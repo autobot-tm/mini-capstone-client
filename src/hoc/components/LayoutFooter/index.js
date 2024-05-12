@@ -1,1 +1,1 @@
-export * from './LayoutFooter'
+export * from './LayoutFooter';

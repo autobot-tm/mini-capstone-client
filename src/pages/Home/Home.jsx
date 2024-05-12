@@ -1,8 +1,7 @@
-import React from 'react'
-import Layout from '../../hoc/Layout'
+import Layout from '../../hoc/Layout';
 
 const Home = () => {
-  return <Layout>Home</Layout>
-}
+  return <Layout>HOME</Layout>;
+};
 
-export default Home
+export default Home;
