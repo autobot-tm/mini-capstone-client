@@ -1,0 +1,27 @@
+#login-page {
+  .bg-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0a0f26;
+    height: 100vh;
+  }
+
+  .bg-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 400px;
+      &-button {
+        font-weight: bold;
+        background-color: #6a307d;
+        width: 100%;
+      }
+    }
+  }
+}
