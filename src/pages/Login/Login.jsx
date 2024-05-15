@@ -4,6 +4,8 @@ import LOGIN from '../../assets/images/Login.gif';
 import { useState } from 'react';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import LoginForm from './components/LoginForm/LoginForm';
+import { Headline } from '../../components/Typography/Headline/Headline';
+import { SubHeading } from '../../components/Typography/SubHeading';
 
 const Login = () => {
   const [status, setStatus] = useState(1);
@@ -21,10 +23,12 @@ const Login = () => {
         </Col>
         <Col xs={12} className="bg-login">
           <div className="login-form">
-            <span style={{ color: '#6A307D', fontSize: 45, fontWeight: 'bold' }}>Welcome!</span>
-            <span style={{ margin: 10, marginBottom: 30, fontSize: 30, fontWeight: 'bold' }}>
+            <Headline size={360} classNames="primary-color" strong>
+              Welcome!
+            </Headline>
+            <SubHeading strong style={{ marginBottom: 20 }}>
               It is really nice to see you
-            </span>
+            </SubHeading>
             {status === 1 ? <LoginForm onRegister={onRegister} /> : <RegisterForm onLogin={onLogin} />}
           </div>
         </Col>

@@ -1,5 +1,7 @@
 import { ArrowRightOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Divider, Form, Input } from 'antd';
+import { Divider, Form, Input } from 'antd';
+import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
+import { Caption } from '../../../../components/Typography/Caption/Caption';
 
 const LoginForm = ({ onRegister }) => {
   const onFinish = values => {
@@ -8,7 +10,6 @@ const LoginForm = ({ onRegister }) => {
 
   return (
     <>
-      {' '}
       <Form
         name="normal_login"
         initialValues={{
@@ -43,14 +44,14 @@ const LoginForm = ({ onRegister }) => {
         </Form.Item>
 
         <Form.Item>
-          <Button size="large" type="primary" htmlType="submit" className="login-form-button">
+          <BaseButton size="large" htmlType="submit" disabled="" loading="">
             Submit <ArrowRightOutlined />
-          </Button>
-          <Divider>OR</Divider>
-          <a onClick={onRegister} style={{ color: '#6A307D', fontWeight: 'bold' }}>
-            Join us today
-          </a>
+          </BaseButton>
         </Form.Item>
+        <Divider>OR</Divider>
+        <Caption onClick={onRegister} style={{ cursor: 'pointer' }} classNames="primary-color" strong>
+          Join us today
+        </Caption>
       </Form>
     </>
   );

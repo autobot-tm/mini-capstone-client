@@ -1,0 +1,12 @@
+@import '../../../theme/scss//colors.theme.scss';
+
+.base-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: $colors-white;
+  background-color: $colors-primary;
+  font-weight: 700;
+  font-size: 18px;
+}

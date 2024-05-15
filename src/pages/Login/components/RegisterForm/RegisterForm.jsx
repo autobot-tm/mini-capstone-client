@@ -1,4 +1,6 @@
 import { Divider, Form, Input } from 'antd';
+import { Caption } from '../../../../components/Typography/Caption/Caption';
+import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 
 const RegisterForm = ({ onLogin }) => {
   const onFinish = values => {
@@ -78,10 +80,15 @@ const RegisterForm = ({ onLogin }) => {
           ]}>
           <Input.Password placeholder="Confirm Password" size="large" />
         </Form.Item>
+        <Form.Item>
+          <BaseButton size="large" htmlType="submit" disabled="" loading="">
+            Register
+          </BaseButton>
+        </Form.Item>
         <Divider>OR</Divider>
-        <a onClick={onLogin} style={{ color: '#6A307D', fontWeight: 'bold' }}>
+        <Caption onClick={onLogin} style={{ cursor: 'pointer' }} classNames="primary-color" strong>
           Sign in
-        </a>
+        </Caption>
       </Form>
     </>
   );
