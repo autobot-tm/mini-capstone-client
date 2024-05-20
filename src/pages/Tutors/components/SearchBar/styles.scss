@@ -1,0 +1,66 @@
+@import '../../../../theme/scss/colors.theme.scss';
+
+.search-section {
+  &-form {
+    display: flex;
+    align-items: center;
+    padding: 24px 0;
+    &-inner {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      width: 80%;
+      background-color: $colors-bg-white;
+      border: 1px solid $colors-border;
+      border-radius: 4px;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08);
+      padding: 14px 10px;
+
+      .btn {
+        background-color: $colors-tertiary;
+        color: $colors-white;
+        border-radius: 4px;
+        width: auto;
+        height: 48px;
+        padding: 7px 24px;
+      }
+    }
+    .icon-section {
+      display: flex;
+      @media screen and (max-width: 576px) {
+        display: none;
+      }
+      figure {
+        padding: 0 20px;
+      }
+      .start-from {
+        font-family: 'Gochi Hand', cursive;
+        font-weight: 400;
+        font-style: normal;
+        color: #676767;
+      }
+    }
+  }
+}
+
+.ant-input-group-wrapper-outlined .ant-input-group-addon {
+  background: 0;
+  border: 0;
+}
+.ant-input-group-wrapper:not(.ant-input-compact-last-item).ant-input-compact-first-item .ant-input {
+  border: 0;
+  font-family: 'Outfit', sans-serif;
+}
+:where(.css-dev-only-do-not-override-1okl62o).ant-input-outlined:focus,
+:where(.css-dev-only-do-not-override-1okl62o).ant-input-outlined:focus-within {
+  box-shadow: none;
+}
+:where(.css-dev-only-do-not-override-1okl62o).ant-select-outlined:not(.ant-select-customize-input)
+  .ant-select-selector {
+  border: none;
+}
+:where(.css-dev-only-do-not-override-1okl62o).ant-btn-compact-item:not(
+    .ant-btn-compact-first-item
+  ).ant-btn-compact-last-item.ant-btn-lg {
+  border-radius: 4px;
+}
