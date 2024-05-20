@@ -9,7 +9,7 @@ import ZIGZAG from '../../../../assets/images/zigzagLine.svg';
 import TutorCard from '../../../../components/TutorCard/TutorCard';
 import tutors from '../../../../mock/tutor.data.json';
 
-const InstructorSection = ({ onFindInstructor }) => {
+const InstructorSection = ({ onFindTutor }) => {
   return (
     <div className="instructor-section">
       <div className="container">
@@ -48,8 +48,8 @@ const InstructorSection = ({ onFindInstructor }) => {
               </>
             );
           })}
-          <BaseButton onClick={onFindInstructor} style={{ width: 'auto', marginTop: 20 }} type="text">
-            Explore all instructors <RightOutlined style={{ fontSize: 14 }} />
+          <BaseButton onClick={onFindTutor} style={{ width: 'auto', marginTop: 20 }} type="text">
+            Explore all tutors <RightOutlined style={{ fontSize: 14 }} />
           </BaseButton>
         </Row>
       </div>
