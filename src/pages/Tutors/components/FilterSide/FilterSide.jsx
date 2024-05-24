@@ -4,57 +4,70 @@ import './styles.scss';
 import { Paragraph } from '../../../../components/Typography/Paragraph/Paragraph';
 import { Caption } from '../../../../components/Typography/Caption/Caption';
 import { useState } from 'react';
+import SUNRISE from '../../../../assets/images/wi--sunrise.png';
+import SUNSET from '../../../../assets/images/wi--sunset.png';
+import SUNNY from '../../../../assets/images/wi--day-sunny.png';
 
-const timeOptions = ['PRE 12PM', '12PM-5PM', 'AFTER 5PM'];
 const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 const FilterSide = () => {
-  const [checkedTime, setCheckedTime] = useState('');
   const [checkedDay, setCheckedDay] = useState('');
+  const [checkedTime, setCheckedTime] = useState([]);
   const [form] = Form.useForm();
   const onChangeDay = day => {
     setCheckedDay(day);
   };
-  const onChangeTime = time => {
-    setCheckedTime(time);
+  const onChangeTime = checkedValues => {
+    setCheckedTime(checkedValues);
+  };
+  const onFinish = values => {
+    console.log('Success:', values);
+    handleClearFilters();
+  };
+  const onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo);
   };
   const handleClearFilters = () => {
     form.resetFields();
-    setCheckedTime([]);
     setCheckedDay([]);
+    setCheckedTime([]);
   };
   return (
     <div className="filter-side">
       <div className="filter-side-inner">
-        <Form form={form} layout="horizontal">
-          <Form.Item className="filter-side-inner-section">
-            <Paragraph strong>Tutor availability</Paragraph>
-            <Caption classNames="d-block" size={160} strong style={{ marginTop: 14 }}>
-              Time of day
-              <Caption>
-                <Checkbox.Group
-                  style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 8 }}
-                  options={timeOptions}
-                  value={checkedTime}
-                  onChange={onChangeTime}
-                />
+        <Form onFinish={onFinish} onFinishFailed={onFinishFailed} form={form} layout="horizontal">
+          <Form.Item name="time" className="filter-side-inner-section">
+            <div>
+              <Paragraph strong>Tutor availability</Paragraph>
+              <Caption classNames="d-block" size={160} strong style={{ marginTop: 14 }}>
+                Time of day
               </Caption>
-            </Caption>
-            <Caption size={160} strong>
-              Day of week
-              <Caption>
-                <Checkbox.Group
-                  style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 8 }}
-                  options={dayOptions}
-                  value={checkedDay}
-                  onChange={onChangeDay}
-                />
-              </Caption>
-            </Caption>
+              <Checkbox.Group className="checkbox-gr" value={checkedTime} onChange={onChangeTime}>
+                <Checkbox value="morning">
+                  <img src={SUNRISE} alt="Sunrise" />
+                  PRE 12PM
+                </Checkbox>
+                <Checkbox value="afternoon">
+                  <img src={SUNNY} alt="Sunny" />
+                  12PM-5PM
+                </Checkbox>
+                <Checkbox value="evening">
+                  <img src={SUNSET} alt="Sunset" />
+                  AFTER 5PM
+                </Checkbox>
+              </Checkbox.Group>
+            </div>
           </Form.Item>
-
+          <Form.Item name="day" className="filter-side-inner-section">
+            <div>
+              <Caption size={160} strong>
+                Day of week
+              </Caption>
+              <Checkbox.Group className="checkbox-gr" options={dayOptions} value={checkedDay} onChange={onChangeDay} />
+            </div>
+          </Form.Item>
           <Form.Item className="filter-side-inner-section">
-            <BaseButton type="text" style={{ padding: 0 }}>
+            <BaseButton type="text" style={{ padding: 0 }} htmlType="submit">
               Apply filters
             </BaseButton>
             <Button type="text" className="clear-btn" onClick={handleClearFilters}>

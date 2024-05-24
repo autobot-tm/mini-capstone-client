@@ -66,12 +66,7 @@ const LayoutMenu = () => {
         className="layout-menu-nav-link"
       />
       <MenuOutlined className="layout-menu-drawer" onClick={toggleCollapsed} />
-      <Drawer
-        placement="left"
-        closable={false}
-        onClose={toggleCollapsed}
-        visible={collapsed}
-        bodyStyle={{ padding: 0 }}>
+      <Drawer placement="left" closable={false} onClose={toggleCollapsed} open={collapsed} bodyStyle={{ padding: 0 }}>
         <Menu
           onClick={onClick}
           mode="vertical"

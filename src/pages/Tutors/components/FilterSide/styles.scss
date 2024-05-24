@@ -12,7 +12,16 @@
 
     &-section {
       width: 100%;
-
+      .checkbox-gr {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 8px;
+        img {
+          width: 20px;
+          padding-right: 4px;
+        }
+      }
       .clear-btn {
         margin-top: 8px;
         font-size: 16px;
