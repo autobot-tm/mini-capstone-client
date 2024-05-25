@@ -25,10 +25,10 @@ const HeaderSection = ({ onLogin }) => {
             </Paragraph>
             <br />
             <BaseButton onClick={onLogin} type="text" className="header-section-first-col-inner-btn highlight">
-              Start as student <RightOutlined style={{ fontSize: 14 }} />
+              Start as Student <RightOutlined style={{ fontSize: 14 }} />
             </BaseButton>
             <BaseButton onClick={onLogin} type="text" className="header-section-first-col-inner-btn">
-              Join as Instructor
+              Join as Tutor
             </BaseButton>
           </div>
         </Col>

@@ -6,10 +6,10 @@ import { Caption } from '../../../../components/Typography/Caption/Caption';
 import { RightOutlined } from '@ant-design/icons';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 import ZIGZAG from '../../../../assets/images/zigzagLine.svg';
-import TutorCard from '../../../../components/TutorCard/TutorCard';
+import TutorCard from './components/TutorCard/TutorCard';
 import tutors from '../../../../mock/tutor.data.json';
 
-const InstructorSection = ({ onFindInstructor }) => {
+const InstructorSection = ({ onFindTutor }) => {
   return (
     <div className="instructor-section">
       <div className="container">
@@ -32,24 +32,22 @@ const InstructorSection = ({ onFindInstructor }) => {
         <Row justify="center" className="instructor-section-second-row" gutter={[24, 24]}>
           {tutors?.slice(0, 4).map(tutor => {
             return (
-              <>
-                <Col xs={24} sm={12} xl={6} key={tutor.id}>
-                  <TutorCard
-                    url="https://www.youtube.com/watch?v=JeOggtJH5n8"
-                    avatar="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
-                    firstName={tutor['first-name']}
-                    lastName={tutor['last-name']}
-                    hourlyRate={tutor['hourly-rate']}
-                    rating={tutor.rating}
-                    mobile={tutor.mobile}
-                    literacy={tutor.literacy}
-                  />
-                </Col>
-              </>
+              <Col xs={24} sm={12} xl={6} key={tutor.id}>
+                <TutorCard
+                  url="https://www.youtube.com/watch?v=JeOggtJH5n8"
+                  avatar="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
+                  firstName={tutor['first-name']}
+                  lastName={tutor['last-name']}
+                  hourlyRate={tutor['hourly-rate']}
+                  rating={tutor.rating}
+                  mobile={tutor.mobile}
+                  literacy={tutor.literacy}
+                />
+              </Col>
             );
           })}
-          <BaseButton onClick={onFindInstructor} style={{ width: 'auto', marginTop: 20 }} type="text">
-            Explore all instructors <RightOutlined style={{ fontSize: 14 }} />
+          <BaseButton onClick={onFindTutor} style={{ width: 'auto', marginTop: 20 }} type="text">
+            Explore all tutors <RightOutlined style={{ fontSize: 14 }} />
           </BaseButton>
         </Row>
       </div>

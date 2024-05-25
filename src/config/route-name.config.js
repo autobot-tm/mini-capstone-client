@@ -4,5 +4,5 @@ export const routeNames = {
   Login: '/login',
   AboutUs: '/about-us',
   HowItWork: '/how-it-work',
-  FindInstructor: '/tutors',
+  FindTutor: '/tutors',
 };

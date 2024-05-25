@@ -1,0 +1,11 @@
+@import '../../theme/scss/colors.theme.scss';
+
+.tutors-page {
+  background-color: $colors-bg-primary;
+  padding: 50px 20px;
+
+  .container {
+    margin: 0 auto;
+    max-width: 1400px;
+  }
+}

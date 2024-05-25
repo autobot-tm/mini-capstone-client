@@ -17,15 +17,15 @@ const Home = () => {
   const onHowItWork = () => {
     navigate(routeNames.HowItWork);
   };
-  const onFindInstructor = () => {
-    navigate(routeNames.FindInstructor);
+  const onFindTutor = () => {
+    navigate(routeNames.FindTutor);
   };
   return (
     <Layout>
       <HeaderSection onLogin={onLogin} />
       <AboutSection onAboutUs={onAboutUs} />
       <WorkSection onHowItWork={onHowItWork} />
-      <InstructorSection onFindInstructor={onFindInstructor} />
+      <InstructorSection onFindTutor={onFindTutor} />
     </Layout>
   );
 };
