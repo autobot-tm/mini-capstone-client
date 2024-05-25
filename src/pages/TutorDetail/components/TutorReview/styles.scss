@@ -1,0 +1,16 @@
+.review-item {
+  display: flex;
+  gap: 20px;
+  padding: 30px 0;
+
+  .avatar-section {
+    width: 10%;
+  }
+  .info-section {
+    width: 90%;
+  }
+  .ant-avatar {
+    width: auto;
+    height: 100px;
+  }
+}

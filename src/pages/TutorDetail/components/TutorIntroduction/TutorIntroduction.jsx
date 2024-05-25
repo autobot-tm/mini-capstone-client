@@ -4,6 +4,9 @@ import { Paragraph } from '../../../../components/Typography/Paragraph/Paragraph
 import { SubHeading } from '../../../../components/Typography/SubHeading/SubHeading';
 import { CheckOutlined } from '@ant-design/icons';
 import ReactPlayer from 'react-player';
+import SUNRISE from '../../../../assets/images/wi--sunrise.png';
+import SUNSET from '../../../../assets/images/wi--sunset.png';
+import SUNNY from '../../../../assets/images/wi--day-sunny.png';
 
 const TutorIntroduction = () => {
   return (
@@ -45,7 +48,12 @@ const ScheduleTable = () => {
   const scheduleData = [
     {
       key: 'morning',
-      time: 'Morning',
+      time: (
+        <span className="time-container">
+          <img src={SUNRISE} alt="Sunrise" />
+          PRE 12PM
+        </span>
+      ),
       monday: true,
       tuesday: false,
       wednesday: true,
@@ -56,7 +64,12 @@ const ScheduleTable = () => {
     },
     {
       key: 'afternoon',
-      time: 'Afternoon',
+      time: (
+        <span className="time-container">
+          <img src={SUNNY} alt="Sunny" />
+          12PM-5PM
+        </span>
+      ),
       monday: false,
       tuesday: true,
       wednesday: false,
@@ -67,7 +80,12 @@ const ScheduleTable = () => {
     },
     {
       key: 'evening',
-      time: 'Evening',
+      time: (
+        <span className="time-container">
+          <img src={SUNSET} alt="Sunset" />
+          AFTER 5PM
+        </span>
+      ),
       monday: true,
       tuesday: true,
       wednesday: true,
@@ -79,16 +97,7 @@ const ScheduleTable = () => {
   ];
 
   const BooleanCell = ({ value }) => (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '5px',
-        borderRadius: '4px',
-      }}>
-      {value ? <CheckOutlined style={{ color: 'green' }} /> : '-'}
-    </div>
+    <div className="boolean-cell">{value ? <CheckOutlined style={{ color: 'green' }} /> : '-'}</div>
   );
 
   const columns = [
