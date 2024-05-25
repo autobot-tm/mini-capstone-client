@@ -4,7 +4,6 @@
     "first-name": "John",
     "last-name": "Doe",
     "mobile": "+1234567890",
-    "hourly-rate": 200000,
     "literacy": "Masters in Computer Science",
     "rating": 4.8
   },
@@ -13,7 +12,6 @@
     "first-name": "Jane",
     "last-name": "Smith",
     "mobile": "+1234567891",
-    "hourly-rate": 250000,
     "literacy": "Bachelors in Mathematics",
     "rating": 4.6
   },
@@ -22,7 +20,6 @@
     "first-name": "Emily",
     "last-name": "Johnson",
     "mobile": "+1234567892",
-    "hourly-rate": 220000,
     "literacy": "PhD in Physics",
     "rating": 4.9
   },
@@ -31,7 +28,6 @@
     "first-name": "Michael",
     "last-name": "Williams",
     "mobile": "+1234567893",
-    "hourly-rate": 180000,
     "literacy": "Bachelors in Chemistry",
     "rating": 4.5
   },
@@ -40,7 +36,6 @@
     "first-name": "Sarah",
     "last-name": "Brown",
     "mobile": "+1234567894",
-    "hourly-rate": 300000,
     "literacy": "Masters in English Literature",
     "rating": 4.7
   },
@@ -49,7 +44,6 @@
     "first-name": "David",
     "last-name": "Jones",
     "mobile": "+1234567895",
-    "hourly-rate": 280000,
     "literacy": "Bachelors in History",
     "rating": 4.4
   },
@@ -58,7 +52,6 @@
     "first-name": "Laura",
     "last-name": "Garcia",
     "mobile": "+1234567896",
-    "hourly-rate": 240000,
     "literacy": "Masters in Biology",
     "rating": 4.8
   },
@@ -67,7 +60,6 @@
     "first-name": "James",
     "last-name": "Martinez",
     "mobile": "+1234567897",
-    "hourly-rate": 270000,
     "literacy": "PhD in Economics",
     "rating": 4.9
   },
@@ -76,7 +68,6 @@
     "first-name": "Olivia",
     "last-name": "Hernandez",
     "mobile": "+1234567898",
-    "hourly-rate": 260000,
     "literacy": "Masters in Political Science",
     "rating": 4.6
   },
@@ -85,7 +76,6 @@
     "first-name": "Daniel",
     "last-name": "Lopez",
     "mobile": "+1234567899",
-    "hourly-rate": 230000,
     "literacy": "Bachelors in Sociology",
     "rating": 4.5
   }

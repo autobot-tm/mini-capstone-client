@@ -25,7 +25,7 @@ const WorkSection = ({ onHowItWork }) => {
             </Headline>
           </Col>
           <Col xs={24} sm={10} style={{ display: 'flex', justifyContent: 'end' }}>
-            <BaseButton type="text" onClick={onHowItWork} style={{ width: 'auto', position: 'relative', zIndex: 2 }}>
+            <BaseButton type="primary" onClick={onHowItWork} style={{ width: 'auto', position: 'relative', zIndex: 2 }}>
               See how it work <RightOutlined style={{ fontSize: 14 }} />
             </BaseButton>
           </Col>

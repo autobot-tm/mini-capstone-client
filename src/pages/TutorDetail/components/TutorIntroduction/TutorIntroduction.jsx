@@ -34,12 +34,15 @@ const TutorIntroduction = () => {
           url="https://www.youtube.com/watch?v=JeOggtJH5n8"
         />
       </div>
-      <Divider />
-      <SubHeading strong classNames="d-block">
-        Availability
-      </SubHeading>
-      <br />
-      <ScheduleTable />
+
+      <div className="schedule-table">
+        <Divider />
+        <SubHeading strong classNames="d-block">
+          Availability
+        </SubHeading>
+        <br />
+        <ScheduleTable />
+      </div>
     </>
   );
 };

@@ -35,7 +35,7 @@ const ReviewItem = ({ name, avatar, rating, description }) => {
         </span>
         <span className="info-section">
           <Paragraph strong>{name}</Paragraph> <br />
-          <Rate allowHalf defaultValue={rating} disabled />
+          <Rate allowHalf defaultValue={rating} disabled className="rate" />
           <br /> <br />
           <Caption size={160}>{description}</Caption>
         </span>

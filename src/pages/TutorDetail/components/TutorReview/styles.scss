@@ -8,9 +8,19 @@
   }
   .info-section {
     width: 90%;
+    .rate {
+      padding-top: 10px;
+    }
   }
   .ant-avatar {
     width: auto;
-    height: 100px;
+    height: auto;
+    @media screen and (max-width: 576px) {
+      width: auto;
+      height: 100px;
+    }
+  }
+  @media screen and (max-width: 576px) {
+    display: block;
   }
 }
