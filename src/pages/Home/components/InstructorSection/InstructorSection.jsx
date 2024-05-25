@@ -6,7 +6,7 @@ import { Caption } from '../../../../components/Typography/Caption/Caption';
 import { RightOutlined } from '@ant-design/icons';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 import ZIGZAG from '../../../../assets/images/zigzagLine.svg';
-import TutorCard from '../../../../components/TutorCard/TutorCard';
+import TutorCard from './components/TutorCard/TutorCard';
 import tutors from '../../../../mock/tutor.data.json';
 
 const InstructorSection = ({ onFindTutor }) => {

@@ -9,13 +9,15 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      width: 80%;
+      width: 85%;
       background-color: $colors-bg-white;
       border: 1px solid $colors-border;
       border-radius: 4px;
       box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08);
       padding: 14px 10px;
-
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
       .btn {
         background-color: $colors-tertiary;
         color: $colors-white;
@@ -27,7 +29,8 @@
     }
     .icon-section {
       display: flex;
-      @media screen and (max-width: 576px) {
+      width: 15%;
+      @media screen and (max-width: 768px) {
         display: none;
       }
       figure {
@@ -51,15 +54,22 @@
   border: 0;
   font-family: 'Outfit', sans-serif;
 }
-:where(.css-dev-only-do-not-override-1okl62o).ant-input-outlined:focus,
-:where(.css-dev-only-do-not-override-1okl62o).ant-input-outlined:focus-within {
+
+:where(.css-dev-only-do-not-override-17seli4).ant-input-outlined:focus,
+:where(.css-dev-only-do-not-override-17seli4).ant-input-outlined:focus-within {
   box-shadow: none;
 }
-:where(.css-dev-only-do-not-override-1okl62o).ant-select-outlined:not(.ant-select-customize-input)
+:where(.css-dev-only-do-not-override-17seli4).ant-select-outlined:not(.ant-select-customize-input)
   .ant-select-selector {
   border: none;
 }
-:where(.css-dev-only-do-not-override-1okl62o).ant-btn-compact-item:not(
+:where(.css-dev-only-do-not-override-17seli4).ant-btn-compact-item:not(
+    .ant-btn-compact-first-item
+  ).ant-btn-compact-last-item,
+:where(.css-dev-only-do-not-override-17seli4).ant-btn-compact-item:not(
+    .ant-btn-compact-first-item
+  ).ant-btn-compact-last-item.ant-btn-sm,
+:where(.css-dev-only-do-not-override-17seli4).ant-btn-compact-item:not(
     .ant-btn-compact-first-item
   ).ant-btn-compact-last-item.ant-btn-lg {
   border-radius: 4px;

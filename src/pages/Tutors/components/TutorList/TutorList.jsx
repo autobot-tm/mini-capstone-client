@@ -1,5 +1,14 @@
+import TutorCardRow from './components/TutorCardRow/TutorCardRow';
+import './styles.scss';
+
 const TutorList = () => {
-  return <div>TutorList</div>;
+  return (
+    <>
+      <TutorCardRow />
+      <TutorCardRow />
+      <TutorCardRow />
+    </>
+  );
 };
 
 export default TutorList;

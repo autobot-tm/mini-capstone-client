@@ -3,8 +3,8 @@ import { EllipsisOutlined, SafetyCertificateOutlined, StarFilled } from '@ant-de
 import { Avatar, Card } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import ReactPlayer from 'react-player/lazy';
-import { Caption } from '../Typography/Caption/Caption';
-import { formatCustomCurrency } from '../../utils/number-seperator';
+import { Caption } from '../../../../../../components/Typography/Caption/Caption';
+import { formatCustomCurrency } from '../../../../../../utils/number-seperator';
 
 const TutorCard = ({ url, avatar, firstName, lastName, literacy, rating, mobile, hourlyRate }) => {
   return (

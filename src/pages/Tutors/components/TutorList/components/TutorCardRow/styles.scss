@@ -1,0 +1,50 @@
+@import '../../../../../../theme/scss/colors.theme.scss';
+
+#tutor-card {
+  height: fit-content;
+  margin-bottom: 20px;
+  .ant-card-body {
+    display: flex;
+    width: 100%;
+    @media screen and (max-width: 992px) {
+      display: flex;
+      flex-direction: column;
+    }
+    .tutor-card-left {
+      height: 200px;
+      width: 30%;
+      padding-right: 20px;
+      @media screen and (max-width: 992px) {
+        width: 100%;
+        padding-right: 0;
+      }
+      .react-player__preview {
+        border-radius: 4px;
+      }
+    }
+
+    .tutor-card-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      width: 70%;
+      @media screen and (max-width: 992px) {
+        width: 100%;
+        margin-top: 10px;
+      }
+      .ant-avatar {
+        width: 50px;
+        height: 50px;
+        margin-right: 6px;
+      }
+      section {
+        display: flex;
+        gap: 4px;
+      }
+      // p .ant-tag {
+      //   margin: 4px;
+      // }
+    }
+  }
+}

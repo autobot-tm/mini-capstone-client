@@ -20,10 +20,10 @@ const Tutors = () => {
             </Col>
           </Row>
           <Row justify="center" gutter={[24, 24]}>
-            <Col xs={24} md={6}>
+            <Col xs={24} md={10} lg={6}>
               <FilterSide />
             </Col>
-            <Col xs={24} md={18}>
+            <Col xs={24} md={14} lg={18}>
               <TutorList />
             </Col>
           </Row>
