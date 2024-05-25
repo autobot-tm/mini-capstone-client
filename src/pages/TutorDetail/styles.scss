@@ -1,0 +1,14 @@
+@import '../../theme/scss/colors.theme.scss';
+.tutors-detail-page {
+  padding: 50px 20px;
+  background-color: $colors-bg-primary;
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .tabs-card {
+    margin-top: 24px;
+    width: 100%;
+  }
+}

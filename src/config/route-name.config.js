@@ -5,4 +5,5 @@ export const routeNames = {
   AboutUs: '/about-us',
   HowItWork: '/how-it-work',
   FindTutor: '/tutors',
+  TutorDetail: '/tutors/:id',
 };

@@ -67,10 +67,10 @@ const FilterSide = () => {
             </div>
           </Form.Item>
           <Form.Item className="filter-side-inner-section">
-            <BaseButton type="text" style={{ padding: 0 }} htmlType="submit">
+            <BaseButton type="primary" style={{ padding: 0 }} htmlType="submit">
               Apply filters
             </BaseButton>
-            <Button type="text" className="clear-btn" onClick={handleClearFilters}>
+            <Button className="clear-btn" onClick={handleClearFilters}>
               Clear all filters
             </Button>
           </Form.Item>
