@@ -1,0 +1,48 @@
+@import '../../../theme/scss/colors.theme.scss';
+.layout-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 0 36px;
+  height: 80px;
+  width: 100%;
+
+  .ant-menu-horizontal {
+    flex: 1;
+    justify-content: flex-end;
+  }
+  &-nav-link {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+
+    .ant-menu-item-selected {
+      color: $colors-primary !important;
+    }
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
+  }
+  &-drawer {
+    &-nav-link {
+      text-align: center;
+      height: 100vh;
+      background-color: $colors-bg-primary;
+      .base-button {
+        padding: 0;
+      }
+    }
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
+}
+:where(.css-dev-only-do-not-override-17seli4).ant-menu-light.ant-menu-horizontal > .ant-menu-item-selected::after {
+  display: none;
+}
+:where(.css-dev-only-do-not-override-17seli4).ant-menu-horizontal {
+  border-bottom: 0;
+}
+:where(.css-dev-only-do-not-override-17seli4).ant-menu-light.ant-menu-horizontal > .ant-menu-item::after {
+  border-bottom: 0;
+}

@@ -1,0 +1,28 @@
+@import '../../../../theme/scss/colors.theme.scss';
+
+.instructor-section {
+  background-color: $colors-bg-white;
+  max-height: 960px;
+  width: 100%;
+  display: block;
+  padding: 50px 20px;
+  @media screen and (max-width: 992px) {
+    padding: 100px 20px;
+    max-height: fit-content;
+  }
+  .container {
+    margin: 0 auto;
+    max-width: 1400px;
+  }
+  &-first-row {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    .text {
+      background-color: aqua;
+    }
+  }
+  &-second-row {
+    padding-top: 30px;
+  }
+}

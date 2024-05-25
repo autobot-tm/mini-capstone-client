@@ -1,5 +1,8 @@
+@import '../theme/scss/colors.theme.scss';
 .layout {
   &-header {
-    background-color: aliceblue;
+    background-color: $colors-bg-white;
+    padding: 0 !important;
+    height: 80px;
   }
 }

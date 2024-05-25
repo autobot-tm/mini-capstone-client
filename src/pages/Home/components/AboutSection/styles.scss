@@ -1,0 +1,93 @@
+@import '../../../../theme/scss/colors.theme.scss';
+
+.about-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-height: 610px;
+  padding: 50px 20px;
+  width: 100%;
+  background-color: $colors-bg-white;
+
+  @media screen and (max-width: 992px) {
+    display: block;
+    max-height: 1060px;
+  }
+
+  @media screen and (max-width: 576px) {
+    display: block;
+    max-height: 1060px;
+  }
+
+  .container {
+    margin: 0 auto;
+    max-width: 1400px;
+  }
+
+  &-first-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-inner {
+      width: 100%;
+    }
+  }
+
+  &-second-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-images {
+      position: relative;
+      max-width: 100%;
+      height: 100%;
+
+      @media screen and (max-width: 1024px) {
+        margin-top: 100px;
+      }
+
+      .signature {
+        padding-left: 450px;
+        padding-top: 34px;
+
+        @media screen and (max-width: 1024px) {
+          padding-left: 350px;
+          padding-top: 100px;
+        }
+
+        @media screen and (max-width: 576px) {
+          padding-left: 150px;
+          padding-top: 70px;
+        }
+      }
+
+      .ceo-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        max-height: 450px;
+        height: 100%;
+
+        @media screen and (max-width: 576px) {
+          max-height: 300px;
+          margin-left: 0;
+        }
+      }
+
+      .dot-image {
+        height: auto;
+        max-height: 368px;
+        margin-left: 120px;
+
+        @media screen and (max-width: 576px) {
+          max-height: 260px;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
