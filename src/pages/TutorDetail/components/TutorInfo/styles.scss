@@ -1,0 +1,59 @@
+@import '../../../../theme/scss/colors.theme.scss';
+
+#tutor-detail {
+  .tutor-info {
+    display: flex;
+    width: 100%;
+    .ant-card-body {
+      display: flex;
+    }
+    @media screen and (max-width: 576px) {
+      display: block;
+    }
+    &-left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30%;
+      .avatar {
+        height: fit-content;
+        width: 80%;
+      }
+      @media screen and (max-width: 576px) {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
+
+    &-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      width: 70%;
+      @media screen and (max-width: 576px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+  .btn-talk-container {
+    display: flex;
+    justify-content: end;
+    .ant-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 18px 22px;
+      @media screen and (max-width: 576px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+    }
+  }
+}

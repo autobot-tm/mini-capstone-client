@@ -48,28 +48,32 @@
 
 .ant-input-group-wrapper-outlined .ant-input-group-addon {
   background: 0;
-  border: 0;
-}
-.ant-input-group-wrapper:not(.ant-input-compact-last-item).ant-input-compact-first-item .ant-input {
-  border: 0;
-  font-family: 'Outfit', sans-serif;
-}
-
-:where(.css-dev-only-do-not-override-17seli4).ant-input-outlined:focus,
-:where(.css-dev-only-do-not-override-17seli4).ant-input-outlined:focus-within {
-  box-shadow: none;
-}
-:where(.css-dev-only-do-not-override-17seli4).ant-select-outlined:not(.ant-select-customize-input)
-  .ant-select-selector {
   border: none;
 }
-:where(.css-dev-only-do-not-override-17seli4).ant-btn-compact-item:not(
+.ant-input-group-wrapper:not(.ant-input-compact-last-item).ant-input-compact-first-item .ant-input {
+  border: none;
+  font-family: 'Outfit', sans-serif;
+}
+:where(.css-dev-only-do-not-override-h3sjpf).ant-select-compact-item:not(.ant-select-compact-first-item):not(
+    .ant-select-compact-last-item
+  )
+  > .ant-select-selector {
+  border-radius: 8px;
+}
+:where(.css-dev-only-do-not-override-h3sjpf).ant-input-outlined:focus,
+:where(.css-dev-only-do-not-override-h3sjpf).ant-input-outlined:focus-within {
+  box-shadow: none;
+}
+:where(.css-dev-only-do-not-override-h3sjpf).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+  border: none;
+}
+:where(.css-dev-only-do-not-override-h3sjpf).ant-btn-compact-item:not(
     .ant-btn-compact-first-item
   ).ant-btn-compact-last-item,
-:where(.css-dev-only-do-not-override-17seli4).ant-btn-compact-item:not(
+:where(.css-dev-only-do-not-override-h3sjpf).ant-btn-compact-item:not(
     .ant-btn-compact-first-item
   ).ant-btn-compact-last-item.ant-btn-sm,
-:where(.css-dev-only-do-not-override-17seli4).ant-btn-compact-item:not(
+:where(.css-dev-only-do-not-override-h3sjpf).ant-btn-compact-item:not(
     .ant-btn-compact-first-item
   ).ant-btn-compact-last-item.ant-btn-lg {
   border-radius: 4px;

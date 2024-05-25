@@ -1,5 +1,8 @@
 .video {
   height: 200px;
+  .react-player__preview {
+    border-radius: 8px 8px 0 0;
+  }
 }
 
 .description-tutor-card {

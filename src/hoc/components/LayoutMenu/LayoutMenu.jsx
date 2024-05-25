@@ -24,7 +24,7 @@ const items = [
     key: 'contact',
   },
   {
-    label: <BaseButton type="text">Get started</BaseButton>,
+    label: <BaseButton type="primary">Get started</BaseButton>,
     key: routeNames.Login,
   },
 ];

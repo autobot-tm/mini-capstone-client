@@ -27,7 +27,7 @@ const AboutSection = ({ onAboutUs }) => {
               Accusamus et iusidio dignissimos ducimus blanditiis praesentium voluptatum deleniti atque corrupti quos
               dolores etmquasa molestias epturi sint occaecati cupiditate non providente mikume.
             </Paragraph>
-            <BaseButton onClick={onAboutUs} type="text" style={{ width: 'auto', marginTop: 30 }}>
+            <BaseButton onClick={onAboutUs} type="primary" style={{ width: 'auto', marginTop: 30 }}>
               Explore more about us <RightOutlined style={{ fontSize: 14 }} />
             </BaseButton>
           </div>

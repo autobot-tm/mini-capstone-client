@@ -1,6 +1,7 @@
 import { routeNames } from '../config';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
+import TutorDetail from '../pages/TutorDetail/TutorDetail';
 import Tutors from '../pages/Tutors/Tutors';
 import UserProfile from '../pages/UserProfile/UserProfile';
 
@@ -17,6 +18,10 @@ export const routePaths = {
     {
       path: routeNames.FindTutor,
       element: <Tutors />,
+    },
+    {
+      path: routeNames.TutorDetail,
+      element: <TutorDetail />,
     },
   ],
   private: [

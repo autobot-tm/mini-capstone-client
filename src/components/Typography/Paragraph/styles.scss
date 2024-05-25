@@ -2,9 +2,18 @@
 
 .paragraph {
   color: $colors-text;
+  font-family: 'Outfit', sans-serif;
   font-weight: 300;
   margin: 0;
   padding: 0;
   font-size: 18px;
   line-height: 1.5;
+}
+
+.color-text-secondary {
+  color: $color-text-secondary;
+}
+
+.d-block {
+  display: block;
 }

@@ -36,9 +36,9 @@ const InstructorSection = ({ onFindTutor }) => {
                 <TutorCard
                   url="https://www.youtube.com/watch?v=JeOggtJH5n8"
                   avatar="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
+                  id={tutor.id}
                   firstName={tutor['first-name']}
                   lastName={tutor['last-name']}
-                  hourlyRate={tutor['hourly-rate']}
                   rating={tutor.rating}
                   mobile={tutor.mobile}
                   literacy={tutor.literacy}
