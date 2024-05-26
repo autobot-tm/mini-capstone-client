@@ -1,0 +1,27 @@
+@import '../../theme/scss/colors.theme.scss';
+
+.not-found-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $colors-bg-primary;
+  height: 100vh;
+  padding: 80px 40px;
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  figure > img {
+    max-height: 400px;
+    width: 100%;
+  }
+  &-left {
+    display: flex;
+    align-items: center;
+  }
+  &-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
