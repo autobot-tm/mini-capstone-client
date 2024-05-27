@@ -4,6 +4,7 @@ import './styles.scss';
 import { Avatar, Button, Card, Divider, Tag } from 'antd';
 import { Paragraph } from '../../../../components/Typography/Paragraph/Paragraph';
 import { Caption } from '../../../../components/Typography/Caption/Caption';
+import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 
 const textBtn = "Let's task now";
 const TutorInfo = () => {
@@ -42,11 +43,14 @@ const TutorInfo = () => {
       </div>
       <Divider dashed />
       <div className="btn-talk-container">
-        <Button>
+        <Button size="large">
           <Caption strong size={160}>
             {textBtn}
           </Caption>
         </Button>
+        <BaseButton type="primary" style={{ width: 'auto' }}>
+          Book a tution
+        </BaseButton>
       </div>
     </Card>
   );

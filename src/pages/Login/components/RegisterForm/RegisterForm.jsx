@@ -81,7 +81,7 @@ const RegisterForm = ({ onLogin }) => {
           <Input.Password placeholder="Confirm Password" size="large" />
         </Form.Item>
         <Form.Item>
-          <BaseButton size="large" htmlType="submit" disabled="" loading="">
+          <BaseButton type="primary" size="large" htmlType="submit" disabled="" loading="">
             Register
           </BaseButton>
         </Form.Item>

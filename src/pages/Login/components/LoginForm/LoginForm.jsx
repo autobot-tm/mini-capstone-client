@@ -44,7 +44,7 @@ const LoginForm = ({ onRegister }) => {
         </Form.Item>
 
         <Form.Item>
-          <BaseButton size="large" htmlType="submit" disabled="" loading="">
+          <BaseButton type="primary" size="large" htmlType="submit" disabled="" loading="">
             Submit <ArrowRightOutlined />
           </BaseButton>
         </Form.Item>

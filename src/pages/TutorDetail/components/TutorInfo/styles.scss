@@ -28,7 +28,7 @@
     &-right {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-around;
       gap: 10px;
       width: 70%;
       @media screen and (max-width: 576px) {
@@ -43,6 +43,7 @@
   .btn-talk-container {
     display: flex;
     justify-content: end;
+    gap: 8px;
     .ant-btn {
       display: flex;
       justify-content: center;
