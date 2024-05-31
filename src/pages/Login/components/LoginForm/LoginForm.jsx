@@ -1,15 +1,43 @@
 import { ArrowRightOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Divider, Form, Input } from 'antd';
+import { Divider, Form, Input, notification } from 'antd';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 import { Caption } from '../../../../components/Typography/Caption/Caption';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearError, selectError, selectLoading, selectUser, signIn } from '../../../../store/features/auth.slice';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const LoginForm = ({ onRegister }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector(selectUser);
+  const token = user?.token;
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+  const [api, contextHolder] = notification.useNotification();
+
   const onFinish = values => {
-    console.log('Received values of form: ', values);
+    dispatch(signIn(values));
+    dispatch(clearError());
   };
+  useEffect(() => {
+    if (error) {
+      api.error({
+        type: 'error',
+        message: 'Phone number or password invalid!',
+      });
+    }
+    dispatch(clearError());
+  }, [error]);
+  useEffect(() => {
+    if (token) {
+      navigate('/');
+    }
+  }, [token, navigate]);
 
   return (
     <>
+      {contextHolder}
       <Form
         name="normal_login"
         initialValues={{
@@ -17,7 +45,7 @@ const LoginForm = ({ onRegister }) => {
         }}
         onFinish={onFinish}>
         <Form.Item
-          name="username"
+          name="phone"
           rules={[
             {
               required: true,
@@ -44,8 +72,8 @@ const LoginForm = ({ onRegister }) => {
         </Form.Item>
 
         <Form.Item>
-          <BaseButton type="primary" size="large" htmlType="submit" disabled="" loading="">
-            Submit <ArrowRightOutlined />
+          <BaseButton type="primary" size="large" htmlType="submit" disabled={loading} loading={loading}>
+            {loading ? 'Submitting' : 'Submit'} <ArrowRightOutlined />
           </BaseButton>
         </Form.Item>
         <Divider>OR</Divider>
