@@ -5,8 +5,12 @@ import { Paragraph } from '../../../../components/Typography/Paragraph/Paragraph
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 import HOME_FIRST from '../../../../assets/images/HomeSection1.svg';
 import { RightOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../../../store/features/auth.slice';
 
 const HeaderSection = ({ onLogin }) => {
+  const user = useSelector(selectUser);
+  const token = user?.token;
   return (
     <div className="header-section">
       <Row className="container" justify="center">
@@ -24,12 +28,16 @@ const HeaderSection = ({ onLogin }) => {
               veniamque.
             </Paragraph>
             <br />
-            <BaseButton onClick={onLogin} type="text" className="header-section-first-col-inner-btn highlight">
-              Start as Student <RightOutlined style={{ fontSize: 14 }} />
-            </BaseButton>
-            <BaseButton onClick={onLogin} type="text" className="header-section-first-col-inner-btn">
-              Join as Tutor
-            </BaseButton>
+            {!token && (
+              <>
+                <BaseButton onClick={onLogin} type="text" className="header-section-first-col-inner-btn highlight">
+                  Start as Student <RightOutlined style={{ fontSize: 14 }} />
+                </BaseButton>
+                <BaseButton onClick={onLogin} type="text" className="header-section-first-col-inner-btn">
+                  Join as Tutor
+                </BaseButton>
+              </>
+            )}
           </div>
         </Col>
         <Col xs={24} md={10} className="header-section-second-col">

@@ -1,18 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { signInService, signUpService } from '../../services/apis/auth.service';
+import { save } from '../../utils/local-storage';
+import { STORAGE_KEYS } from '../../constants/storage.constant';
 
-export const signIn = createAsyncThunk('auth/signIn', async ({ phone, password }, { rejectWithValue }) => {
+export const signIn = createAsyncThunk('auth/signIn', async ({ email, password }, { rejectWithValue }) => {
   try {
-    const response = await signInService({ phone, password });
+    const response = await signInService({ email, password });
+    await save(STORAGE_KEYS.AUTH, response.data);
     return response.data;
   } catch (err) {
     return rejectWithValue(err.response.data);
   }
 });
 
-export const signUp = createAsyncThunk('auth/signUp', async ({ phone, password }, { rejectWithValue }) => {
+export const signUp = createAsyncThunk('auth/signUp', async ({ fullname, email, password }, { rejectWithValue }) => {
   try {
-    const response = await signUpService({ phone, password });
+    const response = await signUpService({ fullname, email, password });
     return response.data;
   } catch (err) {
     return rejectWithValue(err.response.data);

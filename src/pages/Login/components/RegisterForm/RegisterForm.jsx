@@ -1,39 +1,43 @@
-import { Divider, Form, Input } from 'antd';
+import { Divider, Form, Input, notification } from 'antd';
 import { Caption } from '../../../../components/Typography/Caption/Caption';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
+import { clearError, signUp } from '../../../../store/features/auth.slice';
+import { useEffect } from 'react';
+import { PASSWORD_REGEX } from '../../../../constants/auth.constant';
 
-const RegisterForm = ({ onLogin }) => {
+const RegisterForm = ({ onLogin, dispatch, error, loading }) => {
+  const [api, contextHolder] = notification.useNotification();
   const onFinish = values => {
-    console.log('Received values of form: ', values);
+    dispatch(signUp(values));
   };
+  useEffect(() => {
+    if (error) {
+      api.error({
+        type: 'error',
+        message: error,
+      });
+      dispatch(clearError());
+    }
+  }, [error, dispatch]);
 
   return (
     <>
+      {contextHolder}
       <Form
-        name="normal_login"
+        name="sign_up"
         initialValues={{
           remember: true,
         }}
         onFinish={onFinish}>
         <Form.Item
-          name="first_name"
+          name="full_name"
           rules={[
             {
               required: true,
-              message: 'Please input your first name!',
+              message: 'Please input your full name!',
             },
           ]}>
-          <Input placeholder="First Name" size="large" />
-        </Form.Item>
-        <Form.Item
-          name="last_name"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your last name!',
-            },
-          ]}>
-          <Input placeholder="Last Name" size="large" />
+          <Input placeholder="Full Name" size="large" />
         </Form.Item>
         <Form.Item
           name="email"
@@ -52,9 +56,23 @@ const RegisterForm = ({ onLogin }) => {
         <Form.Item
           name="password"
           rules={[
+            { required: true, message: 'Password is required' },
+            { pattern: PASSWORD_REGEX.MIN_LENGTH, message: 'Password must be at least 8 characters' },
             {
-              required: true,
-              message: 'Please input your password!',
+              pattern: PASSWORD_REGEX.LOWERCASE,
+              message: 'Password must contain at least one lowercase character',
+            },
+            {
+              pattern: PASSWORD_REGEX.UPPERCASE,
+              message: 'Password must contain at least one uppercase character',
+            },
+            {
+              pattern: PASSWORD_REGEX.SPECIAL_CHARACTER,
+              message: 'Password must contain at least one special character',
+            },
+            {
+              pattern: PASSWORD_REGEX.NUMBER,
+              message: 'Password must contain at least one digit',
             },
           ]}
           hasFeedback>
@@ -69,6 +87,7 @@ const RegisterForm = ({ onLogin }) => {
               required: true,
               message: 'Please confirm your password!',
             },
+            { min: 8, message: 'Password must be at least 8 characters' },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue('password') === value) {
@@ -81,8 +100,8 @@ const RegisterForm = ({ onLogin }) => {
           <Input.Password placeholder="Confirm Password" size="large" />
         </Form.Item>
         <Form.Item>
-          <BaseButton type="primary" size="large" htmlType="submit" disabled="" loading="">
-            Register
+          <BaseButton type="primary" size="large" htmlType="submit" disabled={loading} loading={loading}>
+            {loading ? 'Registering..' : 'Register'}
           </BaseButton>
         </Form.Item>
         <Divider>OR</Divider>

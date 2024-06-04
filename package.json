@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "prepare": "husky install",
     "lint-fix": "eslint . --fix",
-    "postinstall": "yarn prepare"
+    "postinstall": "yarn prepare",
+    "build": "vite build"
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.7",

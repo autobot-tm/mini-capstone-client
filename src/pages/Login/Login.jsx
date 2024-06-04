@@ -1,19 +1,37 @@
 import { Col, Row } from 'antd';
 import './styles.scss';
 import LOGIN from '../../assets/images/Login.gif';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import LoginForm from './components/LoginForm/LoginForm';
 import { Headline } from '../../components/Typography/Headline/Headline';
 import { SubHeading } from '../../components/Typography/SubHeading';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { selectError, selectLoading, selectUser } from '../../store/features/auth.slice';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector(selectUser);
+  const token = user?.token;
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
   const [status, setStatus] = useState(1);
+  useEffect(() => {
+    if (token) {
+      navigate('/');
+    }
+  }, [token, navigate]);
   const onLogin = () => {
     setStatus(1);
   };
   const onRegister = () => {
     setStatus(2);
+  };
+  const onForgotPassword = () => {
+    setStatus(3);
   };
   return (
     <>
@@ -29,7 +47,21 @@ const Login = () => {
             <SubHeading strong style={{ marginBottom: 20 }}>
               It is really nice to see you
             </SubHeading>
-            {status === 1 ? <LoginForm onRegister={onRegister} /> : <RegisterForm onLogin={onLogin} />}
+            {status === 1 ? (
+              <LoginForm
+                onRegister={onRegister}
+                dispatch={dispatch}
+                loading={loading}
+                error={error}
+                onForgotPassword={onForgotPassword}
+              />
+            ) : status === 2 ? (
+              <RegisterForm onLogin={onLogin} dispatch={dispatch} loading={loading} error={error} />
+            ) : (
+              <>
+                <ForgotPassword />
+              </>
+            )}
           </div>
         </Col>
       </Row>
