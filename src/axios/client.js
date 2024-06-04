@@ -9,7 +9,7 @@ const config = {
 const apiCaller = axios.create(config);
 apiCaller.defaults.baseURL = APP_CONFIG.BACKEND_URL;
 const handleBefore = config => {
-  const token = localStorage.getItem('token')?.replaceAll('"', '');
+  const token = localStorage.getItem('AUTH')?.replaceAll('"', '');
   config.headers['Authorization'] = `Bearer ${token}`;
   return config;
 };

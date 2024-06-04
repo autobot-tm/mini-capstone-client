@@ -31,3 +31,16 @@
     }
   }
 }
+
+.google-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.join-section {
+  display: flex;
+  justify-content: space-between;
+  p {
+    cursor: pointer;
+  }
+}

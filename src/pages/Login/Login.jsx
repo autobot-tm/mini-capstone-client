@@ -56,10 +56,16 @@ const Login = () => {
                 onForgotPassword={onForgotPassword}
               />
             ) : status === 2 ? (
-              <RegisterForm onLogin={onLogin} dispatch={dispatch} loading={loading} error={error} />
+              <RegisterForm
+                onLogin={onLogin}
+                dispatch={dispatch}
+                loading={loading}
+                error={error}
+                onForgotPassword={onForgotPassword}
+              />
             ) : (
               <>
-                <ForgotPassword />
+                <ForgotPassword dispatch={dispatch} onLogin={onLogin} onRegister={onRegister} />
               </>
             )}
           </div>

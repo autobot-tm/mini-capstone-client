@@ -1,9 +1,9 @@
 import { ArrowRightOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Divider, Form, Input, notification } from 'antd';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
-import { Caption } from '../../../../components/Typography/Caption/Caption';
 import { clearError, signIn } from '../../../../store/features/auth.slice';
 import { useEffect } from 'react';
+import GoogleSignInButton from '../../../../components/GoogleSignIn/GoogleSignInButton';
 
 const LoginForm = ({ onRegister, dispatch, loading, error, onForgotPassword }) => {
   const [api, contextHolder] = notification.useNotification();
@@ -61,13 +61,14 @@ const LoginForm = ({ onRegister, dispatch, loading, error, onForgotPassword }) =
             {loading ? 'Submitting' : 'Submit'} <ArrowRightOutlined />
           </BaseButton>
         </Form.Item>
-        <p onClick={onForgotPassword} style={{ cursor: 'pointer' }}>
-          Forgot password?
-        </p>
+        <div className="join-section">
+          <p onClick={onRegister}>Join us today</p>
+          <p onClick={onForgotPassword}>Forgot password?</p>
+        </div>
         <Divider>OR</Divider>
-        <Caption onClick={onRegister} style={{ cursor: 'pointer' }} classNames="primary-color" strong>
-          Join us today
-        </Caption>
+        <span className="google-btn-container">
+          <GoogleSignInButton />
+        </span>
       </Form>
     </>
   );

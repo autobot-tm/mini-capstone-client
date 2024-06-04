@@ -3,5 +3,8 @@ export const ENDPOINTS = {
     base: '/api',
     login: '/api/login',
     register: '/api/register',
+    changePassword: '/api/reset-password',
+    google: '/api/login-google',
+    requestResetPassword: '/api/forget-password',
   },
 };

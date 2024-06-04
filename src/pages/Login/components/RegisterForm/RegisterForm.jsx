@@ -1,11 +1,11 @@
 import { Divider, Form, Input, notification } from 'antd';
-import { Caption } from '../../../../components/Typography/Caption/Caption';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 import { clearError, signUp } from '../../../../store/features/auth.slice';
 import { useEffect } from 'react';
 import { PASSWORD_REGEX } from '../../../../constants/auth.constant';
+import GoogleSignInButton from '../../../../components/GoogleSignIn/GoogleSignInButton';
 
-const RegisterForm = ({ onLogin, dispatch, error, loading }) => {
+const RegisterForm = ({ onLogin, dispatch, error, loading, onForgotPassword }) => {
   const [api, contextHolder] = notification.useNotification();
   const onFinish = values => {
     dispatch(signUp(values));
@@ -104,10 +104,14 @@ const RegisterForm = ({ onLogin, dispatch, error, loading }) => {
             {loading ? 'Registering..' : 'Register'}
           </BaseButton>
         </Form.Item>
+        <div className="join-section">
+          <p onClick={onLogin}>Sign In</p>
+          <p onClick={onForgotPassword}>Forgot password?</p>
+        </div>
         <Divider>OR</Divider>
-        <Caption onClick={onLogin} style={{ cursor: 'pointer' }} classNames="primary-color" strong>
-          Sign in
-        </Caption>
+        <span className="google-btn-container">
+          <GoogleSignInButton />
+        </span>
       </Form>
     </>
   );
