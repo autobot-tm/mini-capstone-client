@@ -16,3 +16,13 @@
 :where(.css-dev-only-do-not-override-h3sjpf).ant-btn-primary {
   box-shadow: none;
 }
+:where(.css-dev-only-do-not-override-h3sjpf).ant-btn {
+  outline: none;
+  position: relative;
+  white-space: nowrap;
+  background: #6a307d;
+  touch-action: manipulation;
+  cursor: pointer;
+  
+
+}
