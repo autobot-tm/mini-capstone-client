@@ -1,15 +1,29 @@
 import { ArrowRightOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Divider, Form, Input } from 'antd';
+import { Divider, Form, Input, notification } from 'antd';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
-import { Caption } from '../../../../components/Typography/Caption/Caption';
+import { clearError, signIn } from '../../../../store/features/auth.slice';
+import { useEffect } from 'react';
+import GoogleSignInButton from '../../../../components/GoogleSignIn/GoogleSignInButton';
 
-const LoginForm = ({ onRegister }) => {
+const LoginForm = ({ onRegister, dispatch, loading, error, onForgotPassword }) => {
+  const [api, contextHolder] = notification.useNotification();
+
   const onFinish = values => {
-    console.log('Received values of form: ', values);
+    dispatch(signIn(values));
   };
+  useEffect(() => {
+    if (error) {
+      api.error({
+        type: 'error',
+        message: error,
+      });
+    }
+    dispatch(clearError());
+  }, [error]);
 
   return (
     <>
+      {contextHolder}
       <Form
         name="normal_login"
         initialValues={{
@@ -17,14 +31,14 @@ const LoginForm = ({ onRegister }) => {
         }}
         onFinish={onFinish}>
         <Form.Item
-          name="username"
+          name="email"
           rules={[
             {
               required: true,
-              message: 'Please input your Username!',
+              message: 'Please input your Email!',
             },
           ]}>
-          <Input size="large" prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          <Input size="large" prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
         </Form.Item>
         <Form.Item
           name="password"
@@ -42,16 +56,19 @@ const LoginForm = ({ onRegister }) => {
             placeholder="Password"
           />
         </Form.Item>
-
         <Form.Item>
-          <BaseButton size="large" htmlType="submit" disabled="" loading="">
-            Submit <ArrowRightOutlined />
+          <BaseButton type="primary" size="large" htmlType="submit" disabled={loading} loading={loading}>
+            {loading ? 'Submitting' : 'Submit'} <ArrowRightOutlined />
           </BaseButton>
         </Form.Item>
+        <div className="join-section">
+          <p onClick={onRegister}>Join us today</p>
+          <p onClick={onForgotPassword}>Forgot password?</p>
+        </div>
         <Divider>OR</Divider>
-        <Caption onClick={onRegister} style={{ cursor: 'pointer' }} classNames="primary-color" strong>
-          Join us today
-        </Caption>
+        <span className="google-btn-container">
+          <GoogleSignInButton />
+        </span>
       </Form>
     </>
   );
