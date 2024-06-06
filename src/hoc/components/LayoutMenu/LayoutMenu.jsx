@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import BaseButton from '../../../components/Buttons/BaseButtons/BaseButton';
 import { EllipsisOutlined, LogoutOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, selectUser } from '../../../store/features/auth.slice';
+import { selectUser, signOut } from '../../../store/features/auth.slice';
 
 const LayoutMenu = () => {
   const [current, setCurrent] = useState(routeNames.Home);
@@ -38,7 +38,7 @@ const LayoutMenu = () => {
     if (e.key === 'profile') {
       navigate('/user-profile');
     } else if (e.key === 'logout') {
-      dispatch(logout());
+      dispatch(signOut());
     }
   };
   const menu = (

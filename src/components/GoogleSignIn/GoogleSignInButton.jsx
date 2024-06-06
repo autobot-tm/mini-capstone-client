@@ -7,10 +7,16 @@ const GoogleSignInButton = () => {
 
   const onSuccess = userInfo => {
     const { credential } = userInfo;
+    console.log('userInfo', userInfo);
     if (!credential) return;
-    dispatch(signInWithGoogle({ idToken: credential }));
+    dispatch(signInWithGoogle({ token: credential }));
   };
-  return <GoogleLogin onSuccess={onSuccess} type="icon" shape="circle" useOneTap />;
+
+  const onFailure = error => {
+    console.error('Google Sign-In failed:', error);
+  };
+
+  return <GoogleLogin onSuccess={onSuccess} onFailure={onFailure} type="icon" shape="circle" useOneTap />;
 };
 
 export default GoogleSignInButton;

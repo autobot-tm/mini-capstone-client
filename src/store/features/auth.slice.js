@@ -41,15 +41,19 @@ export const changePassword = createAsyncThunk('auth/changePassword', async (inp
   }
 });
 
-export const signInWithGoogle = createAsyncThunk('auth/signInWithGoogle', async ({ idToken }, { rejectWithValue }) => {
+export const signInWithGoogle = createAsyncThunk('auth/signInWithGoogle', async ({ token }, { rejectWithValue }) => {
   try {
-    console.log('🚀 ~ idToken:', idToken);
-    const response = await signInWithGoogleService({ id_token: idToken ?? '' });
+    console.log('🚀 ~ idToken:', token);
+    const response = await signInWithGoogleService({ token: token ?? '' });
     await save(STORAGE_KEYS.AUTH, response.data.token);
     return response.data;
   } catch (err) {
     console.warn('🚀 ~ file: auth.slice. signInWithGoogle ~ error:', err);
-    return rejectWithValue(err);
+    return rejectWithValue({
+      message: err.message,
+      code: err.code,
+      response: err.response ? err.response.data : null,
+    });
   }
 });
 
@@ -58,24 +62,28 @@ export const requestResetPassword = createAsyncThunk(
   async (input, { rejectWithValue }) => {
     try {
       await requestResetPasswordService(input);
-    } catch (error) {
-      console.warn('🚀 ~ file: auth.slice.tsx:42 ~ error:', error);
-      return rejectWithValue(error);
+    } catch (err) {
+      console.warn('🚀 ~ file: auth.slice. requestResetPassword ~ error:', err);
+      return rejectWithValue({
+        message: err.message,
+        code: err.code,
+        response: err.response ? err.response.data : null,
+      });
     }
   },
 );
 
 export const signOut = createAsyncThunk('auth/signOut', async (_, { rejectWithValue }) => {
   try {
-    try {
-      googleLogout();
-    } catch (error) {
-      console.warn('🚀 ~ remove refreshToken error: :', error);
-    }
-    return remove(STORAGE_KEYS.AUTH);
-  } catch (error) {
-    console.warn('🚀 ~ file: auth.slice.tsx:42 ~ error:', error);
-    return rejectWithValue(error);
+    googleLogout();
+    remove(STORAGE_KEYS.AUTH);
+  } catch (err) {
+    console.warn('🚀 ~ file: auth.slice. signOut ~ error:', err);
+    return rejectWithValue({
+      message: err.message,
+      code: err.code,
+      response: err.response ? err.response.data : null,
+    });
   }
 });
 
@@ -128,6 +136,18 @@ const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(changePassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(signOut.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signOut.fulfilled, state => {
+        state.user = null;
+        state.loading = false;
+      })
+      .addCase(signOut.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

@@ -40,6 +40,16 @@ const RegisterForm = ({ onLogin, dispatch, error, loading, onForgotPassword }) =
           <Input placeholder="Full Name" size="large" />
         </Form.Item>
         <Form.Item
+          name="phone"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your phone number!',
+            },
+          ]}>
+          <Input placeholder="Phone Number" size="large" />
+        </Form.Item>
+        <Form.Item
           name="email"
           rules={[
             {
