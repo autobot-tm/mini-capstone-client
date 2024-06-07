@@ -21,10 +21,11 @@ const ChangePasswordForm = ({ dispatch }) => {
     } catch (error) {
       notification.error({
         message: 'Error',
-        description: error.response.data || 'Failed to change password',
+        description: error.response || 'Failed to change password',
       });
     }
   };
+
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };

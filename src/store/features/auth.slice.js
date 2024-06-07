@@ -93,13 +93,14 @@ const authSlice = createSlice({
     user: null,
     loading: false,
     error: null,
+    success: false,
   },
   reducers: {
-    logout: state => {
-      state.user = null;
-    },
     clearError(state) {
       state.error = null;
+    },
+    clearSuccess(state) {
+      state.success = false;
     },
   },
   extraReducers: builder => {
@@ -119,14 +120,17 @@ const authSlice = createSlice({
       .addCase(signUp.pending, state => {
         state.loading = true;
         state.error = null;
+        state.success = false;
       })
       .addCase(signUp.fulfilled, (state, action) => {
         state.user = action.payload;
         state.loading = false;
+        state.success = true;
       })
       .addCase(signUp.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.success = false;
       })
       .addCase(changePassword.pending, state => {
         state.loading = true;
@@ -154,8 +158,9 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout, clearError } = authSlice.actions;
+export const { clearError, clearSuccess } = authSlice.actions;
 export const selectUser = state => state.auth.user;
 export const selectLoading = state => state.auth.loading;
 export const selectError = state => state.auth.error;
+export const selectSuccess = state => state.auth.success;
 export default authSlice.reducer;

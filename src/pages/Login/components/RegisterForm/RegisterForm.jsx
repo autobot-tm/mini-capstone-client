@@ -1,11 +1,12 @@
 import { Divider, Form, Input, notification } from 'antd';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
-import { clearError, signUp } from '../../../../store/features/auth.slice';
-import { useEffect } from 'react';
-import { PASSWORD_REGEX } from '../../../../constants/auth.constant';
+import { clearSuccess, signUp } from '../../../../store/features/auth.slice';
+import { PASSWORD_REGEX, PHONE_NUMBER } from '../../../../constants/auth.constant';
 import GoogleSignInButton from '../../../../components/GoogleSignIn/GoogleSignInButton';
+import { validateFullName, validatePhoneNumber } from '../../../../utils/validate-form';
+import { useEffect } from 'react';
 
-const RegisterForm = ({ onLogin, dispatch, error, loading, onForgotPassword }) => {
+const RegisterForm = ({ onLogin, dispatch, loading, error, success, onForgotPassword }) => {
   const [api, contextHolder] = notification.useNotification();
   const onFinish = values => {
     dispatch(signUp(values));
@@ -13,13 +14,18 @@ const RegisterForm = ({ onLogin, dispatch, error, loading, onForgotPassword }) =
   useEffect(() => {
     if (error) {
       api.error({
-        type: 'error',
-        message: error,
+        message: 'Error',
+        description: error || 'Failed to register',
       });
-      dispatch(clearError());
     }
-  }, [error, dispatch]);
+  }, [error]);
 
+  useEffect(() => {
+    if (success) {
+      dispatch(clearSuccess());
+      onLogin();
+    }
+  }, [success]);
   return (
     <>
       {contextHolder}
@@ -33,8 +39,7 @@ const RegisterForm = ({ onLogin, dispatch, error, loading, onForgotPassword }) =
           name="full_name"
           rules={[
             {
-              required: true,
-              message: 'Please input your full name!',
+              validator: validateFullName,
             },
           ]}>
           <Input placeholder="Full Name" size="large" />
@@ -43,8 +48,11 @@ const RegisterForm = ({ onLogin, dispatch, error, loading, onForgotPassword }) =
           name="phone"
           rules={[
             {
-              required: true,
-              message: 'Please input your phone number!',
+              validator: validatePhoneNumber,
+            },
+            {
+              pattern: PHONE_NUMBER.VALID_LENGTH,
+              message: 'Phone number must have 10 or 11 digits!',
             },
           ]}>
           <Input placeholder="Phone Number" size="large" />
