@@ -1,22 +1,21 @@
-import { GoogleLogin } from '@react-oauth/google';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '../../config/firebase.config';
+import GoogleButton from 'react-google-button';
 import { useDispatch } from 'react-redux';
 import { signInWithGoogle } from '../../store/features/auth.slice';
 
 const GoogleSignInButton = () => {
   const dispatch = useDispatch();
-
-  const onSuccess = userInfo => {
-    const { credential } = userInfo;
-    console.log('userInfo', userInfo);
-    if (!credential) return;
-    dispatch(signInWithGoogle({ token: credential }));
+  const loginGoogle = async () => {
+    const result = await signInWithPopup(auth, googleProvider);
+    const token = result.user.accessToken;
+    const user = result.user;
+    console.log('user', user);
+    if (token) {
+      dispatch(signInWithGoogle({ token }));
+    }
   };
-
-  const onFailure = error => {
-    console.error('Google Sign-In failed:', error);
-  };
-
-  return <GoogleLogin onSuccess={onSuccess} onFailure={onFailure} type="icon" shape="circle" useOneTap />;
+  return <GoogleButton onClick={loginGoogle} />;
 };
 
 export default GoogleSignInButton;
