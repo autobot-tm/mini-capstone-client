@@ -1,8 +1,11 @@
 import { Card, Col, Divider, Form, Input, Row } from 'antd';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 import { SubHeading } from '../../../../components/Typography/SubHeading/SubHeading';
+import { selectUser } from '../../../../store/features/auth.slice';
+import { useSelector } from 'react-redux';
 
 const ProfileForm = () => {
+  const user = useSelector(selectUser);
   const [form] = Form.useForm();
   const onFinish = values => {
     console.log('Success:', values);
@@ -23,10 +26,10 @@ const ProfileForm = () => {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your first name!',
+                  message: 'Please input your full name!',
                 },
               ]}>
-              <Input size="large" placeholder="Enter your first name" />
+              <Input size="large" placeholder={user?.fullname || 'Enter your full name'} />
             </Form.Item>
           </Col>
           <Col xs={24} lg={12}>
@@ -52,7 +55,7 @@ const ProfileForm = () => {
                   message: 'Please input your email!',
                 },
               ]}>
-              <Input size="large" placeholder="nmthanh.1906@gmail.com" disabled />
+              <Input size="large" placeholder={user?.email} disabled />
             </Form.Item>
           </Col>
           <Col xs={24} lg={12}>
@@ -65,7 +68,7 @@ const ProfileForm = () => {
                   message: 'Please input your mobile phone!',
                 },
               ]}>
-              <Input size="large" placeholder="Enter your mobile phone" />
+              <Input size="large" placeholder={user?.phone || 'Enter your mobile phone'} />
             </Form.Item>
           </Col>
           <Form.Item>

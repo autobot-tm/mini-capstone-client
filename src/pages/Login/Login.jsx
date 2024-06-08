@@ -8,7 +8,7 @@ import { Headline } from '../../components/Typography/Headline/Headline';
 import { SubHeading } from '../../components/Typography/SubHeading';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { selectError, selectLoading, selectUser } from '../../store/features/auth.slice';
+import { selectError, selectLoading, selectSuccess, selectUser } from '../../store/features/auth.slice';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
 const Login = () => {
@@ -18,7 +18,9 @@ const Login = () => {
   const token = user?.token;
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const success = useSelector(selectSuccess);
   const [status, setStatus] = useState(1);
+
   useEffect(() => {
     if (token) {
       navigate('/');
@@ -61,6 +63,7 @@ const Login = () => {
                 dispatch={dispatch}
                 loading={loading}
                 error={error}
+                success={success}
                 onForgotPassword={onForgotPassword}
               />
             ) : (

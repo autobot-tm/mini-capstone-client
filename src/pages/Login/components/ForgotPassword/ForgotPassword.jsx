@@ -6,7 +6,6 @@ import { requestResetPassword } from '../../../../store/features/auth.slice';
 const ForgotPassword = ({ onRegister, onLogin, dispatch }) => {
   const [form] = Form.useForm();
   const onFinish = async values => {
-    console.log(values);
     const { email } = values;
     try {
       await dispatch(requestResetPassword({ email })).unwrap();
@@ -18,7 +17,7 @@ const ForgotPassword = ({ onRegister, onLogin, dispatch }) => {
     } catch (error) {
       notification.error({
         message: 'Error',
-        description: error.response.data || 'Failed to reset password',
+        description: error.response || 'Failed to reset password',
       });
     }
   };
