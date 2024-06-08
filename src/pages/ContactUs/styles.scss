@@ -1,22 +1,24 @@
 // ContactUs.scss
 @import '../../theme/scss/colors.theme.scss';
 .contact-us-container {
-    background-color: #f7f8fc;
-    padding: 40px;
-    max-width: 600px;
-    margin: 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 40px;
+  max-width: 600px;
+  margin-top: 50px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
   }
   
   .contact-title {
     text-align: center;
-    color: #6a307d;
+    color: $colors-primary;
   }
   
   .contact-form {
     .ant-form-item-label > label {
-      color: #6a307d;
+      color: $colors-primary;
     }
   
     .ant-input,
@@ -33,5 +35,6 @@
         border-color: #531e5e;
       }
     }
+    
   }
   

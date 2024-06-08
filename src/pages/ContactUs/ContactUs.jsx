@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Typography } from 'antd';
+import { Form, Input, Button, Typography, message } from 'antd';
 import './styles.scss';
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -8,11 +8,14 @@ const ContactUs = () => {
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
     // Handle form submission, e.g., send data to server
+
+    // Show success message
+    message.success('Form submitted successfully!');
   };
 
   return (
     <div className="contact-us-container">
-      <Title level={2} className="contact-title">Contact Us</Title>
+      <h1 className="contact-title">Contact Us</h1>
       <Form
         name="contact_us"
         onFinish={onFinish}
@@ -22,7 +25,12 @@ const ContactUs = () => {
         <Form.Item
           name="name"
           label="Name"
-          rules={[{ required: true, message: 'Please enter your name' }]}
+          rules={[
+            { required: true, message: 'Please enter your name' },
+            { min: 2, message: 'Name must be at least 2 characters' },
+            { max: 50, message: 'Name cannot exceed 50 characters' },
+            { pattern: /^[a-zA-Z\s]*$/, message: 'Name can only contain letters and spaces' }
+          ]}
         >
           <Input placeholder="Your Name" />
         </Form.Item>
@@ -46,7 +54,10 @@ const ContactUs = () => {
         <Form.Item
           name="message"
           label="Message"
-          rules={[{ required: true, message: 'Please enter your message' }]}
+          rules={[
+            { required: true, message: 'Please enter your message' },
+            { max: 500, message: 'Message cannot exceed 500 characters' }
+          ]}
         >
           <TextArea rows={4} placeholder="Your Message" />
         </Form.Item>

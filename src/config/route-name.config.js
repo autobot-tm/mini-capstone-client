@@ -6,4 +6,5 @@ export const routeNames = {
   HowItWork: '/how-it-work',
   FindTutor: '/tutors',
   TutorDetail: '/tutors/:id',
+  ContactUs: '/contact-us',
 };

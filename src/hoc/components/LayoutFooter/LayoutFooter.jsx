@@ -11,12 +11,12 @@ const LayoutFooter = () => {
     <Footer className="footer">
       <Row className="footer-item" gutter={[16, 16]}>
         <Col span={8} className="footer-left">
-          <Title level={2} className="cpn-name">Tên Công ty</Title>
-          <Text className="web-name">Tên trang Web</Text>
+          <Title level={2} className="cpn-name">Company Name</Title>
+          <Text className="web-name">Web Name</Text>
           <div className="text">
-            Học không biết chán, dạy người không biết mỏi.
+          Learning is a treasure that will follow its owner everywhere
           </div>
-          <Title level={4} className="web-contact">Liên Hệ</Title>
+          <Title level={4} className="web-contact">Social Contact</Title>
           <div className="icon" style={{ color: "white" }}>
             <FacebookOutlined />
             <YoutubeOutlined />
@@ -24,23 +24,23 @@ const LayoutFooter = () => {
           </div>
         </Col>
         <Col span={8} className="footer-m">
-          <Title level={4} className="location-name">Hà Nội</Title>
+          <Title level={4} className="location-name">Hanoi</Title>
           <div className='text'>
-            Tầng 7 15 & 20, Tòa nhà Capital - 109 Trần Hưng Đạo, Quận Hoàn Kiếm, Hà Nội, Việt Nam
+          7th, 15th, and 20th Floors, Capital Building - 109 Tran Hung Dao, Hoan Kiem District, Hanoi, Vietnam
           </div>
-          <Title level={4} className="location-name">TP.Hồ Chí Minh</Title>
+          <Title level={4} className="location-name">Ho Chi Minh City</Title>
           <div className='text'>
-            Tầng 29 & 30, Tòa nhà LIM 9-11 Tôn Đức Thắng, Quận 1, Thành phố Hồ Chí Minh, Việt Nam
+          29th and 30th Floors, LIM Building, 9-11 Ton Duc Thang, District 1, Ho Chi Minh City, Vietnam
           </div>
         </Col>
         <Col span={8} className="footer-r">
-          <Title level={4} className="location-name">Văn phòng Gia sư Quận Gò Vấp</Title>
+          <Title level={4} className="location-name">Gò Vấp District Tutoring Office</Title>
           <div className='text'>
-            672A28, Đường Phan Văn Trị, Phường 10, Quận Gò Vấp Khu CityLand Park Hill
+          672A28, Phan Van Tri Street, Ward 10, Go Vap District, CityLand Park Hill Area
           </div>
-          <Title level={4} className="location-name">Văn phòng Gia sư Đất Việt Quận Gò Vấp</Title>
+          <Title level={4} className="location-name">Gia Su Dat Viet Office, Go Vap District</Title>
           <div className='text'>
-            672A28, Đường Phan Văn Trị, Phường 10, Quận Gò Vấp Khu CityLand Park Hill
+          672A28, Phan Van Tri Street, Ward 10, Go Vap District, CityLand Park Hill Area, Ho Chi Minh City, Vietnam
           </div>
         </Col>
       </Row>
