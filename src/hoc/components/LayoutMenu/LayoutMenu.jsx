@@ -21,7 +21,7 @@ const items = [
   },
   {
     label: 'Contact Us',
-    key: 'contact',
+    key: routeNames.ContactUs,
   },
   {
     label: <BaseButton type="primary">Get started</BaseButton>,

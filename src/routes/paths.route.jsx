@@ -1,4 +1,5 @@
 import { routeNames } from '../config';
+import ContactUs from '../pages/ContactUs/ContactUs';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import TutorDetail from '../pages/TutorDetail/TutorDetail';
@@ -22,6 +23,10 @@ export const routePaths = {
     {
       path: routeNames.TutorDetail,
       element: <TutorDetail />,
+    },
+    {
+      path: routeNames.ContactUs,
+      element: <ContactUs />,
     },
   ],
   private: [
