@@ -2,12 +2,12 @@ import { Card, Col, Divider, Form, Input, Row, notification } from 'antd';
 import { SubHeading } from '../../../../components/Typography/SubHeading/SubHeading';
 import { PASSWORD_REGEX } from '../../../../constants/auth.constant';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
-import { changePassword, selectLoading } from '../../../../store/features/auth.slice';
+import { changePassword } from '../../../../store/features/auth.slice';
 import { useSelector } from 'react-redux';
 
 const ChangePasswordForm = ({ dispatch }) => {
   const [form] = Form.useForm();
-  const loading = useSelector(selectLoading);
+  const loading = useSelector(state => state.auth.loading);
 
   const onFinish = async values => {
     const { password } = values;

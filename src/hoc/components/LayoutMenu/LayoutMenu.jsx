@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import BaseButton from '../../../components/Buttons/BaseButtons/BaseButton';
 import { EllipsisOutlined, LogoutOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser, signOut } from '../../../store/features/auth.slice';
+import { signOut } from '../../../store/features/auth.slice';
 
 const LayoutMenu = () => {
   const [current, setCurrent] = useState(routeNames.Home);
@@ -14,7 +14,7 @@ const LayoutMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const token = useSelector(selectUser)?.token;
+  const token = useSelector(state => state.auth.user)?.token;
 
   useEffect(() => {
     setCurrent(location.pathname);

@@ -1,10 +1,9 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { routeNames } from '../config/route-name.config';
-import { selectUser } from '../store/features/auth.slice';
 import { useSelector } from 'react-redux';
 
 export function PrivateRoute() {
-  const user = useSelector(selectUser);
+  const user = useSelector(state => state.auth.user);
   let token = user?.token;
   if (!token) {
     const urlParams = new URLSearchParams(window.location.search);

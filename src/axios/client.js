@@ -5,6 +5,9 @@ import { REQUEST_TIME_OUT } from '../constants/api.constant';
 const config = {
   baseUrl: APP_CONFIG.BACKEND_URL,
   timeout: REQUEST_TIME_OUT,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 };
 
 const apiCaller = axios.create(config);

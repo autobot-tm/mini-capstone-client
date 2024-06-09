@@ -8,7 +8,6 @@ import {
 } from '../../services/apis/auth.service';
 import { remove, save } from '../../utils/local-storage';
 import { STORAGE_KEYS } from '../../constants/storage.constant';
-import { googleLogout } from '@react-oauth/google';
 
 export const signIn = createAsyncThunk('auth/signIn', async (input, { rejectWithValue }) => {
   try {
@@ -75,7 +74,6 @@ export const requestResetPassword = createAsyncThunk(
 
 export const signOut = createAsyncThunk('auth/signOut', async (_, { rejectWithValue }) => {
   try {
-    googleLogout();
     remove(STORAGE_KEYS.AUTH);
   } catch (err) {
     console.warn('🚀 ~ file: auth.slice. signOut ~ error:', err);
@@ -134,8 +132,7 @@ const authSlice = createSlice({
         state.error = null;
         state.success = false;
       })
-      .addCase(signUp.fulfilled, (state, action) => {
-        state.user = action.payload;
+      .addCase(signUp.fulfilled, state => {
         state.loading = false;
         state.success = true;
       })
@@ -171,8 +168,4 @@ const authSlice = createSlice({
 });
 
 export const { clearError, clearSuccess } = authSlice.actions;
-export const selectUser = state => state.auth.user;
-export const selectLoading = state => state.auth.loading;
-export const selectError = state => state.auth.error;
-export const selectSuccess = state => state.auth.success;
 export default authSlice.reducer;

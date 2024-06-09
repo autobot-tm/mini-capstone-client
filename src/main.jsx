@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
@@ -10,21 +9,19 @@ import { PersistGate } from 'redux-persist/integration/react';
 import TermOfService from './components/TermOfService/TermOfService.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <ConfigProvider
-            theme={{
-              token: {
-                colorPrimary: '#6a307d',
-              },
-            }}>
-            <App />
-            <TermOfService />
-          </ConfigProvider>
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
-  </StrictMode>,
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: '#6a307d',
+            },
+          }}>
+          <App />
+          <TermOfService />
+        </ConfigProvider>
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>,
 );
