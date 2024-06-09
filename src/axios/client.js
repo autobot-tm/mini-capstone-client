@@ -6,10 +6,16 @@ const config = {
   baseUrl: APP_CONFIG.BACKEND_URL,
   timeout: REQUEST_TIME_OUT,
 };
+
 const apiCaller = axios.create(config);
 apiCaller.defaults.baseURL = APP_CONFIG.BACKEND_URL;
+
 const handleBefore = config => {
-  const token = localStorage.getItem('AUTH')?.replaceAll('"', '');
+  let token = localStorage.getItem('AUTH')?.replaceAll('"', '');
+  if (!token) {
+    const urlParams = new URLSearchParams(window.location.search);
+    token = urlParams.get('token');
+  }
   config.headers['Authorization'] = `Bearer ${token}`;
   return config;
 };

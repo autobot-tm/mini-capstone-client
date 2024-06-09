@@ -4,44 +4,17 @@ import { SubHeading } from '../../components/Typography/SubHeading';
 import LOGIN from '../../assets/images/Login.gif';
 import { PASSWORD_REGEX } from '../../constants/auth.constant';
 import BaseButton from '../../components/Buttons/BaseButtons/BaseButton';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import axios from 'axios';
-import { APP_CONFIG } from '../../config/app.config';
-
-const apiClient = axios.create({
-  baseURL: APP_CONFIG.BACKEND_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-const resetPassword = async (data, token) => {
-  try {
-    const response = await apiClient.post('/api/reset-password', data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error reset password', error);
-    throw error;
-  }
-};
+import { useNavigate } from 'react-router-dom';
+import { changePasswordService } from '../../services/apis/auth.service';
 
 const ResetPassword = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const token = searchParams.get('token');
   const [api, contextHolder] = notification.useNotification();
-
   const onFinish = async values => {
     const { password } = values;
-
     try {
-      const result = await resetPassword(password, token);
-      console.log('Response:', result);
+      await changePasswordService({ password });
       api.success({
         message: 'Change Password',
         description: 'Password changed successfully',
@@ -54,7 +27,6 @@ const ResetPassword = () => {
       console.log(error);
     }
   };
-
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };

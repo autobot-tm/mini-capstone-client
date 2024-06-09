@@ -17,10 +17,6 @@ export const routePaths = {
       element: <Login />,
     },
     {
-      path: routeNames.ResetPassword,
-      element: <ResetPassword />,
-    },
-    {
       path: routeNames.FindTutor,
       element: <Tutors />,
     },
@@ -33,6 +29,10 @@ export const routePaths = {
     {
       path: routeNames.UserProfile,
       element: <UserProfile />,
+    },
+    {
+      path: routeNames.ResetPassword,
+      element: <ResetPassword />,
     },
   ],
 };
