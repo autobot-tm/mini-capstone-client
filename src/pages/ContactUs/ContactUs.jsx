@@ -16,8 +16,10 @@ const ContactUs = () => {
 
   return (
     <Layout>
+      
     <div className="contact-us-container">
       <h1 className="contact-title">Contact Us</h1>
+      
       <Form
         name="contact_us"
         onFinish={onFinish}

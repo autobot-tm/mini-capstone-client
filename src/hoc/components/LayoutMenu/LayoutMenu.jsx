@@ -13,7 +13,7 @@ const items = [
   },
   {
     label: 'How it work',
-    key: 'work',
+    key: routeNames.HowItWork,
   },
   {
     label: 'Find tutors',
