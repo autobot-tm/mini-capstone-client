@@ -7,26 +7,24 @@ import { ConfigProvider } from 'antd';
 import { Provider } from 'react-redux';
 import { persistor, store } from './store/store.js';
 import { PersistGate } from 'redux-persist/integration/react';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { APP_CONFIG } from './config/app.config.js';
+import TermOfService from './components/TermOfService/TermOfService.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-      <GoogleOAuthProvider clientId={APP_CONFIG.GOOGLE_CLIENT_ID}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
-            <ConfigProvider
-              theme={{
-                token: {
-                  colorPrimary: '#6a307d',
-                },
-              }}>
-              <App />
-            </ConfigProvider>
-          </BrowserRouter>
-        </PersistGate>
-      </GoogleOAuthProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: '#6a307d',
+              },
+            }}>
+            <App />
+            <TermOfService />
+          </ConfigProvider>
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   </StrictMode>,
 );
