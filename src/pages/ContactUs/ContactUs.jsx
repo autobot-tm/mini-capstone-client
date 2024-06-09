@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Typography, message } from 'antd';
 import './styles.scss';
+import Layout from '../../hoc/Layout';
 const { Title } = Typography;
 const { TextArea } = Input;
 
@@ -14,6 +15,7 @@ const ContactUs = () => {
   };
 
   return (
+    <Layout>
     <div className="contact-us-container">
       <h1 className="contact-title">Contact Us</h1>
       <Form
@@ -68,6 +70,7 @@ const ContactUs = () => {
         </Form.Item>
       </Form>
     </div>
+    </Layout>
   );
 };
 
