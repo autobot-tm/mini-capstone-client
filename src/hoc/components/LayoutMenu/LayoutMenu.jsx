@@ -59,7 +59,7 @@ const LayoutMenu = () => {
     },
     {
       label: 'How it work',
-      key: 'work',
+      key: routeNames.HowItWork,
     },
     {
       label: 'Find tutors',
@@ -67,7 +67,7 @@ const LayoutMenu = () => {
     },
     {
       label: 'Contact Us',
-      key: 'contact',
+      key: routeNames.ContactUs,
     },
     token
       ? {

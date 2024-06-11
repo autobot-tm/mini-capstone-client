@@ -1,11 +1,12 @@
 import { routeNames } from '../config';
+import ContactUs from '../pages/ContactUs/ContactUs';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import TutorDetail from '../pages/TutorDetail/TutorDetail';
 import Tutors from '../pages/Tutors/Tutors';
 import UserProfile from '../pages/UserProfile/UserProfile';
-
+import HowItWork from '../pages/HowItWork/HowItWork';
 export const routePaths = {
   public: [
     {
@@ -23,6 +24,14 @@ export const routePaths = {
     {
       path: routeNames.TutorDetail,
       element: <TutorDetail />,
+    },
+    {
+     path: routeNames.HowItWork,
+     element: <HowItWork/>,
+    },
+    {
+      path: routeNames.ContactUs,
+      element: <ContactUs />,
     },
   ],
   private: [

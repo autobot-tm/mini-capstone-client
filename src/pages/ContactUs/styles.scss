@@ -1,0 +1,41 @@
+// ContactUs.scss
+@import '../../theme/scss/colors.theme.scss';
+.contact-us-container {
+  background-color: #ffffff;
+  padding: 40px;
+  max-width: 600px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+  }
+  
+  .contact-title {
+    text-align: center;
+    color: $colors-primary;
+  }
+  
+  .contact-form {
+    .ant-form-item-label > label {
+      color: $colors-primary;
+    }
+  
+    .ant-input,
+    .ant-input-textarea {
+      border-radius: 4px;
+    }
+  
+    .submit-button {
+      width: 100%;
+      background-color: #6a307d;
+      border-color: #6a307d;
+      &:hover {
+        background-color: #531e5e;
+        border-color: #531e5e;
+      }
+    }
+    
+  }
+  

@@ -43,7 +43,7 @@ const RegisterForm = ({ onLogin, dispatch, loading, error, success, onForgotPass
         }}
         onFinish={onFinish}>
         <Form.Item
-          name="full_name"
+          name="fullname"
           rules={[
             {
               validator: validateFullName,

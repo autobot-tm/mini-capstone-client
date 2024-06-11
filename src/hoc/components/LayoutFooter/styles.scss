@@ -1,0 +1,63 @@
+// styles.scss
+@import '../../../theme/scss/colors.theme.scss';
+.footer {
+    background-color:$color-bg-footer-primary;
+    color: white;
+    padding: 20px;
+  }
+  
+  .footer-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer-left{
+    text-align: center;
+    padding: 0 10px  ;
+  }
+  .footer-m,
+  .footer-r {
+    text-align: left;;
+    padding: 0 10px;
+  }
+  
+  .cpn-name {
+    font-size: 2rem;
+  }
+  
+  .web-name {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin: 20px 0;
+  }
+  
+  .text {
+    margin: 10px 0;
+  }
+  
+  .web-contact {
+    font-size: 1.25rem;
+    font-style: italic;
+    margin: 20px 0;
+  }
+  
+  .icon {
+    font-size: 2.25rem;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .location-name {
+    font-size: 1.25rem;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  :where(.css-dev-only-do-not-override-h3sjpf).ant-typography{
+    color: $colors-white;
+  }
+  h2:where(.css-dev-only-do-not-override-h3sjpf).ant-typography,h4:where(.css-dev-only-do-not-override-h3sjpf).ant-typography{
+    color: $colors-white;
+
+  }
