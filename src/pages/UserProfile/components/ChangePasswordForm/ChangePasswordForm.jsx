@@ -2,30 +2,37 @@ import { Card, Col, Divider, Form, Input, Row, notification } from 'antd';
 import { SubHeading } from '../../../../components/Typography/SubHeading/SubHeading';
 import { PASSWORD_REGEX } from '../../../../constants/auth.constant';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
-import { changePassword, selectLoading } from '../../../../store/features/auth.slice';
+import { authActions, changePassword } from '../../../../store/features/auth.slice';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const ChangePasswordForm = ({ dispatch }) => {
   const [form] = Form.useForm();
-  const loading = useSelector(selectLoading);
+  const { success, loading, error } = useSelector(state => state.auth);
 
   const onFinish = async values => {
     const { password } = values;
-    try {
-      await dispatch(changePassword({ password })).unwrap();
+    await dispatch(changePassword({ password })).unwrap();
+    form.resetFields();
+  };
+  useEffect(() => {
+    if (success) {
       notification.success({
         message: 'Change Password',
         description: 'Password changed successfully',
       });
-      form.resetFields();
-    } catch (error) {
+      dispatch(authActions.clearSuccess());
+    }
+  }, [success]);
+  useEffect(() => {
+    if (error) {
       notification.error({
         message: 'Error',
-        description: error.response || 'Failed to change password',
+        description: error || 'Failed to change password',
       });
+      dispatch(authActions.clearError());
     }
-  };
-
+  }, [error]);
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };

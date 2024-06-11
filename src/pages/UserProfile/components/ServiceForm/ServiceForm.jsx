@@ -88,58 +88,6 @@ const ServiceForm = () => {
           <Row gutter={[16, 4]} justify="center">
             <Col xs={24} lg={12}>
               <Form.Item
-                label="First name"
-                name="fn"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your first name!',
-                  },
-                ]}>
-                <Input size="large" placeholder="Enter your first name" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} lg={12}>
-              <Form.Item
-                label="Last name"
-                name="ln"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your last name!',
-                  },
-                ]}>
-                <Input size="large" placeholder="Enter your last name" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} lg={12}>
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your email!',
-                  },
-                ]}>
-                <Input size="large" placeholder="Enter your email" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} lg={12}>
-              <Form.Item
-                label="Mobile phone"
-                name="mobile phone"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your mobile phone!',
-                  },
-                ]}>
-                <Input size="large" placeholder="Enter your mobile phone" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} lg={12}>
-              <Form.Item
                 label="Literacy"
                 name="literacy"
                 rules={[

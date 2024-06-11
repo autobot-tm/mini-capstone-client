@@ -7,9 +7,11 @@ import { SubHeading } from '../../components/Typography/SubHeading/SubHeading';
 import ProfileForm from './components/ProfileForm/ProfileForm';
 import { useState } from 'react';
 import ChangePasswordForm from './components/ChangePasswordForm/ChangePasswordForm';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const UserProfile = () => {
+  const user = useSelector(state => state.auth.user);
+  const role = user?.role;
   const dispatch = useDispatch();
   const [selectedKey, setSelectedKey] = useState('1');
   const items = [
@@ -17,7 +19,7 @@ const UserProfile = () => {
       key: '1',
       label: 'Edit Profile',
     },
-    {
+    role === 'TUTOR' && {
       key: '2',
       label: 'Service',
     },
@@ -38,8 +40,8 @@ const UserProfile = () => {
               <Card>
                 <span className="user-profile-left">
                   <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" className="user-avatar" />
-                  <SubHeading strong>Minh Thanh</SubHeading>
-                  <Caption>nmthanh.1906@gmail.com</Caption>
+                  <SubHeading strong>{user?.fullname}</SubHeading>
+                  <Caption>{user?.email}</Caption>
                   <Divider dashed />
                   <Menu
                     style={{
@@ -55,7 +57,7 @@ const UserProfile = () => {
             </Col>
             <Col xs={24} lg={18}>
               {selectedKey === '1' && <ProfileForm />}
-              {selectedKey === '2' && <ServiceForm />}
+              {selectedKey === '2' && role === 'TUTOR' && <ServiceForm />}
               {selectedKey === '3' && <ChangePasswordForm dispatch={dispatch} />}
             </Col>
           </Row>

@@ -1,4 +1,4 @@
-import apiCaller from '../../axios/client';
+import { apiCaller } from '../../axios/client';
 import { ENDPOINTS } from './api-endpoints.service';
 
 /**
@@ -39,4 +39,8 @@ export const signInWithGoogleService = async ({ token }) => {
 
 export const requestResetPasswordService = ({ email }) => {
   return apiCaller.post(ENDPOINTS.auth.requestResetPassword, { email });
+};
+
+export const upRoleTutorService = ({ email }) => {
+  return apiCaller.post(ENDPOINTS.auth.upRoleTutor, { email });
 };

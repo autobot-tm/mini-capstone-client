@@ -1,25 +1,31 @@
 import { ArrowRightOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Divider, Form, Input, notification } from 'antd';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
-import { clearError, signIn } from '../../../../store/features/auth.slice';
+import { signIn, useAuthSlice } from '../../../../store/features/auth.slice';
 import { useEffect } from 'react';
 import GoogleSignInButton from '../../../../components/GoogleSignIn/GoogleSignInButton';
 
-const LoginForm = ({ onRegister, dispatch, loading, error, onForgotPassword }) => {
+const LoginForm = ({ onRegister, dispatch, loading, error, success, onForgotPassword }) => {
   const [api, contextHolder] = notification.useNotification();
+  const { actions: authActions } = useAuthSlice();
 
   const onFinish = values => {
     dispatch(signIn(values));
   };
+  useEffect(() => {
+    if (success) {
+      dispatch(authActions.clearSuccess());
+    }
+  }, [success, dispatch]);
   useEffect(() => {
     if (error) {
       api.error({
         type: 'error',
         message: error,
       });
+      dispatch(authActions.clearError());
     }
-    dispatch(clearError());
-  }, [error]);
+  }, [error, dispatch]);
 
   return (
     <>

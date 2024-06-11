@@ -1,6 +1,6 @@
 import { Divider, Form, Input, notification } from 'antd';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
-import { clearSuccess, signUp } from '../../../../store/features/auth.slice';
+import { useAuthSlice } from '../../../../store/features/auth.slice';
 import { PASSWORD_REGEX, PHONE_NUMBER } from '../../../../constants/auth.constant';
 import GoogleSignInButton from '../../../../components/GoogleSignIn/GoogleSignInButton';
 import { validateFullName, validatePhoneNumber } from '../../../../utils/validate-form';
@@ -8,8 +8,9 @@ import { useEffect } from 'react';
 
 const RegisterForm = ({ onLogin, dispatch, loading, error, success, onForgotPassword }) => {
   const [api, contextHolder] = notification.useNotification();
+  const { actions: authActions } = useAuthSlice();
   const onFinish = values => {
-    dispatch(signUp(values));
+    dispatch(authActions.signUp(values));
   };
   useEffect(() => {
     if (error) {
@@ -17,13 +18,19 @@ const RegisterForm = ({ onLogin, dispatch, loading, error, success, onForgotPass
         message: 'Error',
         description: error || 'Failed to register',
       });
+      dispatch(authActions.clearError());
     }
   }, [error]);
 
   useEffect(() => {
     if (success) {
-      dispatch(clearSuccess());
-      onLogin();
+      api.success({
+        message: 'Register Successful!',
+      });
+      dispatch(authActions.clearSuccess());
+      setTimeout(() => {
+        onLogin();
+      }, 1000);
     }
   }, [success]);
   return (

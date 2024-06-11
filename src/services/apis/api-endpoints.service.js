@@ -6,5 +6,9 @@ export const ENDPOINTS = {
     changePassword: '/api/reset-password',
     google: '/api/login-google',
     requestResetPassword: '/api/forget-password',
+    upRoleTutor: '/api/up-role',
+  },
+  users: {
+    update: id => `/api/account/${id}`,
   },
 };
