@@ -8,21 +8,10 @@
   padding: 24px;
   width: 100%;
   color: $colors-white;
-  border-radius: 4px;
   font-weight: 500;
   font-size: 16px;
 }
 
 :where(.css-dev-only-do-not-override-h3sjpf).ant-btn-primary {
   box-shadow: none;
-}
-:where(.css-dev-only-do-not-override-h3sjpf).ant-btn {
-  outline: none;
-  position: relative;
-  white-space: nowrap;
-  background: #6a307d;
-  touch-action: manipulation;
-  cursor: pointer;
-  
-
 }

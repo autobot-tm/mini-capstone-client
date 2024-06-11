@@ -1,39 +1,68 @@
-import { Divider, Form, Input } from 'antd';
-import { Caption } from '../../../../components/Typography/Caption/Caption';
+import { Divider, Form, Input, notification } from 'antd';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
+import { useAuthSlice } from '../../../../store/features/auth.slice';
+import { PASSWORD_REGEX, PHONE_NUMBER } from '../../../../constants/auth.constant';
+import GoogleSignInButton from '../../../../components/GoogleSignIn/GoogleSignInButton';
+import { validateFullName, validatePhoneNumber } from '../../../../utils/validate-form';
+import { useEffect } from 'react';
 
-const RegisterForm = ({ onLogin }) => {
+const RegisterForm = ({ onLogin, dispatch, loading, error, success, onForgotPassword }) => {
+  const [api, contextHolder] = notification.useNotification();
+  const { actions: authActions } = useAuthSlice();
   const onFinish = values => {
-    console.log('Received values of form: ', values);
+    dispatch(authActions.signUp(values));
   };
+  useEffect(() => {
+    if (error) {
+      api.error({
+        message: 'Error',
+        description: error || 'Failed to register',
+      });
+      dispatch(authActions.clearError());
+    }
+  }, [error]);
 
+  useEffect(() => {
+    if (success) {
+      api.success({
+        message: 'Register Successful!',
+      });
+      dispatch(authActions.clearSuccess());
+      setTimeout(() => {
+        onLogin();
+      }, 1000);
+    }
+  }, [success]);
   return (
     <>
+      {contextHolder}
       <Form
-        name="normal_login"
+        name="sign_up"
         initialValues={{
           remember: true,
         }}
         onFinish={onFinish}>
         <Form.Item
-          name="first_name"
+          name="full_name"
           rules={[
             {
-              required: true,
-              message: 'Please input your first name!',
+              validator: validateFullName,
             },
           ]}>
-          <Input placeholder="First Name" size="large" />
+          <Input placeholder="Full Name" size="large" />
         </Form.Item>
         <Form.Item
-          name="last_name"
+          name="phone"
           rules={[
             {
-              required: true,
-              message: 'Please input your last name!',
+              validator: validatePhoneNumber,
+            },
+            {
+              pattern: PHONE_NUMBER.VALID_LENGTH,
+              message: 'Phone number must have 10 or 11 digits!',
             },
           ]}>
-          <Input placeholder="Last Name" size="large" />
+          <Input placeholder="Phone Number" size="large" />
         </Form.Item>
         <Form.Item
           name="email"
@@ -52,9 +81,23 @@ const RegisterForm = ({ onLogin }) => {
         <Form.Item
           name="password"
           rules={[
+            { required: true, message: 'Password is required' },
+            { pattern: PASSWORD_REGEX.MIN_LENGTH, message: 'Password must be at least 8 characters' },
             {
-              required: true,
-              message: 'Please input your password!',
+              pattern: PASSWORD_REGEX.LOWERCASE,
+              message: 'Password must contain at least one lowercase character',
+            },
+            {
+              pattern: PASSWORD_REGEX.UPPERCASE,
+              message: 'Password must contain at least one uppercase character',
+            },
+            {
+              pattern: PASSWORD_REGEX.SPECIAL_CHARACTER,
+              message: 'Password must contain at least one special character',
+            },
+            {
+              pattern: PASSWORD_REGEX.NUMBER,
+              message: 'Password must contain at least one digit',
             },
           ]}
           hasFeedback>
@@ -69,6 +112,7 @@ const RegisterForm = ({ onLogin }) => {
               required: true,
               message: 'Please confirm your password!',
             },
+            { min: 8, message: 'Password must be at least 8 characters' },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue('password') === value) {
@@ -81,14 +125,18 @@ const RegisterForm = ({ onLogin }) => {
           <Input.Password placeholder="Confirm Password" size="large" />
         </Form.Item>
         <Form.Item>
-          <BaseButton size="large" htmlType="submit" disabled="" loading="">
-            Register
+          <BaseButton type="primary" size="large" htmlType="submit" disabled={loading} loading={loading}>
+            {loading ? 'Registering..' : 'Register'}
           </BaseButton>
         </Form.Item>
+        <div className="join-section">
+          <p onClick={onLogin}>Sign In</p>
+          <p onClick={onForgotPassword}>Forgot password?</p>
+        </div>
         <Divider>OR</Divider>
-        <Caption onClick={onLogin} style={{ cursor: 'pointer' }} classNames="primary-color" strong>
-          Sign in
-        </Caption>
+        <span className="google-btn-container">
+          <GoogleSignInButton />
+        </span>
       </Form>
     </>
   );

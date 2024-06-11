@@ -3,4 +3,5 @@ export const APP_CONFIG = {
   IS_DEV: import.meta.env.NODE_ENV === 'development',
   ENV: import.meta.env.VITE_ENV || '',
   GOOGLE_CLIENT_ID: import.meta.env.VITE_GOOGLE_CLIENT_ID || '',
+  AUTH_DOMAIN: import.meta.env,
 };

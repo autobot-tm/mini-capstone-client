@@ -1,0 +1,25 @@
+@import './../../theme/scss/colors.theme.scss';
+
+.user-profile-page {
+  background-color: $colors-bg-primary;
+  padding: 80px 20px;
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    :where(.css-dev-only-do-not-override-h3sjpf).ant-menu-light.ant-menu-root.ant-menu-vertical {
+      border-inline-end: none;
+    }
+  }
+  .user-profile-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    .user-avatar {
+      height: 160px;
+      width: 160px;
+    }
+  }
+}
