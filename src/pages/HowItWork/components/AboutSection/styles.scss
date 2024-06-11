@@ -1,0 +1,107 @@
+
+
+.tu-main-section {
+  padding: 60px 0;
+  background-color: #f9f9f9;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .tu-maintitle {
+    margin-bottom: 50px;
+
+    img {
+      margin-bottom: 20px;
+      vertical-align: middle;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h4 {
+      text-align: center;
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 32px;
+      color: #000;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #666;
+    }
+  }
+ 
+  .tu-howit-steps {
+    .tu-howit-steps_content {
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #eaeaea;
+      border-radius: 8px;
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+
+      &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      figure {
+        margin: 0 0 20px;
+
+        img {
+          vertical-align: middle;
+          max-width: 100%;
+          height: auto;
+          margin-right: auto;
+          margin-right: auto;
+        }
+       
+      }
+
+      .tu-howit-steps_info {
+        .tu-step-tag {
+          display: inline-block;
+          padding: 5px 10px;
+          font-size: 14px;
+          font-weight: bold;
+          border-radius: 4px;
+          margin-bottom: 10px;
+
+          &.tu-orange-bgclr {
+            background-color: #ff8c00;
+            color: #fff;
+          }
+
+          &.tu-purple-bgclr {
+            background-color: #800080;
+            color: #fff;
+          }
+
+          &.tu-green-bgclr {
+            background-color: #008000;
+            color: #fff;
+          }
+        }
+
+        h5 {
+          font-size: 18px;
+          color: #333;
+          margin-bottom: 10px;
+        }
+
+        p {
+          font-size: 14px;
+          color: #666;
+        }
+      }
+    }
+  }
+}

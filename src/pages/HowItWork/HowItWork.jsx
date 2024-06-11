@@ -1,23 +1,18 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../hoc/Layout";
 import { routeNames } from "../../config";
 import './styles.scss';
-import HeaderSection from "../HowItWork/HeaderSection/HeaderSection";
-import AboutSection from "../HowItWork/AboutSection/AboutSection";
-import WorkSection from "../HowItWork/WorkSection/WorkSection";
+import AboutSection from "../HowItWork/components/AboutSection/AboutSection";
 const HowItWork = () => {
-    const navigate = useNavigate();
-  const onLogin = () => {
-    navigate(routeNames.Login);
+  const navigate = useNavigate();
+  const onAboutUs = () => {
+    navigate(routeNames.AboutUs);
   };
-    return(
-        <Layout>
-            <HeaderSection onLogin={onLogin} />
-            <AboutSection/>
-            <WorkSection/>
-        </Layout>
-    );
+  return (
+    <Layout>
+       <AboutSection onAboutUs={onAboutUs} />
+    </Layout>
+  );
 };
 
 export default HowItWork;
