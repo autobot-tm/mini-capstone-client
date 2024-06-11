@@ -3,7 +3,7 @@ import { routeNames } from '../config/route-name.config';
 import { useSelector } from 'react-redux';
 
 export function PrivateRoute() {
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector(state => state.auth);
   let token = user?.token;
   if (!token) {
     const urlParams = new URLSearchParams(window.location.search);

@@ -17,7 +17,7 @@ const ForgotPassword = ({ onRegister, onLogin, dispatch }) => {
     } catch (error) {
       notification.error({
         message: 'Error',
-        description: error.response || 'Failed to reset password',
+        description: 'Failed to reset password',
       });
     }
   };

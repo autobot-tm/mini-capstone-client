@@ -6,34 +6,46 @@ import {
   signInWithGoogleService,
   signUpService,
 } from '../../services/apis/auth.service';
-import { remove, save } from '../../utils/local-storage';
+import { load, remove, save } from '../../utils/local-storage';
 import { STORAGE_KEYS } from '../../constants/storage.constant';
+
+const createInitialState = () => {
+  const initialState = {
+    user: '',
+    token: '',
+    role: '',
+    loading: false,
+    error: null,
+    success: false,
+  };
+  return initialState;
+};
+export const initialState = createInitialState();
 
 export const signIn = createAsyncThunk('auth/signIn', async (input, { rejectWithValue }) => {
   try {
     const response = await signInService(input);
-    await save(STORAGE_KEYS.AUTH, response.data.token);
-    return response.data;
-  } catch (err) {
-    console.warn('🚀 ~ file: auth.slice. signIn ~ error:', err);
-    return rejectWithValue(err.response.data);
+    await save(STORAGE_KEYS.AUTH, response);
+    return { ...response };
+  } catch (error) {
+    console.warn('🚀 ~ file: auth.slice. signIn ~ error:', error);
+    return rejectWithValue(error);
   }
 });
 
 export const signUp = createAsyncThunk('auth/signUp', async (input, { rejectWithValue }) => {
   try {
     const response = await signUpService(input);
-    return response.data;
-  } catch (err) {
-    console.warn('🚀 ~ file: auth.slice. signUp ~ error:', err);
-    return rejectWithValue(err.response.data);
+    return { ...response };
+  } catch (error) {
+    console.warn('🚀 ~ file: auth.slice. signUp ~ error:', error);
+    return rejectWithValue(error);
   }
 });
 
 export const changePassword = createAsyncThunk('auth/changePassword', async (input, { rejectWithValue }) => {
   try {
-    const response = await changePasswordService(input);
-    return response.data;
+    await changePasswordService(input);
   } catch (err) {
     console.warn('🚀 ~ file: auth.slice. changePassword ~ error:', err);
     return rejectWithValue(err.response.data);
@@ -44,15 +56,11 @@ export const signInWithGoogle = createAsyncThunk('auth/signInWithGoogle', async 
   try {
     console.log('🚀 ~ idToken:', token);
     const response = await signInWithGoogleService({ token: token ?? '' });
-    await save(STORAGE_KEYS.AUTH, response.data.token);
-    return response.data;
-  } catch (err) {
-    console.warn('🚀 ~ file: auth.slice. signInWithGoogle ~ error:', err);
-    return rejectWithValue({
-      message: err.message,
-      code: err.code,
-      response: err.response ? err.response.data : null,
-    });
+    await save(STORAGE_KEYS.AUTH, response?.token);
+    return { ...response };
+  } catch (error) {
+    console.warn('🚀 ~ file: auth.slice. signInWithGoogle ~ error:', error);
+    return rejectWithValue(error);
   }
 });
 
@@ -61,13 +69,9 @@ export const requestResetPassword = createAsyncThunk(
   async (input, { rejectWithValue }) => {
     try {
       await requestResetPasswordService(input);
-    } catch (err) {
-      console.warn('🚀 ~ file: auth.slice. requestResetPassword ~ error:', err);
-      return rejectWithValue({
-        message: err.message,
-        code: err.code,
-        response: err.response ? err.response.data : null,
-      });
+    } catch (error) {
+      console.warn('🚀 ~ file: auth.slice. requestResetPassword ~ error:', error);
+      return rejectWithValue(error);
     }
   },
 );
@@ -75,24 +79,29 @@ export const requestResetPassword = createAsyncThunk(
 export const signOut = createAsyncThunk('auth/signOut', async (_, { rejectWithValue }) => {
   try {
     remove(STORAGE_KEYS.AUTH);
-  } catch (err) {
-    console.warn('🚀 ~ file: auth.slice. signOut ~ error:', err);
-    return rejectWithValue({
-      message: err.message,
-      code: err.code,
-      response: err.response ? err.response.data : null,
-    });
+  } catch (error) {
+    console.warn('🚀 ~ file: auth.slice. signOut ~ error:', error);
+    return rejectWithValue(error);
+  }
+});
+
+export const initState = createAsyncThunk('auth/initState', async (_, { rejectWithValue }) => {
+  try {
+    const localAuth = load(STORAGE_KEYS.AUTH);
+    const states = {
+      ...initialState,
+      ...localAuth,
+    };
+    return states;
+  } catch (error) {
+    console.warn('🚀 ~ file: auth.slice. initState ~ error:', error);
+    return rejectWithValue(error);
   }
 });
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    user: null,
-    loading: false,
-    error: null,
-    success: false,
-  },
+  initialState,
   reducers: {
     clearError(state) {
       state.error = null;
@@ -101,71 +110,129 @@ const authSlice = createSlice({
       state.success = false;
     },
   },
-  extraReducers: builder => {
-    builder
-      .addCase(signIn.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(signIn.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.loading = false;
-      })
-      .addCase(signIn.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-      .addCase(signInWithGoogle.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(signInWithGoogle.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.loading = false;
-      })
-      .addCase(signInWithGoogle.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-      .addCase(signUp.pending, state => {
-        state.loading = true;
-        state.error = null;
-        state.success = false;
-      })
-      .addCase(signUp.fulfilled, state => {
-        state.loading = false;
-        state.success = true;
-      })
-      .addCase(signUp.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-        state.success = false;
-      })
-      .addCase(changePassword.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(changePassword.fulfilled, state => {
-        state.loading = false;
-      })
-      .addCase(changePassword.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-      .addCase(signOut.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(signOut.fulfilled, state => {
-        state.user = null;
-        state.loading = false;
-      })
-      .addCase(signOut.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
+  extraReducers(builder) {
+    builder.addCase(initState.pending, state => ({
+      ...state,
+      success: false,
+      loading: true,
+    }));
+    builder.addCase(initState.fulfilled, (state, { payload }) => ({
+      ...state,
+      user: payload,
+      token: payload.token,
+      role: payload.role,
+      loading: false,
+    }));
+    builder.addCase(initState.rejected, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      success: false,
+      error: payload,
+    }));
+    builder.addCase(signIn.pending, state => ({
+      ...state,
+      loading: true,
+      success: false,
+    }));
+    builder.addCase(signIn.fulfilled, (state, { payload }) => ({
+      ...state,
+      user: payload,
+      token: payload.token,
+      role: payload.role,
+      loading: false,
+      success: true,
+    }));
+    builder.addCase(signIn.rejected, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      success: false,
+      error: payload,
+    }));
+    builder.addCase(signInWithGoogle.pending, state => ({
+      ...state,
+      loading: true,
+      error: null,
+    }));
+    builder.addCase(signInWithGoogle.fulfilled, (state, { payload }) => ({
+      ...state,
+      user: payload,
+      token: payload.token,
+      role: payload.role,
+      loading: false,
+      success: true,
+    }));
+    builder.addCase(signInWithGoogle.rejected, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      success: false,
+      error: payload,
+    }));
+    builder.addCase(signUp.rejected, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      success: false,
+      error: payload,
+    }));
+    builder.addCase(signUp.pending, state => ({
+      ...state,
+      success: false,
+      loading: true,
+    }));
+    builder.addCase(signUp.fulfilled, state => ({
+      ...state,
+      success: true,
+      loading: false,
+      error: '',
+    }));
+    builder.addCase(signOut.pending, state => ({
+      ...state,
+      success: false,
+      loading: true,
+    }));
+    builder.addCase(signOut.fulfilled, state => ({
+      ...state,
+      ...initialState,
+      success: true,
+      loading: false,
+    }));
+    builder.addCase(signOut.rejected, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      success: false,
+      error: payload,
+    }));
+    builder.addCase(changePassword.pending, state => ({
+      ...state,
+      success: false,
+      loading: true,
+    }));
+    builder.addCase(changePassword.fulfilled, state => ({
+      ...state,
+      success: true,
+      loading: false,
+    }));
+    builder.addCase(changePassword.rejected, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      success: false,
+      error: payload,
+    }));
   },
 });
 
-export const { clearError, clearSuccess } = authSlice.actions;
-export default authSlice.reducer;
+const { actions, reducer } = authSlice;
+export const authReducer = reducer;
+export const authActions = actions;
+
+export const useAuthSlice = () => {
+  const actions = {
+    ...authSlice.actions,
+    signIn,
+    signInWithGoogle,
+    initState,
+    signUp,
+    changePassword,
+    signOut,
+  };
+  return { actions };
+};

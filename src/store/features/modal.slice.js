@@ -18,5 +18,4 @@ const modalSlice = createSlice({
 });
 
 export default modalSlice.reducer;
-export const selectTermOfServiceModal = state => state.modal.termOfServiceModal;
 export const { openTermOfServiceModal, closeTermOfServiceModal } = modalSlice.actions;

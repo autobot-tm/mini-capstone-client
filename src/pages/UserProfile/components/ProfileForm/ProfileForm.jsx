@@ -4,27 +4,38 @@ import { SubHeading } from '../../../../components/Typography/SubHeading/SubHead
 import { useDispatch, useSelector } from 'react-redux';
 import { validateFullName, validatePhoneNumber } from '../../../../utils/validate-form';
 import { PHONE_NUMBER } from '../../../../constants/auth.constant';
-import { updateUserProfile } from '../../../../store/features/user.slice';
+import { updateUserProfile, userActions } from '../../../../store/features/user.slice';
+import { useEffect } from 'react';
 
 const ProfileForm = () => {
   const [api, contextHolder] = notification.useNotification();
-  const user = useSelector(state => state.auth.user);
+  const { user, loading, success, error } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
   const onFinish = values => {
     const { fullname, phone } = values;
-    try {
-      const email = user?.email;
-      const id = user?.id;
-      dispatch(updateUserProfile({ id, email, fullname, phone }));
+    const id = user?.id;
+    dispatch(updateUserProfile({ id, fullname, phone }));
+  };
+  useEffect(() => {
+    if (success) {
       api.success({
         message: 'Saved successfully!',
+        description: 'Updated profile successfully',
       });
-    } catch (error) {
-      console.error(error);
+      dispatch(userActions.clearSuccess());
     }
-  };
+  }, [success, api, dispatch]);
+  useEffect(() => {
+    if (error) {
+      api.error({
+        message: 'Error',
+        description: 'Failed to update profile',
+      });
+      dispatch(userActions.clearError());
+    }
+  }, [error, api, dispatch]);
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
@@ -37,7 +48,7 @@ const ProfileForm = () => {
         <Row gutter={[16, 4]}>
           <Col xs={24} lg={12}>
             <Form.Item
-              label="First name"
+              label="Full name"
               name="fullname"
               rules={[
                 {
@@ -47,7 +58,6 @@ const ProfileForm = () => {
               <Input size="large" placeholder={user?.fullname || 'Enter your full name'} />
             </Form.Item>
           </Col>
-
           <Col xs={24} lg={12}>
             <Form.Item label="Email" name="email">
               <Input size="large" placeholder={user?.email} disabled />
@@ -71,8 +81,13 @@ const ProfileForm = () => {
           </Col>
           <Col xs={24} style={{ display: 'flex', justifyContent: 'center' }}>
             <Form.Item>
-              <BaseButton style={{ width: 'auto' }} type="primary" htmlType="submit">
-                Save
+              <BaseButton
+                style={{ width: 'auto' }}
+                type="primary"
+                htmlType="submit"
+                disabled={loading}
+                loading={loading}>
+                {loading ? 'Saving..' : 'Save'}
               </BaseButton>
             </Form.Item>
           </Col>

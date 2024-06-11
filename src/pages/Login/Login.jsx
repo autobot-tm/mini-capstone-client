@@ -50,6 +50,7 @@ const Login = () => {
                 onRegister={onRegister}
                 dispatch={dispatch}
                 loading={loading}
+                success={success}
                 error={error}
                 onForgotPassword={onForgotPassword}
               />

@@ -6,15 +6,16 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import BaseButton from '../../../components/Buttons/BaseButtons/BaseButton';
 import { EllipsisOutlined, LogoutOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { signOut } from '../../../store/features/auth.slice';
+import { useAuthSlice } from '../../../store/features/auth.slice';
 
 const LayoutMenu = () => {
+  const { actions: authActions } = useAuthSlice();
   const [current, setCurrent] = useState(routeNames.Home);
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const token = useSelector(state => state.auth.user)?.token;
+  const { token } = useSelector(state => state.auth);
 
   useEffect(() => {
     setCurrent(location.pathname);
@@ -38,7 +39,7 @@ const LayoutMenu = () => {
     if (e.key === 'profile') {
       navigate('/user-profile');
     } else if (e.key === 'logout') {
-      dispatch(signOut());
+      dispatch(authActions.signOut());
     }
   };
   const menu = (

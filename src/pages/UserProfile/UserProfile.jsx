@@ -40,8 +40,8 @@ const UserProfile = () => {
               <Card>
                 <span className="user-profile-left">
                   <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" className="user-avatar" />
-                  <SubHeading strong>Minh Thanh</SubHeading>
-                  <Caption>nmthanh.1906@gmail.com</Caption>
+                  <SubHeading strong>{user?.fullname}</SubHeading>
+                  <Caption>{user?.email}</Caption>
                   <Divider dashed />
                   <Menu
                     style={{
