@@ -1,4 +1,3 @@
-import React from 'react';
 import { Layout, Row, Col, Typography } from 'antd';
 import { FacebookOutlined, YoutubeOutlined, GoogleOutlined } from '@ant-design/icons';
 import './styles.scss';
