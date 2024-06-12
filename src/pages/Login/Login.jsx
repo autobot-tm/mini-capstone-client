@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd';
+import { Button, Col, FloatButton, Row } from 'antd';
 import './styles.scss';
 import LOGIN from '../../assets/images/Login.gif';
 import { useEffect, useState } from 'react';
@@ -9,6 +9,7 @@ import { SubHeading } from '../../components/Typography/SubHeading';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import { HomeOutlined } from '@ant-design/icons';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -68,6 +69,15 @@ const Login = () => {
                 <ForgotPassword dispatch={dispatch} onLogin={onLogin} onRegister={onRegister} />
               </>
             )}
+            <FloatButton
+              onClick={() => navigate('/')}
+              shape="circle"
+              type="primary"
+              style={{
+                right: 400,
+              }}
+              icon={<HomeOutlined />}
+            />
           </div>
         </Col>
       </Row>

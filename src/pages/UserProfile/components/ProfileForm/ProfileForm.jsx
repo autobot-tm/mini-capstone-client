@@ -10,13 +10,13 @@ import { useEffect } from 'react';
 const ProfileForm = () => {
   const [api, contextHolder] = notification.useNotification();
   const { user, loading, success, error } = useSelector(state => state.user);
+  const auth = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
   const onFinish = values => {
     const { fullname, phone } = values;
-    const id = user?.id;
-    dispatch(updateUserProfile({ id, fullname, phone }));
+    dispatch(updateUserProfile({ fullname, phone }));
   };
   useEffect(() => {
     if (success) {
@@ -60,7 +60,7 @@ const ProfileForm = () => {
           </Col>
           <Col xs={24} lg={12}>
             <Form.Item label="Email" name="email">
-              <Input size="large" placeholder={user?.email} disabled />
+              <Input size="large" placeholder={auth?.email} disabled />
             </Form.Item>
           </Col>
           <Col xs={24} lg={12}>

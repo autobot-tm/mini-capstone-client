@@ -9,6 +9,6 @@ export const ENDPOINTS = {
     upRoleTutor: '/api/up-role',
   },
   users: {
-    update: id => `/api/account/${id}`,
+    update: '/api/account',
   },
 };
