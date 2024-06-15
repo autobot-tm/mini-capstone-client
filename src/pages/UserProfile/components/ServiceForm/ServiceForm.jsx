@@ -5,9 +5,10 @@ import { SubHeading } from '../../../../components/Typography/SubHeading/SubHead
 import { classes, literacy, locationOptions, subjects } from '../../../../constants/option.constant';
 import './styles.scss';
 import { Button, Card, Col, Divider, Form, Input, Row, Select, Space, notification } from 'antd';
-import VideoUploader from '../../../../components/VideoUploader/VideoUploader';
 import TextArea from 'antd/es/input/TextArea';
 import { Paragraph } from '../../../../components/Typography/Paragraph/Paragraph';
+import FileUploader from '../../../../components/FileUploader/FileUploader';
+import VideoUploader from '../../../../components/VideoUploader/VideoUploader';
 
 const initialSchedule = {
   morning: {
@@ -41,6 +42,8 @@ const initialSchedule = {
 const ServiceForm = () => {
   const [form] = Form.useForm();
   const [slotCount, setSlotCount] = useState(0);
+  const [uploadedVideoUrl, setUploadedVideoUrl] = useState([]);
+  const [uploadedCetificateUrl, setUploadedCetificateUrl] = useState([]);
   const [api, contextHolder] = notification.useNotification();
   const openNotification = () => {
     api.success({
@@ -48,11 +51,16 @@ const ServiceForm = () => {
       description: 'Your service has been successfully created. Please wait for our review within 24 hours.',
     });
   };
-  const onChange = e => {
-    console.log('Change:', e.target.value);
-  };
   const onFinish = values => {
     console.log('Success:', values);
+
+    const dataToSend = {
+      ...values,
+      certificateUrl: uploadedCetificateUrl,
+      videoUrl: uploadedVideoUrl,
+    };
+    console.log('Data to send:', dataToSend);
+
     openNotification();
     form.resetFields();
   };
@@ -62,6 +70,24 @@ const ServiceForm = () => {
   const handleScheduleChange = (schedule, count) => {
     form.setFieldsValue({ schedule });
     setSlotCount(count);
+    form.validateFields(['video']);
+  };
+  const handleUploadSuccess = url => {
+    console.log('Uploaded file URL:', url);
+    setUploadedCetificateUrl(url);
+  };
+  const handleDeleteSuccess = url => {
+    setUploadedCetificateUrl(null);
+    console.log('delete', url);
+  };
+  const handleVideoUploadSuccess = url => {
+    console.log('Uploaded video URL:', url);
+    setUploadedVideoUrl(url);
+  };
+
+  const handleVideoDeleteSuccess = url => {
+    console.log('Deleted video URL:', url);
+    setUploadedVideoUrl(null);
   };
   return (
     <>
@@ -174,19 +200,6 @@ const ServiceForm = () => {
             </Col>
             <Col xs={24}>
               <Form.Item
-                label="Video"
-                name="video"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please upload your video',
-                  },
-                ]}>
-                <VideoUploader />
-              </Form.Item>
-            </Col>
-            <Col xs={24}>
-              <Form.Item
                 label="A brief introduction"
                 name="introduction"
                 rules={[
@@ -199,12 +212,54 @@ const ServiceForm = () => {
                   size="large"
                   showCount
                   maxLength={500}
-                  onChange={onChange}
                   placeholder="Enter your description"
                   style={{
                     height: 120,
                     resize: 'none',
                   }}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} lg={12}>
+              <Form.Item
+                label="Certificate evidence"
+                validateTrigger={['onChange', 'onBlur']}
+                rules={[
+                  {
+                    validator: (_, value) => {
+                      if (!uploadedCetificateUrl) {
+                        return Promise.reject(new Error('Please upload your certificate images'));
+                      }
+                      return Promise.resolve();
+                    },
+                  },
+                ]}>
+                <FileUploader
+                  storagePath="tutorCertificate/"
+                  onUploadSuccess={handleUploadSuccess}
+                  onDeleteSuccess={handleDeleteSuccess}
+                  limit={1}
+                />
+              </Form.Item>
+            </Col>
+            <Col xs={24} lg={12}>
+              <Form.Item
+                label="Video academic"
+                validateTrigger={['onChange', 'onBlur']}
+                rules={[
+                  {
+                    validator: (_, value) => {
+                      if (!uploadedVideoUrl) {
+                        return Promise.reject(new Error('Please upload your video academic'));
+                      }
+                      return Promise.resolve();
+                    },
+                  },
+                ]}>
+                <VideoUploader
+                  storagePath="tutorVideo/"
+                  onVideoUploadSuccess={handleVideoUploadSuccess}
+                  onVideoDeleteSuccess={handleVideoDeleteSuccess}
                 />
               </Form.Item>
             </Col>

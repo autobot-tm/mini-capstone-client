@@ -1,22 +1,22 @@
 import { useState } from 'react';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
-import { VideoCameraAddOutlined } from '@ant-design/icons';
+import { InboxOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import { storage } from '../../config/firebase.config';
 
 const { Dragger } = Upload;
 
-const VideoUploader = ({ storagePath = 'tutorVideo/', onVideoUploadSuccess, onVideoDeleteSuccess }) => {
+const FileUploader = ({ storagePath = 'files/', onUploadSuccess, onDeleteSuccess }) => {
   const [fileList, setFileList] = useState([]);
 
   const uploadFile = async file => {
     if (!file || fileList.length >= 1) {
-      message.error('You can only upload one video.');
+      message.error('You can only upload one file.');
       return;
     }
-    if (!file.type.startsWith('video/mp4')) {
-      message.error('You can only upload video files!');
+    if (!file.type.startsWith('image/')) {
+      message.error('You can only upload image files!');
       return;
     }
     const fileRef = ref(storage, `${storagePath}${file.name + uuidv4()}`);
@@ -30,33 +30,33 @@ const VideoUploader = ({ storagePath = 'tutorVideo/', onVideoUploadSuccess, onVi
         url: url,
       };
       setFileList([newFile]);
-      if (onVideoUploadSuccess) {
-        onVideoUploadSuccess(url);
+      if (onUploadSuccess) {
+        onUploadSuccess(url);
       }
-      message.success(`${file.name} video uploaded successfully.`);
+      message.success(`${file.name} file uploaded successfully.`);
     } catch (error) {
       console.error('Error uploading file:', error);
-      message.error(`${file.name} video upload failed.`);
+      message.error(`${file.name} file upload failed.`);
     }
   };
 
   const handleRemove = async file => {
     const { uid, url } = file;
     try {
-      // const fileRef = ref(storage, `${storagePath}${file.name}`);
-      // await deleteObject(fileRef);
+      //   const fileRef = ref(storage, `${storagePath}${file.name}`);
+      //   await deleteObject(fileRef);
 
       setFileList([]);
-      if (onVideoDeleteSuccess) {
-        onVideoDeleteSuccess(url);
+      if (onDeleteSuccess) {
+        onDeleteSuccess(url);
       }
-      message.success(`${file.name} video deleted successfully.`);
+      message.success(`${file.name} file deleted successfully.`);
     } catch (error) {
       console.error('Error deleting file:', error);
       if (error.code === 'storage/object-not-found') {
         message.error('File not found for deletion.');
       } else {
-        message.error(error.message || `${file.name} video deletion failed.`);
+        message.error(error.message || `${file.name} file deletion failed.`);
       }
     }
   };
@@ -75,9 +75,9 @@ const VideoUploader = ({ storagePath = 'tutorVideo/', onVideoUploadSuccess, onVi
     onChange(info) {
       const { status } = info.file;
       if (status === 'done') {
-        console.log(`${info.file.name} video uploaded successfully.`);
+        console.log(`${info.file.name} file uploaded successfully.`);
       } else if (status === 'error') {
-        message.error(`${info.file.name} video upload failed.`);
+        message.error(`${info.file.name} file upload failed.`);
       }
     },
     onDrop(e) {
@@ -88,9 +88,9 @@ const VideoUploader = ({ storagePath = 'tutorVideo/', onVideoUploadSuccess, onVi
   return (
     <Dragger {...props}>
       <p className="ant-upload-drag-icon">
-        <VideoCameraAddOutlined />
+        <InboxOutlined />
       </p>
-      <p className="ant-upload-text">Click or drag video file to this area to upload</p>
+      <p className="ant-upload-text">Click or drag file to this area to upload</p>
       <p className="ant-upload-hint">
         Support for a single upload. Strictly prohibited from uploading company data or other banned files.
       </p>
@@ -98,4 +98,4 @@ const VideoUploader = ({ storagePath = 'tutorVideo/', onVideoUploadSuccess, onVi
   );
 };
 
-export default VideoUploader;
+export default FileUploader;
