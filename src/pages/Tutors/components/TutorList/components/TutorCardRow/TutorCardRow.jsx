@@ -32,12 +32,6 @@ const TutorCardRow = ({ id, name, rating, description, subject }) => {
             </p>
           </section>
           <p>
-            <Tag>{subject}</Tag>
-          </p>
-          <Caption classNames="color-text-secondary" size={160}>
-            {description}
-          </Caption>
-          <p>
             <Caption strong>Availability</Caption>&nbsp;&nbsp;
             <Tag color="cyan">MON</Tag>
             <Tag color="cyan">TUE</Tag>
@@ -45,6 +39,14 @@ const TutorCardRow = ({ id, name, rating, description, subject }) => {
             <Tag>THU</Tag>
             <Tag color="cyan">FRI</Tag>
             <Tag>SAR</Tag>
+          </p>
+          <Caption classNames="color-text-secondary" size={160}>
+            {description}
+          </Caption>
+          <p>
+            {subject.map(item => {
+              return <Tag key={item.key}>{item.subject}</Tag>;
+            })}
           </p>
         </div>
       </Card>

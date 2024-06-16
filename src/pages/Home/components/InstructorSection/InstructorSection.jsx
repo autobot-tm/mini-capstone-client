@@ -39,7 +39,6 @@ const InstructorSection = ({ onFindTutor }) => {
                   id={item.id}
                   fullname={item.tutor.fullname}
                   rating={item.tutor.rating}
-                  subject={item.name}
                   educationLevel={item.tutor.educationLevel}
                 />
               </Col>

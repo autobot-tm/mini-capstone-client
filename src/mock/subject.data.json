@@ -20,7 +20,20 @@
       "rating": 4.8,
       "educationLevel": "Master"
     },
-    "name": "Mathematics",
+    "name": [
+      {
+        "id": 1,
+        "subject": "Mathematics"
+      },
+      {
+        "id": 2,
+        "subject": "Physics"
+      },
+      {
+        "id": 3,
+        "subject": "Chemistry"
+      }
+    ],
     "grade": 10,
     "description": "Experienced tutor passionate about mathematics education, dynamic physics lessons tailored to individual student needs, Passionate about literature and developing critical thinking skills. Exploring the wonders of chemistry through engaging experiments.",
     "location": [
@@ -57,7 +70,20 @@
       "rating": 4.5,
       "educationLevel": "Ph.D."
     },
-    "name": "Physics",
+    "name": [
+      {
+        "id": 1,
+        "subject": "Mathematics"
+      },
+      {
+        "id": 2,
+        "subject": "Physics"
+      },
+      {
+        "id": 3,
+        "subject": "Chemistry"
+      }
+    ],
     "grade": 11,
     "description": "Experienced tutor passionate about mathematics education, dynamic physics lessons tailored to individual student needs, Passionate about literature and developing critical thinking skills. Exploring the wonders of chemistry through engaging experiments.",
     "location": [
@@ -94,7 +120,20 @@
       "rating": 4.7,
       "educationLevel": "Bachelor"
     },
-    "name": "English Literature",
+    "name": [
+      {
+        "id": 1,
+        "subject": "Mathematics"
+      },
+      {
+        "id": 2,
+        "subject": "Physics"
+      },
+      {
+        "id": 3,
+        "subject": "Chemistry"
+      }
+    ],
     "grade": 12,
     "description": "Experienced tutor passionate about mathematics education, dynamic physics lessons tailored to individual student needs, Passionate about literature and developing critical thinking skills. Exploring the wonders of chemistry through engaging experiments.",
     "location": [
@@ -131,7 +170,20 @@
       "rating": 4.9,
       "educationLevel": "Master"
     },
-    "name": "Chemistry",
+    "name": [
+      {
+        "id": 1,
+        "subject": "Mathematics"
+      },
+      {
+        "id": 2,
+        "subject": "Physics"
+      },
+      {
+        "id": 3,
+        "subject": "Chemistry"
+      }
+    ],
     "grade": 11,
     "description": "Experienced tutor passionate about mathematics education, dynamic physics lessons tailored to individual student needs, Passionate about literature and developing critical thinking skills. Exploring the wonders of chemistry through engaging experiments.",
     "location": [
@@ -168,7 +220,20 @@
       "rating": 4.6,
       "educationLevel": "Bachelor"
     },
-    "name": "History",
+    "name": [
+      {
+        "id": 1,
+        "subject": "Mathematics"
+      },
+      {
+        "id": 2,
+        "subject": "Physics"
+      },
+      {
+        "id": 3,
+        "subject": "Chemistry"
+      }
+    ],
     "grade": 10,
     "description": "Experienced tutor passionate about mathematics education, dynamic physics lessons tailored to individual student needs, Passionate about literature and developing critical thinking skills. Exploring the wonders of chemistry through engaging experiments.",
     "location": [
@@ -205,7 +270,20 @@
       "rating": 4.8,
       "educationLevel": "Ph.D."
     },
-    "name": "Biology",
+    "name": [
+      {
+        "id": 1,
+        "subject": "Mathematics"
+      },
+      {
+        "id": 2,
+        "subject": "Physics"
+      },
+      {
+        "id": 3,
+        "subject": "Chemistry"
+      }
+    ],
     "grade": 12,
     "description": "Experienced tutor passionate about mathematics education, dynamic physics lessons tailored to individual student needs, Passionate about literature and developing critical thinking skills. Exploring the wonders of chemistry through engaging experiments.",
     "location": [
@@ -242,7 +320,20 @@
       "rating": 4.7,
       "educationLevel": "Master"
     },
-    "name": "Computer Science",
+    "name": [
+      {
+        "id": 1,
+        "subject": "Mathematics"
+      },
+      {
+        "id": 2,
+        "subject": "Physics"
+      },
+      {
+        "id": 3,
+        "subject": "Chemistry"
+      }
+    ],
     "grade": 11,
     "description": "Experienced tutor passionate about mathematics education, dynamic physics lessons tailored to individual student needs, Passionate about literature and developing critical thinking skills. Exploring the wonders of chemistry through engaging experiments.",
     "location": [
@@ -279,7 +370,20 @@
       "rating": 4.9,
       "educationLevel": "Ph.D."
     },
-    "name": "Economics",
+    "name": [
+      {
+        "id": 1,
+        "subject": "Mathematics"
+      },
+      {
+        "id": 2,
+        "subject": "Physics"
+      },
+      {
+        "id": 3,
+        "subject": "Chemistry"
+      }
+    ],
     "grade": 12,
     "description": "Experienced tutor passionate about mathematics education, dynamic physics lessons tailored to individual student needs, Passionate about literature and developing critical thinking skills. Exploring the wonders of chemistry through engaging experiments.",
     "location": [
@@ -316,7 +420,20 @@
       "rating": 4.5,
       "educationLevel": "Bachelor"
     },
-    "name": "Art",
+    "name": [
+      {
+        "id": 1,
+        "subject": "Mathematics"
+      },
+      {
+        "id": 2,
+        "subject": "Physics"
+      },
+      {
+        "id": 3,
+        "subject": "Chemistry"
+      }
+    ],
     "grade": 10,
     "description": "Experienced tutor passionate about mathematics education, dynamic physics lessons tailored to individual student needs, Passionate about literature and developing critical thinking skills. Exploring the wonders of chemistry through engaging experiments.",
     "location": [
@@ -353,7 +470,20 @@
       "rating": 4.6,
       "educationLevel": "Master"
     },
-    "name": "Music",
+    "name": [
+      {
+        "id": 1,
+        "subject": "Mathematics"
+      },
+      {
+        "id": 2,
+        "subject": "Physics"
+      },
+      {
+        "id": 3,
+        "subject": "Chemistry"
+      }
+    ],
     "grade": 11,
     "description": "Experienced tutor passionate about mathematics education, dynamic physics lessons tailored to individual student needs, Passionate about literature and developing critical thinking skills. Exploring the wonders of chemistry through engaging experiments.",
     "location": [

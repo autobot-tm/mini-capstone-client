@@ -6,7 +6,7 @@ import { Paragraph } from '../../../../components/Typography/Paragraph/Paragraph
 import { Caption } from '../../../../components/Typography/Caption/Caption';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 
-const textBtn = "Let's task now";
+// const textBtn = "Let's task now";
 const TutorInfo = ({ tutor = {}, subject = '', location = [] }) => {
   return (
     <Card id="tutor-detail">
@@ -32,7 +32,9 @@ const TutorInfo = ({ tutor = {}, subject = '', location = [] }) => {
             <Paragraph classNames="d-block color-text-secondary" strong>
               Subjects I teach
             </Paragraph>
-            <Tag>{subject}</Tag>
+            {subject.map(item => {
+              return <Tag key={item.id}>{item.subject}</Tag>;
+            })}
           </p>
           <p>
             <Paragraph classNames="d-block color-text-secondary" strong>
@@ -46,11 +48,11 @@ const TutorInfo = ({ tutor = {}, subject = '', location = [] }) => {
       </div>
       <Divider dashed />
       <div className="btn-talk-container">
-        <Button size="large">
+        {/* <Button size="large">
           <Caption strong size={160}>
             {textBtn}
           </Caption>
-        </Button>
+        </Button> */}
         <BaseButton type="primary" style={{ width: 'auto' }}>
           Book a tution
         </BaseButton>

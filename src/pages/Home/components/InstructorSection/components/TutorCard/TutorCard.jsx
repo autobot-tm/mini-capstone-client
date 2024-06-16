@@ -1,12 +1,12 @@
 import './styles.scss';
-import { EllipsisOutlined, SafetyCertificateOutlined, StarFilled } from '@ant-design/icons';
+import { SafetyCertificateOutlined, StarFilled } from '@ant-design/icons';
 import { Avatar, Card } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import ReactPlayer from 'react-player/lazy';
 import { Caption } from '../../../../../../components/Typography/Caption/Caption';
 import { Link } from 'react-router-dom';
 
-const TutorCard = ({ id, url, avatar, fullname, educationLevel, rating, subject }) => {
+const TutorCard = ({ id, url, avatar, fullname, educationLevel, rating }) => {
   return (
     <Link to={`/tutors/${id}`}>
       <Card
@@ -18,8 +18,7 @@ const TutorCard = ({ id, url, avatar, fullname, educationLevel, rating, subject 
           <div className="video">
             <ReactPlayer light controls={false} width="100%" height="100%" url={url} />
           </div>
-        }
-        actions={[<EllipsisOutlined key="ellipsis" />]}>
+        }>
         <Meta
           style={{ paddingBottom: 16 }}
           avatar={<Avatar src={avatar} />}
@@ -35,11 +34,7 @@ const TutorCard = ({ id, url, avatar, fullname, educationLevel, rating, subject 
           }
         />
         <Caption classNames="description-tutor-card">
-          <p>Subject:</p>
-          <p>{subject}</p>
-        </Caption>
-        <Caption classNames="description-tutor-card">
-          <p>Education level:</p>
+          <b>Education level:</b>
           <p>{educationLevel}</p>
         </Caption>
       </Card>

@@ -11,6 +11,7 @@ import DOT from '../../../../assets/images/dottedBackground.png';
 import { Caption } from '../../../../components/Typography/Caption/Caption';
 
 const AboutSection = ({ onAboutUs }) => {
+  const titleBtn = "Let's contact us";
   return (
     <div className="about-section">
       <Row className="container" justify="center">
@@ -28,7 +29,7 @@ const AboutSection = ({ onAboutUs }) => {
               dolores etmquasa molestias epturi sint occaecati cupiditate non providente mikume.
             </Paragraph>
             <BaseButton onClick={onAboutUs} type="primary" style={{ width: 'auto', marginTop: 30 }}>
-              Explore more about us <RightOutlined style={{ fontSize: 14 }} />
+              {titleBtn} <RightOutlined style={{ fontSize: 14 }} />
             </BaseButton>
           </div>
         </Col>
