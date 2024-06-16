@@ -7,7 +7,7 @@ import { RightOutlined } from '@ant-design/icons';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 import ZIGZAG from '../../../../assets/images/zigzagLine.svg';
 import TutorCard from './components/TutorCard/TutorCard';
-import tutors from '../../../../mock/tutor.data.json';
+import subjects from '../../../../mock/subject.data.json';
 
 const InstructorSection = ({ onFindTutor }) => {
   return (
@@ -30,18 +30,17 @@ const InstructorSection = ({ onFindTutor }) => {
           </Col>
         </Row>
         <Row justify="center" className="instructor-section-second-row" gutter={[24, 24]}>
-          {tutors?.slice(0, 4).map(tutor => {
+          {subjects?.slice(0, 4).map(item => {
             return (
-              <Col xs={24} sm={12} xl={6} key={tutor.id}>
+              <Col xs={24} sm={12} xl={6} key={item.id}>
                 <TutorCard
                   url="https://www.youtube.com/watch?v=JeOggtJH5n8"
                   avatar="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
-                  id={tutor.id}
-                  firstName={tutor['first-name']}
-                  lastName={tutor['last-name']}
-                  rating={tutor.rating}
-                  mobile={tutor.mobile}
-                  literacy={tutor.literacy}
+                  id={item.id}
+                  fullname={item.tutor.fullname}
+                  rating={item.tutor.rating}
+                  subject={item.name}
+                  educationLevel={item.tutor.educationLevel}
                 />
               </Col>
             );

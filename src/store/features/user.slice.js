@@ -13,12 +13,12 @@ export const initialState = createInitialState();
 
 export const updateUserProfile = createAsyncThunk(
   'user/updateUserProfile',
-  async ({ fullname, phone }, { rejectWithValue, getState }) => {
+  async ({ fullname, phone }, { rejectWithValue }) => {
     try {
-      const { auth } = getState();
-      const { user } = auth;
-      const { id } = user;
-      const response = await updateUserByIdService({ id, fullname, phone });
+      // const { auth } = getState();
+      // const { user } = auth;
+      // const { id } = user;
+      const response = await updateUserByIdService({ fullname, phone });
       console.log(response);
       return { ...response };
     } catch (error) {

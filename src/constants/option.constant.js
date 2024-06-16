@@ -98,110 +98,90 @@ export const literacy = [
 
 export const classes = [
   {
-    value: 'Grade 1',
-    label: 'grade 1',
+    value: 1,
+    label: 'Grade 1',
   },
   {
-    value: 'Grade 2',
-    label: 'grade 2',
+    value: 2,
+    label: 'Grade 2',
   },
   {
-    value: 'Grade 3',
-    label: 'grade 3',
+    value: 3,
+    label: 'Grade 3',
   },
   {
-    value: 'Grade 4',
-    label: 'grade 4',
+    value: 4,
+    label: 'Grade 4',
   },
   {
-    value: 'Grade 5',
-    label: 'grade 5',
+    value: 5,
+    label: 'Grade 5',
   },
   {
-    value: 'Grade 6',
-    label: 'grade 6',
+    value: 6,
+    label: 'Grade 6',
   },
   {
-    value: 'Grade 7',
-    label: 'grade 7',
+    value: 7,
+    label: 'Grade 7',
   },
   {
-    value: 'Grade 8',
-    label: 'grade 8',
+    value: 8,
+    label: 'Grade 8',
   },
   {
-    value: 'Grade 9',
-    label: 'grade 9',
+    value: 9,
+    label: 'Grade 9',
   },
   {
-    value: 'Grade 10',
-    label: 'grade 10',
+    value: 10,
+    label: 'Grade 10',
   },
   {
-    value: 'Grade 11',
-    label: 'grade 11',
+    value: 11,
+    label: 'Grade 11',
   },
   {
-    value: 'Grade 12',
-    label: 'grade 12',
-  },
-  {
-    value: 'Other',
-    label: 'other',
+    value: 12,
+    label: 'Grade 12',
   },
 ];
 
 export const subjects = [
   {
     label: 'Mathematics',
-    value: '1',
+    value: 'Mathematics',
   },
   {
     label: 'Physics',
-    value: '2',
+    value: 'Physics',
   },
   {
     label: 'Chemistry',
-    value: '3',
+    value: 'Chemistry',
   },
   {
     label: 'Literature',
-    value: '4',
+    value: 'Literature',
   },
   {
     label: 'English',
-    value: '5',
+    value: 'English',
   },
   {
     label: 'Biology',
-    value: '6',
+    value: 'Biology',
   },
   {
     label: 'History',
-    value: '7',
+    value: 'History',
   },
   {
     label: 'Geography',
-    value: '8',
-  },
-  {
-    label: 'Computer Science',
-    value: '9',
+    value: 'Geography',
   },
   {
     label: 'Drawing',
-    value: '10',
-  },
-  {
-    label: 'TOEIC',
-    value: '11',
-  },
-  {
-    label: 'IELTS',
-    value: '12',
-  },
-  {
-    label: 'TOEFL',
-    value: '13',
+    value: 'Drawing',
   },
 ];

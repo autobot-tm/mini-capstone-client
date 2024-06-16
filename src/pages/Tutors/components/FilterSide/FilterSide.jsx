@@ -70,9 +70,9 @@ const FilterSide = () => {
             <BaseButton type="primary" style={{ padding: 0 }} htmlType="submit">
               Apply filters
             </BaseButton>
-            <Button className="clear-btn" onClick={handleClearFilters}>
+            <BaseButton className="clear-btn" onClick={handleClearFilters}>
               Clear all filters
-            </Button>
+            </BaseButton>
           </Form.Item>
         </Form>
       </div>

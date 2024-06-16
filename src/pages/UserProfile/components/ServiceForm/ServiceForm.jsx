@@ -1,43 +1,23 @@
 import { useState } from 'react';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
-import ScheduleForm from '../../../../components/Schedule/ScheduleForm';
 import { SubHeading } from '../../../../components/Typography/SubHeading/SubHeading';
 import { classes, literacy, locationOptions, subjects } from '../../../../constants/option.constant';
 import './styles.scss';
-import { Button, Card, Col, Divider, Form, Input, Row, Select, Space, notification } from 'antd';
+import { Button, Card, Col, Divider, Form, Row, Select, Space, notification } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { Paragraph } from '../../../../components/Typography/Paragraph/Paragraph';
+import ScheduleForm from '../../../../components/Schedule/ScheduleForm';
 import FileUploader from '../../../../components/FileUploader/FileUploader';
 import VideoUploader from '../../../../components/VideoUploader/VideoUploader';
 
 const initialSchedule = {
-  morning: {
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-    sunday: false,
-  },
-  afternoon: {
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-    sunday: false,
-  },
-  evening: {
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-    sunday: false,
-  },
+  Monday: [],
+  Tuesday: [],
+  Wednesday: [],
+  Thursday: [],
+  Friday: [],
+  Saturday: [],
+  Sunday: [],
 };
 const ServiceForm = () => {
   const [form] = Form.useForm();
@@ -67,9 +47,9 @@ const ServiceForm = () => {
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
-  const handleScheduleChange = (schedule, count) => {
+  const handleScheduleChange = schedule => {
     form.setFieldsValue({ schedule });
-    setSlotCount(count);
+    setSlotCount(Object.values(schedule).flat().length);
     form.validateFields(['video']);
   };
   const handleUploadSuccess = url => {
@@ -156,21 +136,21 @@ const ServiceForm = () => {
             </Col>
             <Col xs={24} lg={12}>
               <Form.Item
-                label="Class"
-                name="class"
+                label="Grade"
+                name="grade"
                 rules={[
                   {
                     required: true,
-                    message: 'Please select classes you want to teach!',
+                    message: 'Please select grade you want to teach!',
                   },
                 ]}>
                 <Select
                   size="large"
-                  mode="multiple"
+                  // mode="multiple"
                   style={{
                     width: '100%',
                   }}
-                  placeholder="Select classes you want to teach"
+                  placeholder="Select grade you want to teach"
                   options={classes}
                   optionRender={option => <Space>{option.data.label}</Space>}
                 />
@@ -179,7 +159,7 @@ const ServiceForm = () => {
             <Col xs={24} lg={12}>
               <Form.Item
                 label="Subject taught"
-                name="subject"
+                name="name"
                 rules={[
                   {
                     required: true,
@@ -188,7 +168,7 @@ const ServiceForm = () => {
                 ]}>
                 <Select
                   size="large"
-                  mode="multiple"
+                  // mode="multiple"
                   style={{
                     width: '100%',
                   }}

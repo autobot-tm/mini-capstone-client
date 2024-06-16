@@ -7,7 +7,7 @@ import { Caption } from '../../../../components/Typography/Caption/Caption';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 
 const textBtn = "Let's task now";
-const TutorInfo = () => {
+const TutorInfo = ({ tutor = {}, subject = '', location = [] }) => {
   return (
     <Card id="tutor-detail">
       <div className="tutor-info">
@@ -17,27 +17,30 @@ const TutorInfo = () => {
         <div className="tutor-info-right">
           <p>
             <SubHeading strong classNames="d-block">
-              Minh Thanh
+              {tutor.fullname}
             </SubHeading>
-            <Caption classNames="color-text-secondary">Masters in Political Science</Caption>
+            <Caption classNames="color-text-secondary">{tutor.educationLevel}</Caption>
           </p>
           <p>
             <Paragraph>
               <StarFilled style={{ color: '#FFD103' }} />
-              &nbsp;<b>5.0</b>&nbsp;
+              &nbsp;<b>{tutor.rating}</b>&nbsp;
             </Paragraph>
             <Paragraph classNames="color-text-secondary">/5.0 (06)</Paragraph>
           </p>
           <p>
-            <Paragraph classNames="d-block color-text-secondary" style={{ paddingBottom: 10 }} strong>
+            <Paragraph classNames="d-block color-text-secondary" strong>
               Subjects I teach
             </Paragraph>
-            <Tag>Mathematics</Tag>
-            <Tag>Literature</Tag>
-            <Tag>History</Tag>
-            <Tag>Physics</Tag>
-            <Tag>Chemistry</Tag>
-            <Tag>English</Tag>
+            <Tag>{subject}</Tag>
+          </p>
+          <p>
+            <Paragraph classNames="d-block color-text-secondary" strong>
+              Desired tutoring location
+            </Paragraph>
+            {location.map(item => {
+              return <Tag key={item.id}>{item.name}</Tag>;
+            })}
           </p>
         </div>
       </div>

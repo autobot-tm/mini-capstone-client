@@ -6,7 +6,7 @@
   .container {
     max-width: 1400px;
     margin: 0 auto;
-    :where(.css-dev-only-do-not-override-h3sjpf).ant-menu-light.ant-menu-root.ant-menu-vertical {
+    .ant-menu-light.ant-menu-root.ant-menu-vertical {
       border-inline-end: none;
     }
   }

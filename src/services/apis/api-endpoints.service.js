@@ -9,6 +9,11 @@ export const ENDPOINTS = {
     upRoleTutor: '/api/up-role',
   },
   users: {
-    update: id => `/api/account/${id}`,
+    update: '/api/account',
+  },
+  subjects: {
+    base: '/api/subject',
+    subjectId: id => `/api/subject/${id}`,
+    subjectName: name => `/api/subject/${name}`,
   },
 };
