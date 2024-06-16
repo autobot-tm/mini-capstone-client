@@ -1,42 +1,21 @@
 import { useState } from 'react';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
-import ScheduleForm from '../../../../components/Schedule/ScheduleForm';
 import { SubHeading } from '../../../../components/Typography/SubHeading/SubHeading';
 import { classes, literacy, locationOptions, subjects } from '../../../../constants/option.constant';
 import './styles.scss';
-import { Button, Card, Col, Divider, Form, Input, Row, Select, Space, notification } from 'antd';
-import VideoUploader from '../../../../components/VideoUploader/VideoUploader';
-import TextArea from 'antd/es/input/TextArea';
+import { Button, Card, Col, Divider, Form, Row, Select, Space, notification } from 'antd';
 import { Paragraph } from '../../../../components/Typography/Paragraph/Paragraph';
+import ScheduleForm from '../../../../components/Schedule/ScheduleForm';
+import { createSubjectService } from '../../../../services/apis/subject.service';
 
 const initialSchedule = {
-  morning: {
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-    sunday: false,
-  },
-  afternoon: {
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-    sunday: false,
-  },
-  evening: {
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-    sunday: false,
-  },
+  Monday: [],
+  Tuesday: [],
+  Wednesday: [],
+  Thursday: [],
+  Friday: [],
+  Saturday: [],
+  Sunday: [],
 };
 const ServiceForm = () => {
   const [form] = Form.useForm();
@@ -48,20 +27,36 @@ const ServiceForm = () => {
       description: 'Your service has been successfully created. Please wait for our review within 24 hours.',
     });
   };
-  const onChange = e => {
-    console.log('Change:', e.target.value);
-  };
-  const onFinish = values => {
-    console.log('Success:', values);
-    openNotification();
-    form.resetFields();
+  const onFinish = async values => {
+    const { schedule, grade, name } = values;
+    const tutorSchedules = Object.entries(schedule).flatMap(([weekDay, times]) =>
+      times.map(teachingTime => ({ weekDay, teachingTime })),
+    );
+    const tutorData = {
+      tutorSchedules,
+      name,
+      grade,
+    };
+    try {
+      const response = await createSubjectService(tutorData);
+      if (response.ok) {
+        openNotification();
+        form.resetFields();
+      } else {
+        form.resetFields();
+        console.error('error at create subject:', await response);
+      }
+    } catch (error) {
+      form.resetFields();
+      console.error('error at create subject:', error);
+    }
   };
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
-  const handleScheduleChange = (schedule, count) => {
+  const handleScheduleChange = schedule => {
     form.setFieldsValue({ schedule });
-    setSlotCount(count);
+    setSlotCount(Object.values(schedule).flat().length);
   };
   return (
     <>
@@ -86,7 +81,7 @@ const ServiceForm = () => {
         <Divider />
         <Form onFinish={onFinish} onFinishFailed={onFinishFailed} form={form} layout="vertical">
           <Row gutter={[16, 4]} justify="center">
-            <Col xs={24} lg={12}>
+            {/* <Col xs={24} lg={12}>
               <Form.Item
                 label="Literacy"
                 name="literacy"
@@ -105,8 +100,8 @@ const ServiceForm = () => {
                   options={literacy}
                 />
               </Form.Item>
-            </Col>
-            <Col xs={24} lg={12}>
+            </Col> */}
+            {/* <Col xs={24} lg={12}>
               <Form.Item
                 label="Desired Tutoring Location"
                 name="location"
@@ -127,24 +122,24 @@ const ServiceForm = () => {
                   optionRender={option => <Space>{option.data.label}</Space>}
                 />
               </Form.Item>
-            </Col>
+            </Col> */}
             <Col xs={24} lg={12}>
               <Form.Item
-                label="Class"
-                name="class"
+                label="Grade"
+                name="grade"
                 rules={[
                   {
                     required: true,
-                    message: 'Please select classes you want to teach!',
+                    message: 'Please select grade you want to teach!',
                   },
                 ]}>
                 <Select
                   size="large"
-                  mode="multiple"
+                  // mode="multiple"
                   style={{
                     width: '100%',
                   }}
-                  placeholder="Select classes you want to teach"
+                  placeholder="Select grade you want to teach"
                   options={classes}
                   optionRender={option => <Space>{option.data.label}</Space>}
                 />
@@ -153,7 +148,7 @@ const ServiceForm = () => {
             <Col xs={24} lg={12}>
               <Form.Item
                 label="Subject taught"
-                name="subject"
+                name="name"
                 rules={[
                   {
                     required: true,
@@ -162,7 +157,7 @@ const ServiceForm = () => {
                 ]}>
                 <Select
                   size="large"
-                  mode="multiple"
+                  // mode="multiple"
                   style={{
                     width: '100%',
                   }}
@@ -172,7 +167,7 @@ const ServiceForm = () => {
                 />
               </Form.Item>
             </Col>
-            <Col xs={24}>
+            {/* <Col xs={24}>
               <Form.Item
                 label="Video"
                 name="video"
@@ -184,8 +179,8 @@ const ServiceForm = () => {
                 ]}>
                 <VideoUploader />
               </Form.Item>
-            </Col>
-            <Col xs={24}>
+            </Col> */}
+            {/* <Col xs={24}>
               <Form.Item
                 label="A brief introduction"
                 name="introduction"
@@ -207,7 +202,7 @@ const ServiceForm = () => {
                   }}
                 />
               </Form.Item>
-            </Col>
+            </Col> */}
             <Col xs={24}>
               <Form.Item
                 label="Schedule"

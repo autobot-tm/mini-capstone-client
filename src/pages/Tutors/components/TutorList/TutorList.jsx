@@ -1,12 +1,23 @@
+import { Fragment } from 'react';
 import TutorCardRow from './components/TutorCardRow/TutorCardRow';
 import './styles.scss';
 
-const TutorList = () => {
+const TutorList = ({ subjects = [] }) => {
   return (
     <>
-      <TutorCardRow />
-      <TutorCardRow />
-      <TutorCardRow />
+      {subjects.map(item => {
+        return (
+          <Fragment key={item.id}>
+            <TutorCardRow
+              id={item.id}
+              name={item.tutor.fullname}
+              rating={item.tutor.rating}
+              description={item.description}
+              subject={item.name}
+            />
+          </Fragment>
+        );
+      })}
     </>
   );
 };

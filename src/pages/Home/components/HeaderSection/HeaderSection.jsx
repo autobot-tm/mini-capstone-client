@@ -20,7 +20,7 @@ const HeaderSection = ({ onLogin, handleConfirmTutor }) => {
               A good <b style={{ color: '#1da1f2' }}>#education</b> is always a base of{' '}
             </Headline>
             <Headline classNames="bg-text" strong>
-              ENDLESS OPPORTUNITIES
+              SUCCESS
             </Headline>
             <br />
             <Paragraph style={{ width: '60%' }}>
@@ -39,7 +39,7 @@ const HeaderSection = ({ onLogin, handleConfirmTutor }) => {
               </>
             )}
             {token && role !== 'TUTOR' && (
-              <BaseButton onClick={handleConfirmTutor} type="dashed" className="header-section-first-col-inner-btn">
+              <BaseButton onClick={handleConfirmTutor} className="header-section-first-col-inner-btn">
                 Become a Tutor
               </BaseButton>
             )}

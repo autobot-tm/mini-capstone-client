@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player/lazy';
 import { Caption } from '../../../../../../components/Typography/Caption/Caption';
 import { Link } from 'react-router-dom';
 
-const TutorCard = ({ id, url, avatar, firstName, lastName, literacy, rating, mobile }) => {
+const TutorCard = ({ id, url, avatar, fullname, educationLevel, rating, subject }) => {
   return (
     <Link to={`/tutors/${id}`}>
       <Card
@@ -25,7 +25,7 @@ const TutorCard = ({ id, url, avatar, firstName, lastName, literacy, rating, mob
           avatar={<Avatar src={avatar} />}
           title={
             <>
-              {firstName} {lastName} &nbsp; <SafetyCertificateOutlined />
+              {fullname} &nbsp; <SafetyCertificateOutlined />
             </>
           }
           description={
@@ -35,12 +35,12 @@ const TutorCard = ({ id, url, avatar, firstName, lastName, literacy, rating, mob
           }
         />
         <Caption classNames="description-tutor-card">
-          <p>Mobile:</p>
-          <p>{mobile}</p>
+          <p>Subject:</p>
+          <p>{subject}</p>
         </Caption>
         <Caption classNames="description-tutor-card">
-          <p>Literacy:</p>
-          <p>{literacy}</p>
+          <p>Education level:</p>
+          <p>{educationLevel}</p>
         </Caption>
       </Card>
     </Link>

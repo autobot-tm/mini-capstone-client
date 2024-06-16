@@ -5,8 +5,22 @@ import { SubHeading } from '../../components/Typography/SubHeading/SubHeading';
 import SearchBar from './components/SearchBar/SearchBar';
 import FilterSide from './components/FilterSide/FilterSide';
 import TutorList from './components/TutorList/TutorList';
+import subjects from '../../mock/subject.data.json';
+// import { useEffect } from 'react';
+// import { getAllSubjects } from '../../services/apis/subject.service';
 
 const Tutors = () => {
+  // useEffect(() => {
+  //   const fetchSubjects = async () => {
+  //     try {
+  //       const response = await getAllSubjects();
+  //       console.log('list', response);
+  //     } catch (error) {
+  //       console.log('Error at get all subject', error);
+  //     }
+  //   };
+  //   fetchSubjects();
+  // }, []);
   return (
     <Layout>
       <div className="tutors-page">
@@ -24,7 +38,7 @@ const Tutors = () => {
               <FilterSide />
             </Col>
             <Col xs={24} md={14} lg={18}>
-              <TutorList />
+              <TutorList subjects={subjects} />
             </Col>
           </Row>
         </div>

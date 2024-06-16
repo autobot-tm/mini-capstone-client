@@ -6,9 +6,9 @@ import { Caption } from '../../../../../../components/Typography/Caption/Caption
 import { StarFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
-const TutorCardRow = () => {
+const TutorCardRow = ({ id, name, rating, description, subject }) => {
   return (
-    <Link to={`/tutors/2}`}>
+    <Link to={`/tutors/${id}}`}>
       <Card id="tutor-card" hoverable>
         <div className="tutor-card-left">
           <ReactPlayer
@@ -24,13 +24,19 @@ const TutorCardRow = () => {
             <Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />
             <p>
               <SubHeading strong classNames="d-block">
-                Minh Thanh
+                {name}
               </SubHeading>
               <Caption size={160}>
-                <b>5.0</b> <StarFilled style={{ color: '#FFD103' }} /> (06)
+                <b>{rating}</b> <StarFilled style={{ color: '#FFD103' }} />
               </Caption>
             </p>
           </section>
+          <p>
+            <Tag>{subject}</Tag>
+          </p>
+          <Caption classNames="color-text-secondary" size={160}>
+            {description}
+          </Caption>
           <p>
             <Caption strong>Availability</Caption>&nbsp;&nbsp;
             <Tag color="cyan">MON</Tag>
@@ -39,19 +45,6 @@ const TutorCardRow = () => {
             <Tag>THU</Tag>
             <Tag color="cyan">FRI</Tag>
             <Tag>SAR</Tag>
-          </p>
-          <Caption classNames="color-text-secondary" size={160}>
-            On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and
-            demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain
-            and trouble
-          </Caption>
-          <p>
-            <Tag>Mathematics</Tag>
-            <Tag>Literature</Tag>
-            <Tag>History</Tag>
-            <Tag>Physics</Tag>
-            <Tag>Chemistry</Tag>
-            <Tag>English</Tag>
           </p>
         </div>
       </Card>

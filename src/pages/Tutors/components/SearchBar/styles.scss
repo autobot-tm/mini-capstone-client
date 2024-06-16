@@ -52,29 +52,18 @@
     border: none;
     font-family: 'Outfit', sans-serif;
   }
-  :where(.css-dev-only-do-not-override-h3sjpf).ant-select-compact-item:not(.ant-select-compact-first-item):not(
-      .ant-select-compact-last-item
-    )
+  .ant-select-compact-item:not(.ant-select-compact-first-item):not(.ant-select-compact-last-item)
     > .ant-select-selector {
     border-radius: 8px;
   }
-  :where(.css-dev-only-do-not-override-h3sjpf).ant-input-outlined:focus,
-  :where(.css-dev-only-do-not-override-h3sjpf).ant-input-outlined:focus-within {
+  .ant-input-outlined:focus,
+  .ant-input-outlined:focus-within {
     box-shadow: none;
   }
-  :where(.css-dev-only-do-not-override-h3sjpf).ant-select-outlined:not(.ant-select-customize-input)
-    .ant-select-selector {
+  .ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
     border: none;
   }
-  :where(.css-dev-only-do-not-override-h3sjpf).ant-btn-compact-item:not(
-      .ant-btn-compact-first-item
-    ).ant-btn-compact-last-item,
-  :where(.css-dev-only-do-not-override-h3sjpf).ant-btn-compact-item:not(
-      .ant-btn-compact-first-item
-    ).ant-btn-compact-last-item.ant-btn-sm,
-  :where(.css-dev-only-do-not-override-h3sjpf).ant-btn-compact-item:not(
-      .ant-btn-compact-first-item
-    ).ant-btn-compact-last-item.ant-btn-lg {
+  .ant-btn-compact-item:not(.ant-btn-compact-first-item).ant-btn-compact-last-item.ant-btn-lg {
     border-radius: 4px;
   }
 }

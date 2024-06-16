@@ -11,4 +11,9 @@ export const ENDPOINTS = {
   users: {
     update: '/api/account',
   },
+  subjects: {
+    base: '/api/subject',
+    subjectId: id => `/api/subject/${id}`,
+    subjectName: name => `/api/subject/${name}`,
+  },
 };
