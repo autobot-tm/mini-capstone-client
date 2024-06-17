@@ -19,56 +19,64 @@ const initialSchedule = {
   Saturday: [],
   Sunday: [],
 };
+
 const ServiceForm = () => {
   const [form] = Form.useForm();
   const [slotCount, setSlotCount] = useState(0);
-  const [uploadedVideoUrl, setUploadedVideoUrl] = useState([]);
-  const [uploadedCetificateUrl, setUploadedCetificateUrl] = useState([]);
+  const [uploadedVideoUrl, setUploadedVideoUrl] = useState(null);
+  const [uploadedCetificateUrl, setUploadedCetificateUrl] = useState(null);
   const [api, contextHolder] = notification.useNotification();
+
   const openNotification = () => {
     api.success({
       message: `Service Created Successfully`,
       description: 'Your service has been successfully created. Please wait for our review within 24 hours.',
     });
   };
-  const onFinish = values => {
-    console.log('Success:', values);
 
+  const onFinish = values => {
     const dataToSend = {
       ...values,
       certificateUrl: uploadedCetificateUrl,
       videoUrl: uploadedVideoUrl,
     };
+
     console.log('Data to send:', dataToSend);
 
     openNotification();
     form.resetFields();
   };
+
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
+
   const handleScheduleChange = schedule => {
     form.setFieldsValue({ schedule });
     setSlotCount(Object.values(schedule).flat().length);
     form.validateFields(['video']);
   };
+
   const handleUploadSuccess = url => {
     console.log('Uploaded file URL:', url);
     setUploadedCetificateUrl(url);
   };
+
   const handleDeleteSuccess = url => {
     setUploadedCetificateUrl(null);
-    console.log('delete', url);
+    console.log('delete certificate success', url);
   };
+
   const handleVideoUploadSuccess = url => {
     console.log('Uploaded video URL:', url);
     setUploadedVideoUrl(url);
   };
 
   const handleVideoDeleteSuccess = url => {
-    console.log('Deleted video URL:', url);
+    console.log('delete video success:', url);
     setUploadedVideoUrl(null);
   };
+
   return (
     <>
       <Card className="promotion-package">
@@ -94,8 +102,8 @@ const ServiceForm = () => {
           <Row gutter={[16, 4]} justify="center">
             <Col xs={24} lg={12}>
               <Form.Item
-                label="Literacy"
-                name="literacy"
+                label="Education level"
+                name="education_level"
                 rules={[
                   {
                     required: true,
@@ -124,12 +132,13 @@ const ServiceForm = () => {
                 ]}>
                 <Select
                   size="large"
-                  mode="multiple"
+                  mode="tags"
                   style={{
                     width: '100%',
                   }}
                   placeholder="Select location you want to teach"
                   options={locationOptions}
+                  optionLabelProp="label"
                   optionRender={option => <Space>{option.data.label}</Space>}
                 />
               </Form.Item>
@@ -146,12 +155,13 @@ const ServiceForm = () => {
                 ]}>
                 <Select
                   size="large"
-                  // mode="multiple"
+                  mode="tags"
                   style={{
                     width: '100%',
                   }}
                   placeholder="Select grade you want to teach"
                   options={classes}
+                  optionLabelProp="label"
                   optionRender={option => <Space>{option.data.label}</Space>}
                 />
               </Form.Item>
@@ -168,12 +178,13 @@ const ServiceForm = () => {
                 ]}>
                 <Select
                   size="large"
-                  // mode="multiple"
+                  mode="tags"
                   style={{
                     width: '100%',
                   }}
                   placeholder="Select subjects you want to teach"
                   options={subjects}
+                  optionLabelProp="label"
                   optionRender={option => <Space>{option.data.label}</Space>}
                 />
               </Form.Item>
@@ -181,7 +192,7 @@ const ServiceForm = () => {
             <Col xs={24}>
               <Form.Item
                 label="A brief introduction"
-                name="introduction"
+                name="description"
                 rules={[
                   {
                     required: true,

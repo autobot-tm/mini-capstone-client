@@ -19,13 +19,13 @@ const UserProfile = () => {
       key: '1',
       label: 'Edit Profile',
     },
-    role === 'TUTOR' && {
-      key: '2',
-      label: 'Service',
-    },
     {
-      key: '3',
+      key: '2',
       label: 'Change Password',
+    },
+    role === 'TUTOR' && {
+      key: '3',
+      label: 'Service',
     },
   ];
   const handleMenuClick = e => {
@@ -57,8 +57,8 @@ const UserProfile = () => {
             </Col>
             <Col xs={24} lg={18}>
               {selectedKey === '1' && <ProfileForm />}
-              {selectedKey === '2' && role === 'TUTOR' && <ServiceForm />}
-              {selectedKey === '3' && <ChangePasswordForm dispatch={dispatch} />}
+              {selectedKey === '2' && <ChangePasswordForm dispatch={dispatch} />}
+              {selectedKey === '3' && role === 'TUTOR' && <ServiceForm />}
             </Col>
           </Row>
         </div>

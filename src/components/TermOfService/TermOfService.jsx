@@ -1,38 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
 import BaseButton from '../Buttons/BaseButtons/BaseButton';
 import CustomModal from '../Modal/CustomModal';
-import { useNavigate } from 'react-router-dom';
 import { Caption } from '../Typography/Caption/Caption';
-import { Checkbox, notification } from 'antd';
-import { upRoleTutorService } from '../../services/apis/auth.service';
+import { Checkbox } from 'antd';
 import { useEffect, useState } from 'react';
 import { closeTermOfServiceModal } from '../../store/features/modal.slice';
 
 const TermOfService = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { termOfServiceModal } = useSelector(state => state.modal);
   const [checkTerms, setCheckTerms] = useState(false);
-  const user = useSelector(state => state.auth.user);
-  const email = user?.email;
-  const [api, contextHolder] = notification.useNotification();
+
   const handleCancel = () => {
     dispatch(closeTermOfServiceModal());
     setCheckTerms(false);
   };
   const handleOk = async () => {
-    try {
-      await upRoleTutorService({ email });
-      navigate('/user-profile');
-      api.success({
-        message: 'Congratulations!',
-        description: 'You Are Now a Tutor',
-        duration: 5,
-      });
-      setCheckTerms(false);
-    } catch (error) {
-      console.error('Error up role Tutor', error);
-    }
+    setCheckTerms(false);
   };
   const handleCheckedTerms = e => {
     const isChecked = e.target.checked;
@@ -47,9 +31,9 @@ const TermOfService = () => {
   useEffect(() => {
     if (termOfServiceModal) setCheckTerms(false);
   }, [termOfServiceModal]);
+
   return (
     <>
-      {contextHolder}
       <CustomModal
         width={500}
         nameOfModal={termOfServiceModal}
