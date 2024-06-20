@@ -1,50 +1,93 @@
-import { Layout, Row, Col, Typography } from 'antd';
-import { FacebookOutlined, YoutubeOutlined, GoogleOutlined } from '@ant-design/icons';
+import React from 'react';
+import { Layout, Row, Col, Typography, List } from 'antd';
+import { PhoneOutlined, MailOutlined, EnvironmentOutlined, FacebookOutlined, TwitterOutlined, InstagramOutlined } from '@ant-design/icons';
 import './styles.scss';
-
 const { Footer } = Layout;
-const { Title, Text } = Typography;
+const {  Link } = Typography;
 
-const LayoutFooter = () => {
-  return (
-    <Footer className="footer">
-      <Row className="footer-item" gutter={[16, 16]}>
-        <Col span={8} className="footer-left">
-          <Title level={2} className="cpn-name">Company Name</Title>
-          <Text className="web-name">Web Name</Text>
-          <div className="text">
-          Learning is a treasure that will follow its owner everywhere
+const LayoutFooter = () => (
+  <Footer className="footer">
+    <div className="container">
+      <Row gutter={[16, 16]} className="py-2">
+        <Col md={10}>
+          <div className="mb-3">
+            <Link href="/">
+              <img src="https://demos.wp-guppy.com/tuturn/wp-content/uploads/2022/03/logo_white-1.svg" alt="/" width="150" />
+            </Link>
           </div>
-          <Title level={4} className="web-contact">Social Contact</Title>
-          <div className="icon" style={{ color: "white" }}>
-            <FacebookOutlined />
-            <YoutubeOutlined />
-            <GoogleOutlined  />
+          <div className="pe-md-10">
+            <h2>TUTOR System - The True Learning Assistant.</h2>
+            <List>
+              <List.Item>
+                <EnvironmentOutlined /> 2nd Floor, No. 541 Vu Tong Phan, Khuong Dinh Ward, Thanh Xuan District, Hanoi City, Vietnam
+              </List.Item>
+              <List.Item>
+                <EnvironmentOutlined /> 29th and 30th Floors, LIM Building, 9-11 Ton Duc Thang, District 1, Ho Chi Minh City, Vietnam
+              </List.Item>
+              <List.Item>
+                <PhoneOutlined /> Phone: <Link href="tel:0967237073">096 727 073</Link>
+              </List.Item>
+              <List.Item>
+                <MailOutlined /> Email: <Link href="mailto:vulq72@gmail.com">tutor@gmail.com</Link>
+              </List.Item>
+            </List>
           </div>
         </Col>
-        <Col span={8} className="footer-m">
-          <Title level={4} className="location-name">Hanoi</Title>
-          <div className='text'>
-          7th, 15th, and 20th Floors, Capital Building - 109 Tran Hung Dao, Hoan Kiem District, Hanoi, Vietnam
-          </div>
-          <Title level={4} className="location-name">Ho Chi Minh City</Title>
-          <div className='text'>
-          29th and 30th Floors, LIM Building, 9-11 Ton Duc Thang, District 1, Ho Chi Minh City, Vietnam
-          </div>
+        <Col md={10}>
+          <Row gutter={[16, 16]}>
+            <Col xs={12}>
+              <h2 className="text-uppercase">ABOUT TUTOR</h2>
+              <List>
+                <List.Item>
+                  <Link href="">About Us </Link>
+                </List.Item>
+              </List>
+              <h2 className="text-uppercase">Regulations</h2>
+              <List>
+                
+                <List.Item>
+                  <Link href="">Fee and Service Policy</Link>
+                </List.Item>
+                <List.Item>
+                  <Link href="">Regulations for Tutor Accounts</Link>
+                </List.Item>
+                <List.Item>
+                  <Link href="">Regulations when Requesting to Find a Tutor</Link>
+                </List.Item>
+                <List.Item>
+                  <Link href="">Personal Information Privacy</Link>
+                </List.Item>
+              </List>
+            </Col>
+            <Col xs={12}>
+              <h2 className="text-uppercase">Contact</h2>
+              <List>
+                <List.Item>
+                  <Link href="">Tutor List</Link>
+                </List.Item>
+              </List>
+            </Col>
+          </Row>
         </Col>
-        <Col span={8} className="footer-r">
-          <Title level={4} className="location-name">Gò Vấp District Tutoring Office</Title>
-          <div className='text'>
-          672A28, Phan Van Tri Street, Ward 10, Go Vap District, CityLand Park Hill Area
-          </div>
-          <Title level={4} className="location-name">Gia Su Dat Viet Office, Go Vap District</Title>
-          <div className='text'>
-          672A28, Phan Van Tri Street, Ward 10, Go Vap District, CityLand Park Hill Area, Ho Chi Minh City, Vietnam
+        <Col md={4}>
+          <h2 className="text-uppercase">Contact US</h2>
+          <div className="mt-5">
+            <Link href="#!" className="icon-shape icon-sm social-links">
+              <FacebookOutlined />
+            </Link>
+            <Link href="#!" className="icon-shape icon-sm social-links">
+              <TwitterOutlined />
+            </Link>
+            <Link href="#!" className="icon-shape icon-sm social-links">
+              <InstagramOutlined />
+            </Link>
           </div>
         </Col>
       </Row>
-    </Footer>
-  );
-};
+    </div>
+   
+  </Footer>
+  
+);
 
 export default LayoutFooter;
