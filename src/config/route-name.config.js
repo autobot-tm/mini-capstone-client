@@ -8,4 +8,9 @@ export const routeNames = {
   FindTutor: '/tutors',
   TutorDetail: '/tutors/:id',
   ContactUs: '/contact-us',
+  ServiceInfo: '/service-info', 
+  RegulationAccount: '/regulation-account',
+  RegulationFind: '/regulation-find',
+  Privacy: '/privacy',
+
 };

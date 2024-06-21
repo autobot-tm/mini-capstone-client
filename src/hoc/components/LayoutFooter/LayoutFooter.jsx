@@ -46,16 +46,16 @@ const LayoutFooter = () => (
               <List>
                 
                 <List.Item>
-                  <Link href="">Fee and Service Policy</Link>
+                  <Link href="/ServiceInfo">Fee and Service Policy</Link>
                 </List.Item>
                 <List.Item>
-                  <Link href="">Regulations for Tutor Accounts</Link>
+                  <Link href="/RegulationAccount">Regulations for Tutor Accounts</Link>
                 </List.Item>
                 <List.Item>
-                  <Link href="">Regulations when Requesting to Find a Tutor</Link>
+                  <Link href="/RegulationsFind">Regulations when Requesting to Find a Tutor</Link>
                 </List.Item>
                 <List.Item>
-                  <Link href="">Personal Information Privacy</Link>
+                  <Link href="/Privacy">Personal Information Privacy</Link>
                 </List.Item>
               </List>
             </Col>
@@ -63,7 +63,7 @@ const LayoutFooter = () => (
               <h2 className="text-uppercase">Contact</h2>
               <List>
                 <List.Item>
-                  <Link href="">Tutor List</Link>
+                  <Link href="/Tutors">Tutor List</Link>
                 </List.Item>
               </List>
             </Col>

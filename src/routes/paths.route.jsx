@@ -7,6 +7,10 @@ import TutorDetail from '../pages/TutorDetail/TutorDetail';
 import Tutors from '../pages/Tutors/Tutors';
 import UserProfile from '../pages/UserProfile/UserProfile';
 import HowItWork from '../pages/HowItWork/HowItWork';
+import RegulationAccount from '../pages/Regulations/RegulationAccount/RegulationAccount';
+import ServiceInfor from '../pages/Regulations/ServiceInfo/ServiceInfo';
+import RegulationsFind from '../pages/Regulations/RegulationsFind/RegulationsFind';
+import Privacy from '../pages/Regulations/Privacy/Privacy';
 export const routePaths = {
   public: [
     {
@@ -33,6 +37,24 @@ export const routePaths = {
       path: routeNames.ContactUs,
       element: <ContactUs />,
     },
+    {
+      path: routeNames.ServiceInfo,
+      element: <ServiceInfor />,
+
+    },
+    {
+      path: routeNames.RegulationAccount,
+      element: <RegulationAccount />,
+    },
+    {
+      path: routeNames.RegulationsFind,
+      element: <RegulationsFind />,
+    },
+    {
+      path: routeNames.Privacy,
+      element: <Privacy />,
+    },
+
   ],
   private: [
     {
