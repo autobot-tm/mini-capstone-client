@@ -2,6 +2,7 @@ import './styles.scss';
 import { Space, Layout as AntdLayout } from 'antd';
 import LayoutFooter from './components/LayoutFooter/LayoutFooter';
 import LayoutMenu from './components/LayoutMenu/LayoutMenu';
+import CopyrightFooter from './components/LayoutFooter/CoppyrightFooter/CopyrightFooter';
 
 const { Header, Content } = AntdLayout;
 const Layout = ({ children }) => {
@@ -13,6 +14,7 @@ const Layout = ({ children }) => {
         </Header>
         <Content>{children}</Content>
         <LayoutFooter />
+        <CopyrightFooter/>
       </AntdLayout>
     </Space>
   );
