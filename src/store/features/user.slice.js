@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { updateUserByIdService } from '../../services/apis/user.service';
+import { getUserByIdService, updateUserByIdService } from '../../services/apis/user.service';
 
 const createInitialState = () => {
   const initialState = {
@@ -11,13 +11,25 @@ const createInitialState = () => {
 };
 export const initialState = createInitialState();
 
+export const getUserProfile = createAsyncThunk('user/getUserProfile', async (_, { rejectWithValue, getState }) => {
+  try {
+    const { auth } = getState();
+    const { user } = auth;
+    const id = user?.id;
+    const response = await getUserByIdService({ id });
+    return {
+      ...response,
+    };
+  } catch (error) {
+    console.warn('🚀 ~ file: user.slice. getUserProfile ~ error:', error);
+    return rejectWithValue(error);
+  }
+});
+
 export const updateUserProfile = createAsyncThunk(
   'user/updateUserProfile',
   async ({ fullname, phone }, { rejectWithValue }) => {
     try {
-      // const { auth } = getState();
-      // const { user } = auth;
-      // const { id } = user;
       const response = await updateUserByIdService({ fullname, phone });
       console.log(response);
       return { ...response };
@@ -40,6 +52,24 @@ const userSlice = createSlice({
     },
   },
   extraReducers(builder) {
+    builder.addCase(getUserProfile.pending, state => ({
+      ...state,
+      user: '',
+      success: false,
+      loading: true,
+    }));
+    builder.addCase(getUserProfile.fulfilled, (state, { payload }) => ({
+      ...state,
+      user: payload,
+      loading: false,
+      success: true,
+    }));
+    builder.addCase(getUserProfile.rejected, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      success: false,
+      error: payload,
+    }));
     builder.addCase(updateUserProfile.pending, state => ({
       ...state,
       user: '',
@@ -68,6 +98,7 @@ export const userActions = actions;
 export const useUserSlice = () => {
   const actions = {
     ...userSlice.actions,
+    getUserProfile,
     updateUserProfile,
   };
   return { actions };

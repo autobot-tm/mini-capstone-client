@@ -69,15 +69,7 @@ const Login = () => {
                 <ForgotPassword dispatch={dispatch} onLogin={onLogin} onRegister={onRegister} />
               </>
             )}
-            <FloatButton
-              onClick={() => navigate('/')}
-              shape="circle"
-              type="primary"
-              style={{
-                right: 400,
-              }}
-              icon={<HomeOutlined />}
-            />
+            <FloatButton onClick={() => navigate('/')} shape="circle" type="primary" icon={<HomeOutlined />} />
           </div>
         </Col>
       </Row>

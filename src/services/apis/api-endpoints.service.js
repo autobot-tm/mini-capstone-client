@@ -10,6 +10,7 @@ export const ENDPOINTS = {
   },
   users: {
     update: '/api/account',
+    userId: id => `/api/account/${id}`,
   },
   subjects: {
     base: '/api/subject',

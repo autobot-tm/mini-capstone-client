@@ -64,6 +64,7 @@ const VideoUploader = ({ storagePath = 'tutorVideo/', onVideoUploadSuccess, onVi
   const props = {
     name: 'file',
     multiple: false,
+    accept: 'video/mp4',
     customRequest: ({ file, onSuccess }) => {
       uploadFile(file);
       onSuccess('ok');
@@ -92,7 +93,8 @@ const VideoUploader = ({ storagePath = 'tutorVideo/', onVideoUploadSuccess, onVi
       </p>
       <p className="ant-upload-text">Click or drag video file to this area to upload</p>
       <p className="ant-upload-hint">
-        Support for a single upload. Strictly prohibited from uploading company data or other banned files.
+        The system only supports uploading MP4 format files and only supports one upload at a time. Uploading company
+        data or other prohibited files is strictly prohibited.
       </p>
     </Dragger>
   );

@@ -10,7 +10,7 @@ import ChangePasswordForm from './components/ChangePasswordForm/ChangePasswordFo
 import { useDispatch, useSelector } from 'react-redux';
 
 const UserProfile = () => {
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector(state => state.user.user);
   const role = user?.role;
   const dispatch = useDispatch();
   const [selectedKey, setSelectedKey] = useState('1');

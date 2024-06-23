@@ -41,6 +41,6 @@ export const requestResetPasswordService = ({ email }) => {
   return apiCaller.post(ENDPOINTS.auth.requestResetPassword, { email });
 };
 
-export const upRoleTutorService = ({ email }) => {
-  return apiCaller.post(ENDPOINTS.auth.upRoleTutor, { email });
+export const upRoleTutorService = ({ certificateUrl }) => {
+  return apiCaller.post(ENDPOINTS.auth.upRoleTutor, { certificateUrl });
 };

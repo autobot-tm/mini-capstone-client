@@ -2,21 +2,45 @@ import { useDispatch, useSelector } from 'react-redux';
 import BaseButton from '../Buttons/BaseButtons/BaseButton';
 import CustomModal from '../Modal/CustomModal';
 import { Caption } from '../Typography/Caption/Caption';
-import { Checkbox } from 'antd';
+import { Checkbox, notification } from 'antd';
 import { useEffect, useState } from 'react';
 import { closeTermOfServiceModal } from '../../store/features/modal.slice';
+import { upRoleTutorService } from '../../services/apis/auth.service';
+import FileUploader from '../FileUploader/FileUploader';
 
 const TermOfService = () => {
   const dispatch = useDispatch();
   const { termOfServiceModal } = useSelector(state => state.modal);
+  const [uploadedCertificateUrl, setUploadedCertificateUrl] = useState(null);
   const [checkTerms, setCheckTerms] = useState(false);
+  const [api, contextHolder] = notification.useNotification();
 
   const handleCancel = () => {
     dispatch(closeTermOfServiceModal());
     setCheckTerms(false);
+    setUploadedCertificateUrl(null);
   };
   const handleOk = async () => {
-    setCheckTerms(false);
+    if (!uploadedCertificateUrl) {
+      api.error({
+        type: 'error',
+        message: 'Please upload your certificate.',
+      });
+      return;
+    }
+    try {
+      await upRoleTutorService({ certificateUrl: uploadedCertificateUrl });
+      api.success({
+        message: 'Your certificate upload successful',
+        description: 'Please allow 24 hours for us to review!',
+        type: 'success',
+      });
+    } catch (error) {
+      console.log('error', error);
+    } finally {
+      setCheckTerms(false);
+      setUploadedCertificateUrl(null);
+    }
   };
   const handleCheckedTerms = e => {
     const isChecked = e.target.checked;
@@ -28,12 +52,21 @@ const TermOfService = () => {
       dispatch(closeTermOfServiceModal());
     }
   };
+  const handleUploadSuccess = url => {
+    console.log('Uploaded file URL:', url);
+    setUploadedCertificateUrl(url);
+  };
+  const handleDeleteSuccess = url => {
+    setUploadedCertificateUrl(null);
+    console.log('delete certificate success', url);
+  };
   useEffect(() => {
     if (termOfServiceModal) setCheckTerms(false);
   }, [termOfServiceModal]);
 
   return (
     <>
+      {contextHolder}
       <CustomModal
         width={500}
         nameOfModal={termOfServiceModal}
@@ -66,9 +99,20 @@ const TermOfService = () => {
                 your students.
               </li>
               <li>You agree not to engage in any form of harassment, discrimination, or inappropriate behavior.</li>
+              <li>
+                You must upload a valid certificate of your qualifications. This is required to complete your
+                registration as a tutor.
+              </li>
             </ul>
           </Caption>
-          <Checkbox onChange={handleCheckedTerms}>
+          <Caption>Please upload your certificate to proceed:</Caption>
+          <FileUploader
+            storagePath="tutorCertificate/"
+            onUploadSuccess={handleUploadSuccess}
+            onDeleteSuccess={handleDeleteSuccess}
+            limit={1}
+          />
+          <Checkbox style={{ paddingBottom: 20 }} onChange={handleCheckedTerms}>
             <Caption classNames="d-block">I agree to the terms & service</Caption>
           </Checkbox>
         </div>
