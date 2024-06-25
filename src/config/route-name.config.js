@@ -10,7 +10,7 @@ export const routeNames = {
   ContactUs: '/contact-us',
   ServiceInfo: '/service-info', 
   RegulationAccount: '/regulation-account',
-  RegulationFind: '/regulation-find',
+  RegulationsFind: '/regulations-find',
   Privacy: '/privacy',
 
 };

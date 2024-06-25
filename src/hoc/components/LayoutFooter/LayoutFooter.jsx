@@ -46,13 +46,13 @@ const LayoutFooter = () => (
               <List>
                 
                 <List.Item>
-                  <Link href="/ServiceInfo">Fee and Service Policy</Link>
+                  <Link href="/service-info">Fee and Service Policy</Link>
                 </List.Item>
                 <List.Item>
-                  <Link href="/RegulationAccount">Regulations for Tutor Accounts</Link>
+                  <Link href="/regulation-account">Regulations for Tutor Accounts</Link>
                 </List.Item>
                 <List.Item>
-                  <Link href="/RegulationsFind">Regulations when Requesting to Find a Tutor</Link>
+                  <Link href="/regulations-find">Regulations when Requesting to Find a Tutor</Link>
                 </List.Item>
                 <List.Item>
                   <Link href="/Privacy">Personal Information Privacy</Link>
