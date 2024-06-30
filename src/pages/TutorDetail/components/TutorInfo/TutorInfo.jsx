@@ -7,7 +7,7 @@ import { Caption } from '../../../../components/Typography/Caption/Caption';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 
 // const textBtn = "Let's task now";
-const TutorInfo = ({ tutor = {}, subject = '', location = [] }) => {
+const TutorInfo = ({ tutorEduLv, tutorName, subject = [], location = [], grade = [] }) => {
   return (
     <Card id="tutor-detail">
       <div className="tutor-info">
@@ -16,32 +16,40 @@ const TutorInfo = ({ tutor = {}, subject = '', location = [] }) => {
         </div>
         <div className="tutor-info-right">
           <p>
-            <SubHeading strong classNames="d-block">
-              {tutor.fullname}
+            <SubHeading size={260} strong classNames="d-block">
+              {tutorName}
             </SubHeading>
-            <Caption classNames="color-text-secondary">{tutor.educationLevel}</Caption>
+            <Caption classNames="color-text-secondary">{tutorEduLv?.educationLevel}</Caption>
           </p>
-          <p>
+          {/* <p>
             <Paragraph>
               <StarFilled style={{ color: '#FFD103' }} />
               &nbsp;<b>{tutor.rating}</b>&nbsp;
             </Paragraph>
             <Paragraph classNames="color-text-secondary">/5.0 (06)</Paragraph>
-          </p>
+          </p> */}
           <p>
             <Paragraph classNames="d-block color-text-secondary" strong>
               Subjects I teach
             </Paragraph>
             {subject.map(item => {
-              return <Tag key={item.id}>{item.subject}</Tag>;
+              return <Tag key={item.id}>{item.name}</Tag>;
             })}
           </p>
           <p>
             <Paragraph classNames="d-block color-text-secondary" strong>
-              Desired tutoring location
+              Desired tutoring grades
+            </Paragraph>
+            {grade.map(item => {
+              return <Tag key={item.id}>{item.grade}</Tag>;
+            })}
+          </p>
+          <p>
+            <Paragraph classNames="d-block color-text-secondary" strong>
+              Desired tutoring locations
             </Paragraph>
             {location.map(item => {
-              return <Tag key={item.id}>{item.name}</Tag>;
+              return <Tag key={item.id}>{item.location}</Tag>;
             })}
           </p>
         </div>

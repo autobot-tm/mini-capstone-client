@@ -2,18 +2,18 @@ import './styles.scss';
 import { Card, Divider } from 'antd';
 import { SubHeading } from '../../../../components/Typography/SubHeading/SubHeading';
 
-const TutorContact = ({ tutor = {} }) => {
+const TutorContact = ({ tutorEmail, tutorPhone }) => {
   return (
     <Card>
       <SubHeading strong>Contact me</SubHeading> <Divider dashed />
       <span className="contact-info">
         <p>Mobile</p>
-        <p>{tutor.phone}</p>
+        <p>{tutorPhone}</p>
       </span>
       <Divider dashed />
       <span className="contact-info">
         <p>Email</p>
-        <p>tutor@edu.vn</p>
+        <p>{tutorEmail}</p>
       </span>
     </Card>
   );

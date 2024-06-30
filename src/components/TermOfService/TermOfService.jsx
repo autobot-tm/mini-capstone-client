@@ -7,10 +7,12 @@ import { useEffect, useState } from 'react';
 import { closeTermOfServiceModal } from '../../store/features/modal.slice';
 import { upRoleTutorService } from '../../services/apis/auth.service';
 import FileUploader from '../FileUploader/FileUploader';
+import { getUserProfile, useUserSlice } from '../../store/features/user.slice';
 
 const TermOfService = () => {
   const dispatch = useDispatch();
   const { termOfServiceModal } = useSelector(state => state.modal);
+  const { actions: userActions } = useUserSlice();
   const [uploadedCertificateUrl, setUploadedCertificateUrl] = useState(null);
   const [checkTerms, setCheckTerms] = useState(false);
   const [api, contextHolder] = notification.useNotification();
@@ -35,11 +37,14 @@ const TermOfService = () => {
         description: 'Please allow 24 hours for us to review!',
         type: 'success',
       });
+      dispatch(getUserProfile());
     } catch (error) {
       console.log('error', error);
     } finally {
       setCheckTerms(false);
       setUploadedCertificateUrl(null);
+      dispatch(userActions.clearSuccess());
+      dispatch(userActions.clearError());
     }
   };
   const handleCheckedTerms = e => {

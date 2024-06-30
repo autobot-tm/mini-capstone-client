@@ -3,17 +3,17 @@ import { Divider } from 'antd';
 import { Paragraph } from '../../../../components/Typography/Paragraph/Paragraph';
 import { SubHeading } from '../../../../components/Typography/SubHeading/SubHeading';
 import ReactPlayer from 'react-player';
-import ScheduleForm from '../../../../components/Schedule/ScheduleForm';
+import ScheduleAvalablity from '../../../../components/Schedule/ScheduleAvalablity';
+import { TEACHINGSLOTS, WEEKDAYS } from '../../../../utils/time-slot';
 
 const TutorIntroduction = ({ tutorAvailability = [], description }) => {
-  console.log(tutorAvailability);
   return (
     <>
       <SubHeading strong classNames="d-block">
         A brief introduction
       </SubHeading>
       <br />
-      <Paragraph>{description}</Paragraph>
+      <Paragraph className="description">{description}</Paragraph>
       <div className="video-container">
         <ReactPlayer
           light
@@ -29,7 +29,7 @@ const TutorIntroduction = ({ tutorAvailability = [], description }) => {
           Availability
         </SubHeading>
         <br />
-        <ScheduleForm initialSchedule={tutorAvailability} readOnly={true} />
+        <ScheduleAvalablity initialSchedule={tutorAvailability} weekDays={WEEKDAYS} teachingSlots={TEACHINGSLOTS} />
       </div>
     </>
   );

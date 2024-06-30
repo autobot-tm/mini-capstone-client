@@ -16,5 +16,12 @@ export const ENDPOINTS = {
     base: '/api/subject',
     subjectId: id => `/api/subject/${id}`,
     subjectName: name => `/api/subject/${name}`,
+    location: '/api/location',
+    grade: '/api/grade',
+    educationLevel: '/api/education-level',
+    weekDay: '/api/week-days',
+    teachingSlot: '/api/teaching-slots',
+    register: '/api/subject/register-for-tutor',
+    tutor: '/api/approved-registration',
   },
 };

@@ -2,18 +2,20 @@ import { Fragment } from 'react';
 import TutorCardRow from './components/TutorCardRow/TutorCardRow';
 import './styles.scss';
 
-const TutorList = ({ subjects = [] }) => {
+const TutorList = ({ tutors = [] }) => {
   return (
     <>
-      {subjects.map(item => {
+      {tutors.map(item => {
         return (
           <Fragment key={item.id}>
             <TutorCardRow
               id={item.id}
-              name={item.tutor.fullname}
-              rating={item.tutor.rating}
-              description={item.description}
-              subject={item.name}
+              name={item.fullname}
+              eduLevel={item.educationLevel}
+              brief={item.brief}
+              subject={item.subjects}
+              video={item.tutorVideos}
+              schedule={item.scheduleRecords}
             />
           </Fragment>
         );

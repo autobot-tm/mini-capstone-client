@@ -12,6 +12,7 @@ const HeaderSection = ({ onLogin, handleConfirmTutor }) => {
   const user = useSelector(state => state.user.user);
   const token = auth?.token;
   const role = user?.role;
+  const roleRequestStatus = user?.requestStatus;
   return (
     <div className="header-section">
       <Row className="container" justify="center">
@@ -38,7 +39,7 @@ const HeaderSection = ({ onLogin, handleConfirmTutor }) => {
                 </BaseButton>
               </>
             )}
-            {token && role !== 'TUTOR' && (
+            {token && role !== 'TUTOR' && (!roleRequestStatus || roleRequestStatus === 'REJECTED') && (
               <BaseButton onClick={handleConfirmTutor} className="header-section-first-col-inner-btn">
                 Become a Tutor
               </BaseButton>

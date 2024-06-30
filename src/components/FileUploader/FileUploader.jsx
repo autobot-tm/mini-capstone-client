@@ -64,6 +64,7 @@ const FileUploader = ({ storagePath = 'files/', onUploadSuccess, onDeleteSuccess
   const props = {
     name: 'file',
     multiple: false,
+    accept: 'image/jpeg,image/png, image/jpg, application/pdf',
     customRequest: ({ file, onSuccess }) => {
       uploadFile(file);
       onSuccess('ok');
@@ -90,7 +91,7 @@ const FileUploader = ({ storagePath = 'files/', onUploadSuccess, onDeleteSuccess
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
-      <p className="ant-upload-text">Click or drag image file to this area to upload certificate</p>
+      <p className="ant-upload-text">Click or drag image or PDF file to this area to upload certificate</p>
       <p className="ant-upload-hint">
         Support for a single upload. Strictly prohibited from uploading company data or other banned files.
       </p>

@@ -1,98 +1,80 @@
 import { useState, useEffect } from 'react';
 import { Table, Checkbox } from 'antd';
-import SUNRISE from '../../assets/images/wi--sunrise.png';
-import SUNSET from '../../assets/images/wi--sunset.png';
-import SUNNY from '../../assets/images/wi--day-sunny.png';
-import './styles.scss';
-import { CheckOutlined } from '@ant-design/icons';
+import { getAllTeachingSlots, getAllWeekDays } from '../../services/apis/subject.service';
 
-const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-const teachingTimes = ['morning', 'afternoon', 'evening'];
-
-const timeLabels = {
-  morning: (
-    <span className="time-container">
-      <img src={SUNRISE} alt="Sunrise" />
-      PRE 12PM
-    </span>
-  ),
-  afternoon: (
-    <span className="time-container">
-      <img src={SUNNY} alt="Sunny" />
-      12PM-5PM
-    </span>
-  ),
-  evening: (
-    <span className="time-container">
-      <img src={SUNSET} alt="Sunset" />
-      AFTER 5PM
-    </span>
-  ),
-};
-
-const getDayLabel = day => {
-  return day.substring(0, 3).toUpperCase();
-};
-
-const BooleanCell = ({ value }) => (
-  <div className="boolean-cell">{value ? <CheckOutlined style={{ color: 'green' }} /> : '-'}</div>
-);
-
-const ScheduleForm = ({ initialSchedule, onChange, readOnly }) => {
-  const [schedules, setSchedules] = useState(initialSchedule);
+const ScheduleTable = ({ onChange }) => {
+  const [weekDays, setWeekDays] = useState([]);
+  const [teachingSlots, setTeachingSlots] = useState([]);
+  const [schedule, setSchedule] = useState([]);
 
   useEffect(() => {
-    onChange && onChange(schedules);
-  }, [schedules]);
+    const fetchWeekDays = async () => {
+      const response = await getAllWeekDays();
+      setWeekDays(response);
+    };
 
-  const handleCheckboxChange = (day, time) => {
-    if (!readOnly) {
-      setSchedules(prevSchedules => {
-        const newSchedules = { ...prevSchedules };
-        if (!newSchedules[day]) {
-          newSchedules[day] = [];
+    const fetchTeachingSlots = async () => {
+      const response = await getAllTeachingSlots();
+      setTeachingSlots(response);
+    };
+
+    fetchWeekDays();
+    fetchTeachingSlots();
+  }, []);
+
+  const handleCheckboxChange = (weekDayId, slotId, checked) => {
+    let newSchedule = [...schedule];
+    const dayIndex = newSchedule.findIndex(day => day.weekDayIds === weekDayId);
+
+    if (dayIndex === -1 && checked) {
+      newSchedule.push({ weekDayIds: weekDayId, teachingSlotIds: [slotId] });
+    } else if (dayIndex !== -1) {
+      if (checked) {
+        newSchedule[dayIndex].teachingSlotIds.push(slotId);
+      } else {
+        newSchedule[dayIndex].teachingSlotIds = newSchedule[dayIndex].teachingSlotIds.filter(id => id !== slotId);
+        if (newSchedule[dayIndex].teachingSlotIds.length === 0) {
+          newSchedule = newSchedule.filter(day => day.weekDayIds !== weekDayId);
         }
-        if (newSchedules[day].includes(time)) {
-          newSchedules[day] = newSchedules[day].filter(t => t !== time);
-        } else {
-          newSchedules[day].push(time);
-        }
-        return newSchedules;
-      });
+      }
     }
+
+    setSchedule(newSchedule);
+    onChange(newSchedule);
+  };
+
+  const renderCheckbox = (weekDayId, slotId) => {
+    const isChecked = schedule.some(day => day.weekDayIds === weekDayId && day.teachingSlotIds.includes(slotId));
+    return <Checkbox checked={isChecked} onChange={e => handleCheckboxChange(weekDayId, slotId, e.target.checked)} />;
   };
 
   const columns = [
-    { title: 'Time/Day', dataIndex: 'timeLabel', key: 'timeLabel', align: 'center' },
-    ...weekDays.map(day => ({
-      title: getDayLabel(day),
-      dataIndex: day,
-      key: day,
+    {
+      title: 'Time Slot',
+      dataIndex: 'slot',
+      key: 'slot',
       align: 'center',
-      render: (_, record) => {
-        if (readOnly) {
-          return <BooleanCell value={record[day]?.includes(record.time)} />;
-        } else {
-          return (
-            <Checkbox
-              checked={record[day]?.includes(record.time)}
-              onChange={() => handleCheckboxChange(day, record.time)}
-              disabled={readOnly}
-            />
-          );
-        }
-      },
+      render: (_, record) => teachingSlots.find(slot => slot.id === record.slotId)?.time,
+    },
+    ...weekDays.map(day => ({
+      title: day.day,
+      dataIndex: day.id,
+      key: day.id,
+      align: 'center',
+      render: (_, record) => renderCheckbox(day.id, record.slotId),
     })),
   ];
 
-  const dataSource = teachingTimes.map(time => ({
-    key: time,
-    timeLabel: timeLabels[time],
-    time,
-    ...weekDays.reduce((acc, day) => ({ ...acc, [day]: schedules[day] || [] }), {}),
+  const dataSource = teachingSlots.map(slot => ({
+    key: slot.id,
+    slotId: slot.id,
   }));
 
-  return <Table dataSource={dataSource} columns={columns} pagination={false} bordered />;
+  return (
+    <div>
+      <Table dataSource={dataSource} columns={columns} pagination={false} rowKey="slotId" bordered />
+    </div>
+  );
 };
 
-export default ScheduleForm;
+export default ScheduleTable;
