@@ -119,11 +119,11 @@ const ServiceForm = () => {
 
       form.resetFields();
 
-      const timer = setTimeout(() => {
-        window.location.reload();
-      }, 3000);
+      // const timer = setTimeout(() => {
+      //   window.location.reload();
+      // }, 3000);
 
-      return () => clearTimeout(timer);
+      // return () => clearTimeout(timer);
     } catch (error) {
       console.error('Error during form submission:', error);
     }

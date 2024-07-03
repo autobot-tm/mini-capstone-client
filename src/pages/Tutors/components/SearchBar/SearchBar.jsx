@@ -4,24 +4,42 @@ import { Button, Form, Input, Select, Space } from 'antd';
 import FROM from '../../../../assets/images/startForm.png';
 import { Caption } from '../../../../components/Typography/Caption/Caption';
 
-const SearchBar = () => {
+const { Option } = Select;
+
+const SearchBar = ({ onSearch }) => {
+  const [form] = Form.useForm();
+
+  const handleSearch = () => {
+    form.validateFields().then(values => {
+      onSearch(values);
+    });
+  };
+
   return (
     <div className="search-section">
-      <Form className="search-section-form">
+      <Form form={form} className="search-section-form" onFinish={handleSearch}>
         <Space.Compact size="large" className="search-section-form-inner">
-          <Input
-            style={{
-              width: '65%',
-            }}
-            addonBefore={<SearchOutlined style={{ color: '#999999', fontSize: 20 }} />}
-            placeholder="What are you looking for?"
-          />
-          <Select
-            style={{
-              width: '25%',
-            }}
-            placeholder="Select category"
-          />
+          <Form.Item name="tutorName" noStyle>
+            <Input
+              style={{
+                width: '65%',
+              }}
+              addonBefore={<SearchOutlined style={{ color: '#999999', fontSize: 20 }} />}
+              placeholder="What are you looking for?"
+            />
+          </Form.Item>
+          <Form.Item name="educationLevel" noStyle>
+            <Select
+              style={{
+                width: '25%',
+              }}
+              placeholder="Select education level">
+              <Option value="Student">High School</Option>
+              <Option value="Bachelor">Bachelor</Option>
+              <Option value="Master">Master</Option>
+              <Option value="Ph.D">Ph.D</Option>
+            </Select>
+          </Form.Item>
           <Button className="btn" type="text" htmlType="submit">
             Search now
           </Button>
