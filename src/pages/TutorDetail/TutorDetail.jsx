@@ -28,6 +28,7 @@ const TutorDetail = () => {
   useEffect(() => {
     fetchSubjects();
   }, [subject_id]);
+  console.log(tutorInfo);
 
   const items = [
     {
@@ -50,11 +51,13 @@ const TutorDetail = () => {
           <Row justify="center" gutter={[24, 24]}>
             <Col xs={24} lg={18}>
               <TutorInfo
+                tutorId={tutorInfo.id}
                 tutorName={tutorInfo?.fullname}
                 tutorEduLv={tutorInfo?.educationLevel}
                 grade={tutorInfo?.grades}
                 subject={tutorInfo?.subjects}
                 location={tutorInfo?.locations}
+                isBooking={tutorInfo?.tutorBookings}
               />
               <Card className="tabs-card">
                 <Tabs defaultActiveKey="1" items={items} />

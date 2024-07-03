@@ -101,19 +101,31 @@ const ServiceForm = () => {
       errorUpVideo();
       return;
     }
+
     const dataToSend = {
       ...values,
       accountId: user?.id,
       tutorVideoUrl: uploadedVideoUrl,
     };
-    if (dataToSend && isEdit === 1) {
-      await createSubjectService(dataToSend);
-      successCreate();
+
+    try {
+      if (isEdit === 1) {
+        await createSubjectService(dataToSend);
+        successCreate();
+      } else {
+        await updateSubjectService(dataToSend);
+        updateCreate();
+      }
+
       form.resetFields();
-    } else {
-      await updateSubjectService(dataToSend);
-      updateCreate();
-      form.resetFields();
+
+      const timer = setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    } catch (error) {
+      console.error('Error during form submission:', error);
     }
   };
 

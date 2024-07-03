@@ -24,4 +24,7 @@ export const ENDPOINTS = {
     register: '/api/subject/register-for-tutor',
     tutor: '/api/approved-registration',
   },
+  booking: {
+    base: '/api/bookings/booking',
+  },
 };

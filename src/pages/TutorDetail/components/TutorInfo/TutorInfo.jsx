@@ -1,13 +1,34 @@
-import { StarFilled } from '@ant-design/icons';
 import { SubHeading } from '../../../../components/Typography/SubHeading/SubHeading';
 import './styles.scss';
-import { Avatar, Button, Card, Divider, Tag } from 'antd';
+import { Avatar, Card, Divider, Tag } from 'antd';
 import { Paragraph } from '../../../../components/Typography/Paragraph/Paragraph';
 import { Caption } from '../../../../components/Typography/Caption/Caption';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
+import { bookingTutorService } from '../../../../services/apis/booking.service';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 // const textBtn = "Let's task now";
-const TutorInfo = ({ tutorEduLv, tutorName, subject = [], location = [], grade = [] }) => {
+const TutorInfo = ({ tutorId, tutorEduLv, tutorName, subject = [], location = [], grade = [], isBooking = [] }) => {
+  const { token } = useSelector(state => state.auth);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  console.log('isBooking', isBooking?.[0]?.status);
+  const handleBooking = async () => {
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+    setLoading(true);
+    try {
+      await bookingTutorService({ tutorId });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Card id="tutor-detail">
       <div className="tutor-info">
@@ -61,9 +82,15 @@ const TutorInfo = ({ tutorEduLv, tutorName, subject = [], location = [], grade =
             {textBtn}
           </Caption>
         </Button> */}
-        <BaseButton type="primary" style={{ width: 'auto' }}>
-          Book a tution
-        </BaseButton>
+        {isBooking?.[0]?.status === 'PENDING' ? (
+          <BaseButton type="text" style={{ width: 'auto' }} disabled={true}>
+            In Processing
+          </BaseButton>
+        ) : (
+          <BaseButton type="primary" style={{ width: 'auto' }} onClick={handleBooking} loading={loading}>
+            {loading ? 'Booking..' : 'Book a tution'}
+          </BaseButton>
+        )}
       </div>
     </Card>
   );
