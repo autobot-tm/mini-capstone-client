@@ -27,4 +27,7 @@ export const ENDPOINTS = {
   booking: {
     base: '/api/bookings/booking',
   },
+  payment: {
+    base: '/api/request-recharge-vnpay',
+  },
 };

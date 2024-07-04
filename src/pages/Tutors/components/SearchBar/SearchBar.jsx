@@ -33,7 +33,8 @@ const SearchBar = ({ onSearch }) => {
               style={{
                 width: '25%',
               }}
-              placeholder="Select education level">
+              placeholder="Select education level"
+              allowClear>
               <Option value="Student">High School</Option>
               <Option value="Bachelor">Bachelor</Option>
               <Option value="Master">Master</Option>
