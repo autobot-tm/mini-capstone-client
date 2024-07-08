@@ -15,6 +15,7 @@ function App() {
   const { token } = useSelector(state => state.auth);
   const { success, erorr } = useSelector(state => state.user);
 
+  const bubbleIcon = document.querySelector('#kmw-bubble-icon');
   useEffect(() => {
     if (!token) {
       dispatch(authActions.initState());
@@ -22,7 +23,12 @@ function App() {
     if (token) {
       dispatch(userActions.getUserProfile());
     }
-  }, [token, dispatch]);
+    if (bubbleIcon) {
+      bubbleIcon.click();
+    } else {
+      console.error('Element with ID #kmw-bubble-icon not found');
+    }
+  }, [token, dispatch, bubbleIcon]);
 
   useEffect(() => {
     if (success) {

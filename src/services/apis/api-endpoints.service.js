@@ -29,5 +29,8 @@ export const ENDPOINTS = {
   },
   payment: {
     base: '/api/request-recharge-vnpay',
+    wallet: id => `/api/walletDetail/${id}`,
+    update: '/api/update-money',
+    package: '/api/monthly-package',
   },
 };

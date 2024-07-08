@@ -7,6 +7,7 @@ import TutorDetail from '../pages/TutorDetail/TutorDetail';
 import Tutors from '../pages/Tutors/Tutors';
 import UserProfile from '../pages/UserProfile/UserProfile';
 import HowItWork from '../pages/HowItWork/HowItWork';
+import Payment from '../pages/Payment/Payment';
 export const routePaths = {
   public: [
     {
@@ -26,12 +27,16 @@ export const routePaths = {
       element: <TutorDetail />,
     },
     {
-     path: routeNames.HowItWork,
-     element: <HowItWork/>,
+      path: routeNames.HowItWork,
+      element: <HowItWork />,
     },
     {
       path: routeNames.ContactUs,
       element: <ContactUs />,
+    },
+    {
+      path: routeNames.Payment,
+      element: <Payment />,
     },
   ],
   private: [

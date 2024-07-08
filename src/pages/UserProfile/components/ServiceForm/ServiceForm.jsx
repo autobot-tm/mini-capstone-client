@@ -16,15 +16,18 @@ import {
 } from '../../../../services/apis/subject.service';
 import { ArrowRightOutlined, EditOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ScheduleTable from '../../../../components/Schedule/ScheduleForm';
+import { requestBuyPackageService } from '../../../../services/apis/payment.service';
+import { useUserSlice } from '../../../../store/features/user.slice';
 
-const ServiceForm = () => {
+const ServiceForm = ({ getWalletDetail }) => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
   const userProfile = useSelector(state => state.user.user);
-  const [slotCount, setSlotCount] = useState(0);
+  const { actions: userActions } = useUserSlice();
   const [uploadedVideoUrl, setUploadedVideoUrl] = useState(null);
   const [api, contextHolder] = notification.useNotification();
   const [subjects, setSubjects] = useState([]);
@@ -118,12 +121,6 @@ const ServiceForm = () => {
       }
 
       form.resetFields();
-
-      // const timer = setTimeout(() => {
-      //   window.location.reload();
-      // }, 3000);
-
-      // return () => clearTimeout(timer);
     } catch (error) {
       console.error('Error during form submission:', error);
     }
@@ -135,7 +132,6 @@ const ServiceForm = () => {
 
   const handleScheduleChange = schedule => {
     form.setFieldsValue({ schedule });
-    setSlotCount(Object.values(schedule).flat().length);
     form.validateFields(['video']);
   };
 
@@ -149,197 +145,216 @@ const ServiceForm = () => {
     setUploadedVideoUrl(null);
   };
 
+  const handleBuyPackage = async () => {
+    try {
+      await requestBuyPackageService({ accountId: userProfile?.id });
+      await getWalletDetail();
+      dispatch(userActions.getUserProfile());
+    } catch (error) {
+      console.log('Error buy package', error);
+    }
+  };
+
   return (
     <>
-      {/* <Card className="promotion-package">
-        <p>
-          <SubHeading classNames="d-block" strong>
-            Buy package to add more details
-          </SubHeading>
-          <Paragraph>
-            Consectur adipiscing elitsedo eiusmod tempor incididuntem utaborate dolore magna aliqua ad minim veniamque.
-          </Paragraph>
-        </p>
-        <span className="btn-container">
-          <Button type="text" className="btn">
-            Buy a new package
-          </Button>
-        </span>
-      </Card> */}
       {contextHolder}
-      {isSubjectRegister === 'PENDING' || (isSubjectRegister === 'APPROVED' && isEdit === 1) ? (
-        <Card className="status-service-form">
-          <SubHeading strong>My service</SubHeading>
-          {isSubjectRegister === 'PENDING' && <Tag color="cyan">Processing</Tag>}
-          {isSubjectRegister === 'APPROVED' && (
-            <>
-              <Tag color="green">Active</Tag>{' '}
-              <dir className="container-edit">
-                <Button icon={<EditOutlined />} onClick={() => setIsEdit(2)} />
-                <Button icon={<ArrowRightOutlined />} onClick={() => navigate(`/tutors/${user?.id}`)} />
-              </dir>
-            </>
-          )}
+      {userProfile?.role === 'TUTOR' &&
+      (!userProfile?.monthlyPackage || userProfile?.monthlyPackage === 'DEACTIVATED') ? (
+        <Card className="promotion-package">
+          <p>
+            <SubHeading classNames="d-block" strong>
+              Buy package to add more details
+            </SubHeading>
+            <Paragraph>
+              Consectur adipiscing elitsedo eiusmod tempor incididuntem utaborate dolore magna aliqua ad minim
+              veniamque.
+            </Paragraph>
+          </p>
+          <span className="btn-container">
+            <Button type="text" className="btn" onClick={handleBuyPackage}>
+              Buy a new package
+            </Button>
+          </span>
         </Card>
       ) : (
-        <Card>
-          <SubHeading strong>Service form</SubHeading>
-          <Divider />
-          <Form onFinish={onFinish} onFinishFailed={onFinishFailed} form={form} layout="vertical">
-            <Row gutter={[16, 4]} justify="center">
-              <Col xs={24} lg={12}>
-                <Form.Item
-                  label="Education level"
-                  name="educationLevelId"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please select your education level!',
-                    },
-                  ]}>
-                  <Select
-                    size="large"
-                    style={{
-                      width: '100%',
-                    }}
-                    placeholder="Select your education level"
-                    options={eduLevel}
-                  />
-                </Form.Item>
-              </Col>
-              <Col xs={24} lg={12}>
-                <Form.Item
-                  label="Desired tutoring locations"
-                  name="locationIds"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please select your desired tutoring location!',
-                    },
-                  ]}>
-                  <Select
-                    size="large"
-                    mode="multiple"
-                    style={{
-                      width: '100%',
-                    }}
-                    placeholder="Select locations you want to teach"
-                    options={locations}
-                    optionLabelProp="label"
-                    optionRender={option => <Space>{option.data.label}</Space>}
-                  />
-                </Form.Item>
-              </Col>
-              <Col xs={24} lg={12}>
-                <Form.Item
-                  label="Desired tutoring grades"
-                  name="gradeIds"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please select grades you want to teach!',
-                    },
-                  ]}>
-                  <Select
-                    size="large"
-                    mode="multiple"
-                    style={{
-                      width: '100%',
-                    }}
-                    placeholder="Select grades you want to teach"
-                    options={grades}
-                    optionLabelProp="label"
-                    optionRender={option => <Space>{option.data.label}</Space>}
-                  />
-                </Form.Item>
-              </Col>
-              <Col xs={24} lg={12}>
-                <Form.Item
-                  label="Desired tutoring subjects"
-                  name="subjectIds"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please select subjects you want to teach!',
-                    },
-                  ]}>
-                  <Select
-                    size="large"
-                    mode="multiple"
-                    style={{
-                      width: '100%',
-                    }}
-                    placeholder="Select subjects you want to teach"
-                    options={subjects}
-                    // optionLabelProp="label"
-                    optionRender={option => <Space>{option.data.label}</Space>}
-                  />
-                </Form.Item>
-              </Col>
-              <Col xs={24}>
-                <Form.Item
-                  label="A brief introduction"
-                  name="brief"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input your brief introduction!',
-                    },
-                  ]}>
-                  <TextArea
-                    size="large"
-                    showCount
-                    maxLength={500}
-                    placeholder="Enter your description"
-                    style={{
-                      height: 120,
-                      resize: 'none',
-                    }}
-                  />
-                </Form.Item>
-              </Col>
-              <Col xs={24}>
-                <Form.Item
-                  label="Video academic"
-                  validateTrigger={['onChange', 'onBlur']}
-                  rules={[
-                    {
-                      required: true,
-                      validator: async (_, value) => {
-                        if (!uploadedVideoUrl) {
-                          return await Promise.reject(new Error('Please upload your video academic'));
-                        }
-                        return Promise.resolve();
-                      },
-                    },
-                  ]}>
-                  <VideoUploader
-                    storagePath="tutorVideo/"
-                    onVideoUploadSuccess={handleVideoUploadSuccess}
-                    onVideoDeleteSuccess={handleVideoDeleteSuccess}
-                  />
-                </Form.Item>
-              </Col>
-              <Col xs={24}>
-                <Form.Item
-                  label="Available Schedule"
-                  name="dayAndSlotRequests"
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}>
-                  <ScheduleTable onChange={handleScheduleChange} />
-                </Form.Item>
-              </Col>
-              <Form.Item>
-                <BaseButton type="primary" htmlType="submit">
-                  {isEdit === 1 ? 'Create' : 'Update'}
-                </BaseButton>
-              </Form.Item>
-            </Row>
-          </Form>
-        </Card>
+        //  : userProfile?.monthlyPackage === 'PENDING' ? (
+        //   'Your request is waiting for approval. Please wait a moment!'
+        // )
+        <>
+          {isSubjectRegister === 'PENDING' || (isSubjectRegister === 'APPROVED' && isEdit === 1) ? (
+            <Card className="status-service-form">
+              <SubHeading strong>My service</SubHeading>
+              {isSubjectRegister === 'PENDING' && <Tag color="cyan">Processing</Tag>}
+              {isSubjectRegister === 'APPROVED' && (
+                <>
+                  <Tag color="green">Active</Tag>{' '}
+                  <dir className="container-edit">
+                    <Button icon={<EditOutlined />} onClick={() => setIsEdit(2)} />
+                    <Button icon={<ArrowRightOutlined />} onClick={() => navigate(`/tutors/${user?.id}`)} />
+                  </dir>
+                </>
+              )}
+            </Card>
+          ) : (
+            <Card>
+              <SubHeading strong>Service form</SubHeading>
+              <Divider />
+              <Form onFinish={onFinish} onFinishFailed={onFinishFailed} form={form} layout="vertical">
+                <Row gutter={[16, 4]} justify="center">
+                  <Col xs={24} lg={12}>
+                    <Form.Item
+                      label="Education level"
+                      name="educationLevelId"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please select your education level!',
+                        },
+                      ]}>
+                      <Select
+                        size="large"
+                        style={{
+                          width: '100%',
+                        }}
+                        placeholder="Select your education level"
+                        options={eduLevel}
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} lg={12}>
+                    <Form.Item
+                      label="Desired tutoring locations"
+                      name="locationIds"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please select your desired tutoring location!',
+                        },
+                      ]}>
+                      <Select
+                        size="large"
+                        mode="multiple"
+                        style={{
+                          width: '100%',
+                        }}
+                        placeholder="Select locations you want to teach"
+                        options={locations}
+                        optionLabelProp="label"
+                        optionRender={option => <Space>{option.data.label}</Space>}
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} lg={12}>
+                    <Form.Item
+                      label="Desired tutoring grades"
+                      name="gradeIds"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please select grades you want to teach!',
+                        },
+                      ]}>
+                      <Select
+                        size="large"
+                        mode="multiple"
+                        style={{
+                          width: '100%',
+                        }}
+                        placeholder="Select grades you want to teach"
+                        options={grades}
+                        optionLabelProp="label"
+                        optionRender={option => <Space>{option.data.label}</Space>}
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} lg={12}>
+                    <Form.Item
+                      label="Desired tutoring subjects"
+                      name="subjectIds"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please select subjects you want to teach!',
+                        },
+                      ]}>
+                      <Select
+                        size="large"
+                        mode="multiple"
+                        style={{
+                          width: '100%',
+                        }}
+                        placeholder="Select subjects you want to teach"
+                        options={subjects}
+                        optionRender={option => <Space>{option.data.label}</Space>}
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24}>
+                    <Form.Item
+                      label="A brief introduction"
+                      name="brief"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please input your brief introduction!',
+                        },
+                      ]}>
+                      <TextArea
+                        size="large"
+                        showCount
+                        maxLength={500}
+                        placeholder="Enter your description"
+                        style={{
+                          height: 120,
+                          resize: 'none',
+                        }}
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24}>
+                    <Form.Item
+                      label="Video academic"
+                      validateTrigger={['onChange', 'onBlur']}
+                      rules={[
+                        {
+                          required: true,
+                          validator: async (_, value) => {
+                            if (!uploadedVideoUrl) {
+                              return await Promise.reject(new Error('Please upload your video academic'));
+                            }
+                            return Promise.resolve();
+                          },
+                        },
+                      ]}>
+                      <VideoUploader
+                        storagePath="tutorVideo/"
+                        onVideoUploadSuccess={handleVideoUploadSuccess}
+                        onVideoDeleteSuccess={handleVideoDeleteSuccess}
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24}>
+                    <Form.Item
+                      label="Available Schedule"
+                      name="dayAndSlotRequests"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <ScheduleTable onChange={handleScheduleChange} />
+                    </Form.Item>
+                  </Col>
+                  <Form.Item>
+                    <BaseButton type="primary" htmlType="submit">
+                      {isEdit === 1 ? 'Create' : 'Update'}
+                    </BaseButton>
+                  </Form.Item>
+                </Row>
+              </Form>
+            </Card>
+          )}
+        </>
       )}
     </>
   );

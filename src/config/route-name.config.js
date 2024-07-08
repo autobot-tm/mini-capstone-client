@@ -8,4 +8,5 @@ export const routeNames = {
   FindTutor: '/tutors',
   TutorDetail: '/tutors/:id',
   ContactUs: '/contact-us',
+  Payment: '/payments',
 };
