@@ -17,7 +17,7 @@ const ResultSuccessfully = ({ leadingToHomepage, leadingToUserProfile, money }) 
   };
   useEffect(() => {
     updateWallet({ money });
-  }, []);
+  }, [money]);
   return (
     <div className="center-container">
       <Result

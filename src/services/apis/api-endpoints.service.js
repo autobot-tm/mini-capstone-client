@@ -29,8 +29,8 @@ export const ENDPOINTS = {
     detail: id => `/api/bookings/booking/${id}`,
     idTutor: id => `/api/bookings/tutor-bookings/${id}`,
     idStudent: id => `/api/bookings/student-bookings/${id}`,
-    approve: '/api/bookings/approved-up-role',
-    reject: '/api/bookings/reject-up-role',
+    approve: '/api/bookings/approved-booking',
+    reject: '/api/bookings/rejected-booking',
   },
   payment: {
     base: '/api/request-recharge-vnpay',
@@ -40,7 +40,7 @@ export const ENDPOINTS = {
   },
   reviews: {
     base: '/api/review',
-    review: id => `/api/review/${id}`,
+    review: tutorId => `/api/review/${tutorId}`,
   },
   complaints: {
     base: '/api/complaints',

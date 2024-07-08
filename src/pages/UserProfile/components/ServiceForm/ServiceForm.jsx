@@ -120,7 +120,9 @@ const ServiceForm = ({ getWalletDetail }) => {
         await updateSubjectService(dataToSend);
         updateCreate();
       }
-
+      setTimeout(() => {
+        dispatch(userActions.getUserProfile());
+      }, 1000);
       form.resetFields();
     } catch (error) {
       console.error('Error during form submission:', error);
@@ -160,6 +162,11 @@ const ServiceForm = ({ getWalletDetail }) => {
         dispatch(userActions.getUserProfile());
       }, 1000);
     } catch (error) {
+      api.error({
+        message: 'Package registration failed',
+        description: error,
+        type: 'error',
+      });
       console.log('Error buy package', error);
     } finally {
       setLoading(false);
@@ -192,7 +199,7 @@ const ServiceForm = ({ getWalletDetail }) => {
           {isSubjectRegister === 'PENDING' || (isSubjectRegister === 'APPROVED' && isEdit === 1) ? (
             <Card className="status-service-form">
               <SubHeading strong>My service</SubHeading>
-              {isSubjectRegister === 'PENDING' && <Tag color="cyan">Processing</Tag>}
+              {isSubjectRegister === 'PENDING' && <Tag color="cyan">{isSubjectRegister}</Tag>}
               {isSubjectRegister === 'APPROVED' && (
                 <>
                   <Tag color="green">Active</Tag>{' '}
