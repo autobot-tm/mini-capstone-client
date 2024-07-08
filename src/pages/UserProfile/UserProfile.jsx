@@ -116,7 +116,7 @@ const UserProfile = () => {
               {selectedKey === '1' && <ProfileForm />}
               {selectedKey === '2' && <ChangePasswordForm dispatch={dispatch} />}
               {selectedKey === '3' && role === 'TUTOR' && <ServiceForm getWalletDetail={getWalletDetail} />}
-              {selectedKey === '4' && <ServiceManagement />}
+              {selectedKey === '4' && <ServiceManagement id={idUser} role={role} />}
             </Col>
           </Row>
         </div>

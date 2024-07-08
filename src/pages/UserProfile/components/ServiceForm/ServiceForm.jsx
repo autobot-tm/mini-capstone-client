@@ -36,6 +36,7 @@ const ServiceForm = ({ getWalletDetail }) => {
   const [eduLevel, setEduLevel] = useState([]);
   const isSubjectRegister = userProfile?.subjectRegistrationStatus;
   const [isEdit, setIsEdit] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -146,12 +147,22 @@ const ServiceForm = ({ getWalletDetail }) => {
   };
 
   const handleBuyPackage = async () => {
+    setLoading(true);
     try {
       await requestBuyPackageService({ accountId: userProfile?.id });
       await getWalletDetail();
-      dispatch(userActions.getUserProfile());
+      api.success({
+        message: 'Package registration successful',
+        description: 'Congratulations, you have successfully signed up for the 1 month package',
+        type: 'success',
+      });
+      setTimeout(() => {
+        dispatch(userActions.getUserProfile());
+      }, 1000);
     } catch (error) {
       console.log('Error buy package', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -171,15 +182,12 @@ const ServiceForm = ({ getWalletDetail }) => {
             </Paragraph>
           </p>
           <span className="btn-container">
-            <Button type="text" className="btn" onClick={handleBuyPackage}>
-              Buy a new package
+            <Button type="text" className="btn" onClick={handleBuyPackage} loading={loading} disabled={loading}>
+              {loading ? 'Buying..' : ' Buy a new package'}
             </Button>
           </span>
         </Card>
       ) : (
-        //  : userProfile?.monthlyPackage === 'PENDING' ? (
-        //   'Your request is waiting for approval. Please wait a moment!'
-        // )
         <>
           {isSubjectRegister === 'PENDING' || (isSubjectRegister === 'APPROVED' && isEdit === 1) ? (
             <Card className="status-service-form">

@@ -26,11 +26,27 @@ export const ENDPOINTS = {
   },
   booking: {
     base: '/api/bookings/booking',
+    detail: id => `/api/bookings/booking/${id}`,
+    idTutor: id => `/api/bookings/tutor-bookings/${id}`,
+    idStudent: id => `/api/bookings/student-bookings/${id}`,
+    approve: '/api/bookings/approved-up-role',
+    reject: '/api/bookings/reject-up-role',
   },
   payment: {
     base: '/api/request-recharge-vnpay',
     wallet: id => `/api/walletDetail/${id}`,
     update: '/api/update-money',
     package: '/api/monthly-package',
+  },
+  reviews: {
+    base: '/api/review',
+    review: id => `/api/review/${id}`,
+  },
+  complaints: {
+    base: '/api/complaints',
+    complaint: '/api/complaint',
+    pending: '/api/pending-complaint',
+    approve: id => `/api/complaint/approved/${id}`,
+    reject: id => `/api/complaint/rejected/${id}`,
   },
 };

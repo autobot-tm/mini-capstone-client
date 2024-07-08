@@ -9,12 +9,13 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-// const textBtn = "Let's task now";
 const TutorInfo = ({ tutorId, tutorEduLv, tutorName, subject = [], location = [], grade = [], isBooking = [] }) => {
   const { token } = useSelector(state => state.auth);
+  const user = useSelector(state => state.user.user);
+  const role = user?.role;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  console.log('isBooking', isBooking?.[0]?.status);
+
   const handleBooking = async () => {
     if (!token) {
       navigate('/login');
@@ -77,19 +78,18 @@ const TutorInfo = ({ tutorId, tutorEduLv, tutorName, subject = [], location = []
       </div>
       <Divider dashed />
       <div className="btn-talk-container">
-        {/* <Button size="large">
-          <Caption strong size={160}>
-            {textBtn}
-          </Caption>
-        </Button> */}
-        {isBooking?.[0]?.status === 'PENDING' ? (
-          <BaseButton type="text" style={{ width: 'auto' }} disabled={true}>
-            In Processing
-          </BaseButton>
-        ) : (
-          <BaseButton type="primary" style={{ width: 'auto' }} onClick={handleBooking} loading={loading}>
-            {loading ? 'Booking..' : 'Book a tution'}
-          </BaseButton>
+        {role !== 'TUTOR' && (
+          <>
+            {isBooking?.[0]?.status === 'PENDING' ? (
+              <BaseButton type="text" style={{ width: 'auto' }} disabled={true}>
+                In Processing
+              </BaseButton>
+            ) : (
+              <BaseButton type="primary" style={{ width: 'auto' }} onClick={handleBooking} loading={loading}>
+                {loading ? 'Booking..' : 'Book a tution'}
+              </BaseButton>
+            )}
+          </>
         )}
       </div>
     </Card>
