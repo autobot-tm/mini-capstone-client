@@ -25,6 +25,10 @@ export const rejectBookingService = ({ bookingId }) => {
   return apiCaller.post(ENDPOINTS.booking.reject, { bookingId });
 };
 
+export const passBookingService = ({ bookingId }) => {
+  return apiCaller.post(ENDPOINTS.booking.pass, { bookingId });
+};
+
 export const reviewTutorService = ({ content, score, tutorId, bookingId }) => {
   return apiCaller.post(ENDPOINTS.reviews.base, { content, score, tutorId, bookingId });
 };

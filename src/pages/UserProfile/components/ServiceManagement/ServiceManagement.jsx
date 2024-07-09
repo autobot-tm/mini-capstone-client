@@ -7,6 +7,7 @@ import {
   getBookingsByIdStudentService,
   getBookingsByIdTutorService,
   getReviewByIdService,
+  passBookingService,
   rejectBookingService,
   reviewTutorService,
 } from '../../../../services/apis/booking.service';
@@ -76,6 +77,15 @@ const ServiceManagement = ({ id, role }) => {
       role === 'TUTOR' ? await fetchTutorBooking() : await fetchStudentBooking();
     } catch (error) {
       console.log('Error at handleRejectBooking', error);
+    }
+  };
+
+  const handlePassCourse = async bookingId => {
+    try {
+      await passBookingService({ bookingId });
+      role === 'TUTOR' ? await fetchTutorBooking() : await fetchStudentBooking();
+    } catch (error) {
+      console.log('Error at handlePassCourse', error);
     }
   };
 
@@ -231,7 +241,7 @@ const ServiceManagement = ({ id, role }) => {
               <div className="container-action">
                 {role === 'TUTOR' ? (
                   <>
-                    {booking?.booking?.status === 'PENDING' && (
+                    {booking?.booking?.status === 'PENDING' ? (
                       <>
                         <BaseButton
                           type="primary"
@@ -245,6 +255,14 @@ const ServiceManagement = ({ id, role }) => {
                           Reject
                         </BaseButton>
                       </>
+                    ) : booking?.booking?.status !== 'PASSED' && booking?.booking?.status !== 'REJECTED' ? (
+                      <BaseButton
+                        style={{ width: 'auto', padding: '0 20px' }}
+                        onClick={() => handlePassCourse(booking.booking.id)}>
+                        Done
+                      </BaseButton>
+                    ) : (
+                      ''
                     )}
                   </>
                 ) : (

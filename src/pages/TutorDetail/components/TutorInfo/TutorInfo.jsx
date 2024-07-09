@@ -87,15 +87,15 @@ const TutorInfo = ({ tutorId, tutorEduLv, tutorName, subject = [], location = []
         <div className="btn-talk-container">
           {role !== 'TUTOR' && (
             <>
-              {isBooking?.[0]?.status === 'PENDING' ? (
+              {/* {isBooking?.[0]?.status === 'PENDING' ? (
                 <BaseButton type="text" style={{ width: 'auto' }} disabled={true}>
                   In Processing
                 </BaseButton>
-              ) : (
-                <BaseButton type="primary" style={{ width: 'auto' }} onClick={handleBooking} loading={loading}>
-                  {loading ? 'Booking..' : 'Book a tution'}
-                </BaseButton>
-              )}
+              ) : ( */}
+              <BaseButton type="primary" style={{ width: 'auto' }} onClick={handleBooking} loading={loading}>
+                {loading ? 'Booking..' : 'Book a tution'}
+              </BaseButton>
+              {/* )} */}
             </>
           )}
         </div>

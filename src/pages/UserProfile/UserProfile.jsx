@@ -76,7 +76,9 @@ const UserProfile = () => {
     }
   };
   useEffect(() => {
-    getWalletDetail();
+    if (role === 'TUTOR') {
+      getWalletDetail();
+    }
   }, []);
 
   return (

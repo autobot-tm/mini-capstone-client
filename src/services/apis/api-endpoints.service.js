@@ -31,6 +31,7 @@ export const ENDPOINTS = {
     idStudent: id => `/api/bookings/student-bookings/${id}`,
     approve: '/api/bookings/approved-booking',
     reject: '/api/bookings/rejected-booking',
+    pass: '/api/bookings/passed-course',
   },
   payment: {
     base: '/api/request-recharge-vnpay',

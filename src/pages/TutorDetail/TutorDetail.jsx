@@ -28,7 +28,6 @@ const TutorDetail = () => {
   useEffect(() => {
     fetchSubjects();
   }, [subject_id]);
-  console.log(tutorInfo);
 
   const items = [
     {
@@ -39,7 +38,7 @@ const TutorDetail = () => {
     {
       key: '2',
       label: 'Reviews',
-      children: <TutorReview />,
+      children: <TutorReview id={tutorInfo?.id} />,
     },
   ];
   if (isLoading) return <Spin size="large" />;
