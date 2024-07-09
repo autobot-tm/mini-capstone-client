@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 const Tutors = () => {
   const [tutors, setTutors] = useState([]);
   const [filteredTutors, setFilteredTutors] = useState([]);
+  const [filters, setFilters] = useState({ tutorName: '', educationLevel: '', day: [], time: [] });
 
   const fetchSubjects = async () => {
     try {
@@ -26,13 +27,25 @@ const Tutors = () => {
     fetchSubjects();
   }, []);
 
-  const handleSearch = ({ tutorName, educationLevel }) => {
+  useEffect(() => {
+    handleSearch(filters);
+  }, [filters]);
+
+  const handleSearch = ({ tutorName, educationLevel, day, time }) => {
     const filtered = tutors.filter(tutor => {
       const matchesName = tutorName ? tutor.fullname.toLowerCase().includes(tutorName.toLowerCase()) : true;
       const matchesEducationLevel = educationLevel ? tutor.educationLevel.educationLevel === educationLevel : true;
-      return matchesName && matchesEducationLevel;
+      const matchesDay = day.length ? tutor.scheduleRecords.some(record => day.includes(record.weekDay.day)) : true;
+      const matchesTime = time.length
+        ? tutor.scheduleRecords.some(record => time.includes(record.teachingSlot.time))
+        : true;
+      return matchesName && matchesEducationLevel && matchesDay && matchesTime;
     });
     setFilteredTutors(filtered);
+  };
+
+  const handleFiltersChange = newFilters => {
+    setFilters({ ...filters, ...newFilters });
   };
 
   return (
@@ -44,12 +57,12 @@ const Tutors = () => {
               <SubHeading size={260}>{filteredTutors.length} search results found</SubHeading>
             </Col>
             <Col xs={24}>
-              <SearchBar onSearch={handleSearch} />
+              <SearchBar onSearch={newFilters => handleFiltersChange(newFilters)} />
             </Col>
           </Row>
           <Row justify="center" gutter={[24, 24]}>
             <Col xs={24} md={10} lg={6}>
-              <FilterSide />
+              <FilterSide onFilterChange={newFilters => handleFiltersChange(newFilters)} />
             </Col>
             <Col xs={24} md={14} lg={18}>
               <TutorList tutors={filteredTutors} />

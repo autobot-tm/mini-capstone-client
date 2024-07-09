@@ -8,34 +8,36 @@ import SUNRISE from '../../../../assets/images/wi--sunrise.png';
 import SUNSET from '../../../../assets/images/wi--sunset.png';
 import SUNNY from '../../../../assets/images/wi--day-sunny.png';
 
-const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const FilterSide = () => {
-  const [checkedDay, setCheckedDay] = useState('');
+const FilterSide = ({ onFilterChange }) => {
+  const [checkedDay, setCheckedDay] = useState([]);
   const [checkedTime, setCheckedTime] = useState([]);
   const [form] = Form.useForm();
-  const onChangeDay = day => {
-    setCheckedDay(day);
+
+  const onChangeDay = checkedValues => {
+    setCheckedDay(checkedValues);
   };
+
   const onChangeTime = checkedValues => {
     setCheckedTime(checkedValues);
   };
+
   const onFinish = values => {
-    console.log('Success:', values);
-    handleClearFilters();
+    onFilterChange({ day: checkedDay, time: checkedTime });
   };
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-  };
+
   const handleClearFilters = () => {
     form.resetFields();
     setCheckedDay([]);
     setCheckedTime([]);
+    onFilterChange({ day: [], time: [] });
   };
+
   return (
     <div className="filter-side">
       <div className="filter-side-inner">
-        <Form onFinish={onFinish} onFinishFailed={onFinishFailed} form={form} layout="horizontal">
+        <Form onFinish={onFinish} form={form} layout="horizontal">
           <Form.Item name="time" className="filter-side-inner-section">
             <div>
               <Paragraph strong>Tutor availability</Paragraph>
@@ -43,15 +45,15 @@ const FilterSide = () => {
                 Time of day
               </Caption>
               <Checkbox.Group className="checkbox-gr" value={checkedTime} onChange={onChangeTime}>
-                <Checkbox value="morning">
+                <Checkbox value="Morning">
                   <img src={SUNRISE} alt="Sunrise" />
                   PRE 12PM
                 </Checkbox>
-                <Checkbox value="afternoon">
+                <Checkbox value="Afternoon">
                   <img src={SUNNY} alt="Sunny" />
                   12PM-5PM
                 </Checkbox>
-                <Checkbox value="evening">
+                <Checkbox value="Evening">
                   <img src={SUNSET} alt="Sunset" />
                   AFTER 5PM
                 </Checkbox>
