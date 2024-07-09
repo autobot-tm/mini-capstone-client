@@ -35,7 +35,7 @@ const SearchBar = ({ onSearch }) => {
               }}
               placeholder="Select education level"
               allowClear>
-              <Option value="Student">High School</Option>
+              <Option value="Student">Student</Option>
               <Option value="Bachelor">Bachelor</Option>
               <Option value="Master">Master</Option>
               <Option value="Ph.D">Ph.D</Option>

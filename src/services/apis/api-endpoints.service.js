@@ -41,7 +41,7 @@ export const ENDPOINTS = {
   },
   reviews: {
     base: '/api/review',
-    review: tutorId => `/api/review/${tutorId}`,
+    review: tutorId => `/api/reviews/tutor/${tutorId}`,
   },
   complaints: {
     base: '/api/complaints',

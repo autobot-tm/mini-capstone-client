@@ -7,6 +7,12 @@
   height: 80px;
   width: 100%;
 
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .ant-menu-horizontal {
     flex: 1;
     justify-content: flex-end;

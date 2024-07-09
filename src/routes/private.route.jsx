@@ -1,10 +1,17 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { routeNames } from '../config/route-name.config';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 export function PrivateRoute() {
-  const user = useSelector(state => state.auth);
-  let token = user?.token;
+  // const user = useSelector(state => state.auth);
+  const valueJson = localStorage.getItem('AUTH');
+  let token = null;
+  if (valueJson) {
+    const auth = JSON.parse(valueJson);
+    token = auth?.token;
+  }
+
+  // let token = user?.token;
   if (!token) {
     const urlParams = new URLSearchParams(window.location.search);
     token = urlParams.get('token');

@@ -6,7 +6,7 @@ import { Caption } from '../../../../../../components/Typography/Caption/Caption
 import { Link } from 'react-router-dom';
 import { WEEKDAYS } from '../../../../../../utils/time-slot';
 
-const TutorCardRow = ({ id, name, brief, subject, schedule, eduLevel }) => {
+const TutorCardRow = ({ id, name, brief, subject, schedule, eduLevel, video }) => {
   const maxItems = 5;
   const displayedSubjects = subject.slice(0, maxItems);
   const hasMore = subject.length > maxItems;
@@ -15,13 +15,7 @@ const TutorCardRow = ({ id, name, brief, subject, schedule, eduLevel }) => {
     <Link to={`/tutors/${id}}`}>
       <Card id="tutor-card" hoverable>
         <div className="tutor-card-left">
-          <ReactPlayer
-            light
-            controls={false}
-            width="100%"
-            height="100%"
-            url="https://www.youtube.com/watch?v=JeOggtJH5n8"
-          />
+          <ReactPlayer className="video" controls={true} width="100%" height="100%" url={video} />
         </div>
         <div className="tutor-card-right">
           <section style={{ display: 'flex', alignItems: 'center' }}>

@@ -62,7 +62,7 @@ const userSlice = createSlice({
       ...state,
       user: payload,
       loading: false,
-      success: true,
+      // success: true,
     }));
     builder.addCase(getUserProfile.rejected, (state, { payload }) => ({
       ...state,

@@ -33,7 +33,13 @@ const TutorDetail = () => {
     {
       key: '1',
       label: 'Introduction',
-      children: <TutorIntroduction description={tutorInfo?.brief} tutorAvailability={tutorInfo?.scheduleRecords} />,
+      children: (
+        <TutorIntroduction
+          description={tutorInfo?.brief}
+          tutorAvailability={tutorInfo?.scheduleRecords}
+          video={tutorInfo?.tutorVideos?.[0]?.url}
+        />
+      ),
     },
     {
       key: '2',
@@ -41,8 +47,10 @@ const TutorDetail = () => {
       children: <TutorReview id={tutorInfo?.id} />,
     },
   ];
+
+  if (!tutorInfo) return <Spin size="large" />;
   if (isLoading) return <Spin size="large" />;
-  if (!tutorInfo) return 'Error';
+
   return (
     <Layout>
       <div className="tutors-detail-page">
@@ -50,7 +58,7 @@ const TutorDetail = () => {
           <Row justify="center" gutter={[24, 24]}>
             <Col xs={24} lg={18}>
               <TutorInfo
-                tutorId={tutorInfo.id}
+                tutorId={tutorInfo?.id}
                 tutorName={tutorInfo?.fullname}
                 tutorEduLv={tutorInfo?.educationLevel}
                 grade={tutorInfo?.grades}

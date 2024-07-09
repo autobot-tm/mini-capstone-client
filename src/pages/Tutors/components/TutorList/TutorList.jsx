@@ -26,7 +26,7 @@ const TutorList = ({ tutors = [] }) => {
               eduLevel={item.educationLevel}
               brief={item.brief}
               subject={item.subjects}
-              video={item.tutorVideos}
+              video={item?.tutorVideos?.[0]?.url}
               schedule={item.scheduleRecords}
             />
           </Fragment>

@@ -24,18 +24,21 @@ const TutorReview = ({ id }) => {
   return (
     <>
       <SubHeading classNames="d-block" strong>
-        Reviews({reviews?.length})
+        Reviews ({reviews?.length})
       </SubHeading>
       {!reviews?.length ? (
         'No comment'
       ) : (
         <>
-          <ReviewItem
-            name="Bo"
-            avatar="https://api.dicebear.com/7.x/miniavs/svg?seed=2"
-            rating={4.5}
-            description="Elit amet ut dui nam enim consectetur arcu amet varius. Viverra ac nisl quam nec justo, posuere suspendisse consequat. Sit aliquam purus mattis libero, pellentesque tellus sed amet pretium. Porttitor massa lectus dolor at enim. Ultricies varius diam elementum quis id eleifend. Eu vulputate urna, nulla dignissim ultrices."
-          />
+          {reviews.map((review, index) => (
+            <ReviewItem
+              key={index}
+              name={review.name || 'Anonymous'}
+              avatar="https://api.dicebear.com/7.x/miniavs/svg?seed=2"
+              rating={review.score || 0}
+              description={review.content || 'No description provided.'}
+            />
+          ))}
         </>
       )}
     </>
@@ -51,7 +54,7 @@ const ReviewItem = ({ name, avatar, rating, description }) => {
         </span>
         <span className="info-section">
           <Paragraph strong>{name}</Paragraph> <br />
-          <Rate allowHalf defaultValue={rating} disabled className="rate" />
+          <Rate defaultValue={rating} disabled className="rate" />
           <br /> <br />
           <Caption size={160}>{description}</Caption>
         </span>

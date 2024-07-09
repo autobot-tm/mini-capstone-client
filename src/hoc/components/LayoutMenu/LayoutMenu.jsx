@@ -7,7 +7,6 @@ import BaseButton from '../../../components/Buttons/BaseButtons/BaseButton';
 import { EllipsisOutlined, LogoutOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuthSlice } from '../../../store/features/auth.slice';
-import LOGO from '../../../assets/images/logo.png';
 
 const LayoutMenu = () => {
   const { actions: authActions } = useAuthSlice();
@@ -87,7 +86,7 @@ const LayoutMenu = () => {
 
   return (
     <div className="layout-menu">
-      <Link to="/" style={{ color: 'white' }}>
+      <Link to="/" className="logo">
         {/* <img src="../../../assets/images/logo.png"  width="200" /> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player';
 import ScheduleAvalablity from '../../../../components/Schedule/ScheduleAvalablity';
 import { TEACHINGSLOTS, WEEKDAYS } from '../../../../utils/time-slot';
 
-const TutorIntroduction = ({ tutorAvailability = [], description }) => {
+const TutorIntroduction = ({ tutorAvailability = [], description, video }) => {
   return (
     <>
       <SubHeading strong classNames="d-block">
@@ -15,13 +15,7 @@ const TutorIntroduction = ({ tutorAvailability = [], description }) => {
       <br />
       <Paragraph className="description">{description}</Paragraph>
       <div className="video-container">
-        <ReactPlayer
-          light
-          controls={false}
-          width="100%"
-          height="100%"
-          url="https://www.youtube.com/watch?v=JeOggtJH5n8"
-        />
+        <ReactPlayer controls={true} width="100%" height="100%" url={video} />
       </div>
       <div className="schedule-table">
         <Divider />

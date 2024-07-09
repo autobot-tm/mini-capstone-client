@@ -13,7 +13,7 @@ function App() {
   const { actions: authActions } = useAuthSlice();
   const { actions: userActions } = useUserSlice();
   const { token } = useSelector(state => state.auth);
-  const { success, erorr } = useSelector(state => state.user);
+  const { success, error } = useSelector(state => state.user);
 
   const bubbleIcon = document.querySelector('#kmw-bubble-icon');
   useEffect(() => {
@@ -37,10 +37,10 @@ function App() {
   }, [success, dispatch]);
 
   useEffect(() => {
-    if (erorr) {
+    if (error) {
       dispatch(userActions.clearError());
     }
-  }, [erorr, dispatch]);
+  }, [error, dispatch]);
 
   return (
     <>

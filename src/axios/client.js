@@ -26,8 +26,14 @@ export const configureApiCaller = store => {
   );
 
   apiCaller.interceptors.request.use(async config => {
-    const auth = store.getState().auth;
-    let token = auth?.token;
+    const valueJson = localStorage.getItem('AUTH');
+    let token = null;
+    if (valueJson) {
+      const auth = JSON.parse(valueJson);
+      token = auth?.token;
+    }
+    // const auth = store.getState().auth;
+    // let token = auth?.token;
     if (!token) {
       const urlParams = new URLSearchParams(window.location.search);
       token = urlParams.get('token');

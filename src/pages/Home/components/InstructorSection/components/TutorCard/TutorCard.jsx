@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player/lazy';
 import { Caption } from '../../../../../../components/Typography/Caption/Caption';
 import { Link } from 'react-router-dom';
 
-const TutorCard = ({ id, url, avatar, fullname, educationLevel, rating }) => {
+const TutorCard = ({ id, url, avatar, fullname, educationLevel }) => {
   return (
     <Link to={`/tutors/${id}`}>
       <Card
@@ -16,7 +16,7 @@ const TutorCard = ({ id, url, avatar, fullname, educationLevel, rating }) => {
         }}
         cover={
           <div className="video">
-            <ReactPlayer light controls={false} width="100%" height="100%" url={url} />
+            <ReactPlayer controls={true} width="100%" height="100%" style={{ borderRadius: '50%' }} url={url} />
           </div>
         }>
         <Meta
@@ -27,11 +27,11 @@ const TutorCard = ({ id, url, avatar, fullname, educationLevel, rating }) => {
               {fullname} &nbsp; <SafetyCertificateOutlined />
             </>
           }
-          description={
-            <Caption>
-              {rating} <StarFilled style={{ color: '#FFD103' }} />
-            </Caption>
-          }
+          // description={
+          //   <Caption>
+          //     {rating} <StarFilled style={{ color: '#FFD103' }} />
+          //   </Caption>
+          // }
         />
         <Caption classNames="description-tutor-card">
           <b>Education level:</b>
