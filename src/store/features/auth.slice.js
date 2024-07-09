@@ -64,7 +64,7 @@ export const signInWithGoogle = createAsyncThunk('auth/signInWithGoogle', async 
     if (role === 'MODERATOR' || role === 'ADMIN') {
       throw 'Your role cannot login';
     }
-    await save(STORAGE_KEYS.AUTH, response?.token);
+    await save(STORAGE_KEYS.AUTH, response);
     return { ...response };
   } catch (error) {
     console.warn('🚀 ~ file: auth.slice. signInWithGoogle ~ error:', error);
