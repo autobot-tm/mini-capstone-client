@@ -48,8 +48,13 @@ const TutorDetail = () => {
     },
   ];
 
-  if (!tutorInfo) return <Spin size="large" />;
-  if (isLoading) return <Spin size="large" />;
+  if (!tutorInfo || isLoading) {
+    return (
+      <div className="container-loading">
+        <Spin size="large" />
+      </div>
+    );
+  }
 
   return (
     <Layout>
