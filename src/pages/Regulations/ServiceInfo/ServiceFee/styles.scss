@@ -1,0 +1,58 @@
+.theme-main-wrapper {
+    .main-section {
+      background-color: #f9f9f9;
+      padding: 20px 0;
+  
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+  
+        .blogs-bottom {
+          display: flex;
+          justify-content: center;
+  
+          .col-xl-12 {
+            width: 100%;
+  
+            .theme-box {
+              background-color: #fff;
+              padding: 30px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+              .entry-header {
+                margin-bottom: 20px;
+  
+                .tuturn-entry-title {
+                  color: #333;
+                  font-size: 24px;
+                  font-weight: 600;
+                  margin: 0;
+                }
+              }
+  
+              .entry-content {
+                .wp-block-heading {
+                  color: #333;
+                  font-size: 20px;
+                  font-weight: 500;
+                  margin-top: 20px;
+                }
+  
+                p {
+                  font-size: 16px;
+                  color: #666;
+                  line-height: 1.6;
+  
+                  .privacy-policy-tutorial {
+                    font-weight: 700;
+                    color: #000;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

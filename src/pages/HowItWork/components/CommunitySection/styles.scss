@@ -1,0 +1,74 @@
+.ant-section {
+  width: 100%;
+  padding: 40px 0;
+  background-color: #ffffff; // Add background color for better visibility
+
+  .ant-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .main-title {
+    text-align: center;
+    margin-bottom: 40px;
+
+    img {
+      margin-bottom: 20px;
+    }
+
+    h4 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #666;
+    }
+  }
+
+  .banner-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      .primary-btn {
+        background: linear-gradient(45deg, #f85c4b, #f7457b);
+        border: none;
+        color: #fff;
+
+        &:hover {
+          background: linear-gradient(45deg, #f7457b, #f85c4b);
+        }
+      }
+
+      .secondary-btn {
+        background: #fff;
+        border: 1px solid #ddd;
+        color: #333;
+
+        em {
+          font-style: normal;
+          color: #999;
+        }
+
+        &:hover {
+          background: #f8f9fa;
+          border-color: #ccc;
+        }
+      }
+    }
+  }
+}

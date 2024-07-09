@@ -1,0 +1,98 @@
+.ant-section {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa; /* Add background color for better visibility */
+    margin-bottom: 5%;
+  
+    .ant-container {
+      max-width: 100%;
+      padding: 0 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  
+    .ant-top-column {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  
+    .main-title {
+      text-align: center;
+      margin-bottom: 20px;
+  
+      img {
+        margin-bottom: 10px;
+      }
+  
+      h4 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+  
+      h2 {
+        font-size: 32px;
+        color: #333;
+      }
+    }
+  
+    .processing-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+  
+      li {
+        margin-bottom: 20px;
+  
+        .processing-list-info {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 10px;
+  
+          .anticon {
+            font-size: 24px;
+            margin-right: 10px;
+          }
+  
+          h4 {
+            font-size: 20px;
+            color: #333;
+            margin: 0;
+          }
+        }
+  
+        p {
+          font-size: 16px;
+          color: #000000;
+          margin: 0;
+        }
+      }
+    }
+  }
+  
+  // Icon color classes
+  .icon-green {
+    color: #52c41a; // green color
+  }
+  
+  .icon-orange {
+    color: #fa8c16; // orange color
+  }
+  
+  .icon-purple {
+    color: #722ed1; // purple color
+  }
+  :where(.css-dev-only-do-not-override-h3sjpf).ant-typography {
+    color: #000000;
+    word-break: auto;
+}

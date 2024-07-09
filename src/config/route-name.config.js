@@ -9,4 +9,8 @@ export const routeNames = {
   TutorDetail: '/tutors/:id',
   ContactUs: '/contact-us',
   Payment: '/payments',
+  ServiceInfo: '/service-info',
+  RegulationAccount: '/regulation-account',
+  RegulationsFind: '/regulations-find',
+  Privacy: '/privacy',
 };
