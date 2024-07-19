@@ -1,37 +1,50 @@
 import { useDispatch, useSelector } from 'react-redux';
 import BaseButton from '../Buttons/BaseButtons/BaseButton';
 import CustomModal from '../Modal/CustomModal';
-import { useNavigate } from 'react-router-dom';
 import { Caption } from '../Typography/Caption/Caption';
 import { Checkbox, notification } from 'antd';
-import { upRoleTutorService } from '../../services/apis/auth.service';
 import { useEffect, useState } from 'react';
 import { closeTermOfServiceModal } from '../../store/features/modal.slice';
+import { upRoleTutorService } from '../../services/apis/auth.service';
+import FileUploader from '../FileUploader/FileUploader';
+import { useUserSlice } from '../../store/features/user.slice';
 
 const TermOfService = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { termOfServiceModal } = useSelector(state => state.modal);
+  const { actions: userActions } = useUserSlice();
+  const [uploadedCertificateUrl, setUploadedCertificateUrl] = useState(null);
   const [checkTerms, setCheckTerms] = useState(false);
-  const user = useSelector(state => state.auth.user);
-  const email = user?.email;
   const [api, contextHolder] = notification.useNotification();
+
   const handleCancel = () => {
     dispatch(closeTermOfServiceModal());
     setCheckTerms(false);
+    setUploadedCertificateUrl(null);
   };
   const handleOk = async () => {
-    try {
-      await upRoleTutorService({ email });
-      navigate('/user-profile');
-      api.success({
-        message: 'Congratulations!',
-        description: 'You Are Now a Tutor',
-        duration: 5,
+    if (!uploadedCertificateUrl) {
+      api.error({
+        type: 'error',
+        message: 'Please upload your certificate.',
       });
-      setCheckTerms(false);
+      return;
+    }
+    try {
+      await upRoleTutorService({ certificateUrl: uploadedCertificateUrl });
+      api.success({
+        message: 'Your certificate upload successful',
+        description: 'Please allow 24 hours for us to review!',
+        type: 'success',
+      });
+      dispatch(userActions.getUserProfile());
     } catch (error) {
-      console.error('Error up role Tutor', error);
+      console.log('error', error);
+    } finally {
+      setCheckTerms(false);
+      setUploadedCertificateUrl(null);
+      dispatch(userActions.clearSuccess());
+      dispatch(userActions.clearError());
     }
   };
   const handleCheckedTerms = e => {
@@ -44,9 +57,18 @@ const TermOfService = () => {
       dispatch(closeTermOfServiceModal());
     }
   };
+  const handleUploadSuccess = url => {
+    console.log('Uploaded file URL:', url);
+    setUploadedCertificateUrl(url);
+  };
+  const handleDeleteSuccess = url => {
+    setUploadedCertificateUrl(null);
+    console.log('delete certificate success', url);
+  };
   useEffect(() => {
     if (termOfServiceModal) setCheckTerms(false);
   }, [termOfServiceModal]);
+
   return (
     <>
       {contextHolder}
@@ -82,9 +104,20 @@ const TermOfService = () => {
                 your students.
               </li>
               <li>You agree not to engage in any form of harassment, discrimination, or inappropriate behavior.</li>
+              <li>
+                You must upload a valid certificate of your qualifications. This is required to complete your
+                registration as a tutor.
+              </li>
             </ul>
           </Caption>
-          <Checkbox onChange={handleCheckedTerms}>
+          <Caption>Please upload your certificate to proceed:</Caption>
+          <FileUploader
+            storagePath="tutorCertificate/"
+            onUploadSuccess={handleUploadSuccess}
+            onDeleteSuccess={handleDeleteSuccess}
+            limit={1}
+          />
+          <Checkbox style={{ paddingBottom: 20 }} onChange={handleCheckedTerms}>
             <Caption classNames="d-block">I agree to the terms & service</Caption>
           </Checkbox>
         </div>

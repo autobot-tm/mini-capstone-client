@@ -27,3 +27,17 @@
     }
   }
 }
+
+.status-service-form {
+  .ant-card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.container-edit {
+  display: flex;
+  gap: 6px;
+}

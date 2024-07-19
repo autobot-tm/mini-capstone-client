@@ -25,6 +25,10 @@ export const initialState = createInitialState();
 export const signIn = createAsyncThunk('auth/signIn', async (input, { rejectWithValue }) => {
   try {
     const response = await signInService(input);
+    const role = await response.role;
+    if (role === 'MODERATOR' || role === 'ADMIN') {
+      throw 'Your role cannot login';
+    }
     await save(STORAGE_KEYS.AUTH, response);
     return { ...response };
   } catch (error) {
@@ -56,7 +60,11 @@ export const signInWithGoogle = createAsyncThunk('auth/signInWithGoogle', async 
   try {
     console.log('🚀 ~ idToken:', token);
     const response = await signInWithGoogleService({ token: token ?? '' });
-    await save(STORAGE_KEYS.AUTH, response?.token);
+    const role = await response.role;
+    if (role === 'MODERATOR' || role === 'ADMIN') {
+      throw 'Your role cannot login';
+    }
+    await save(STORAGE_KEYS.AUTH, response);
     return { ...response };
   } catch (error) {
     console.warn('🚀 ~ file: auth.slice. signInWithGoogle ~ error:', error);

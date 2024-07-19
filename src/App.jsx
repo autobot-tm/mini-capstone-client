@@ -6,17 +6,41 @@ import NotFoundPage from './pages/NotFound/NotFoundPage';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuthSlice } from './store/features/auth.slice';
+import { useUserSlice } from './store/features/user.slice';
 
 function App() {
   const dispatch = useDispatch();
   const { actions: authActions } = useAuthSlice();
+  const { actions: userActions } = useUserSlice();
   const { token } = useSelector(state => state.auth);
+  const { success, error } = useSelector(state => state.user);
 
+  const bubbleIcon = document.querySelector('#kmw-bubble-icon');
   useEffect(() => {
     if (!token) {
       dispatch(authActions.initState());
     }
-  }, [token, dispatch]);
+    if (token) {
+      dispatch(userActions.getUserProfile());
+    }
+    if (bubbleIcon) {
+      bubbleIcon.click();
+    } else {
+      console.error('Element with ID #kmw-bubble-icon not found');
+    }
+  }, [token, dispatch, bubbleIcon]);
+
+  useEffect(() => {
+    if (success) {
+      dispatch(userActions.clearSuccess());
+    }
+  }, [success, dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      dispatch(userActions.clearError());
+    }
+  }, [error, dispatch]);
 
   return (
     <>

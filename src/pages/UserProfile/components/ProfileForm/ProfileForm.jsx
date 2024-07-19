@@ -4,19 +4,20 @@ import { SubHeading } from '../../../../components/Typography/SubHeading/SubHead
 import { useDispatch, useSelector } from 'react-redux';
 import { validateFullName, validatePhoneNumber } from '../../../../utils/validate-form';
 import { PHONE_NUMBER } from '../../../../constants/auth.constant';
-import { updateUserProfile, userActions } from '../../../../store/features/user.slice';
+import { updateUserProfile, useUserSlice, userActions } from '../../../../store/features/user.slice';
 import { useEffect } from 'react';
 
 const ProfileForm = () => {
   const [api, contextHolder] = notification.useNotification();
   const { user, loading, success, error } = useSelector(state => state.user);
+  const { actions: userActions } = useUserSlice();
+  const auth = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
   const onFinish = values => {
     const { fullname, phone } = values;
-    const id = user?.id;
-    dispatch(updateUserProfile({ id, fullname, phone }));
+    dispatch(userActions.updateUserProfile({ fullname, phone }));
   };
   useEffect(() => {
     if (success) {
@@ -30,7 +31,7 @@ const ProfileForm = () => {
   useEffect(() => {
     if (error) {
       api.error({
-        message: 'Error',
+        message: 'Save failed!',
         description: 'Failed to update profile',
       });
       dispatch(userActions.clearError());
@@ -60,7 +61,7 @@ const ProfileForm = () => {
           </Col>
           <Col xs={24} lg={12}>
             <Form.Item label="Email" name="email">
-              <Input size="large" placeholder={user?.email} disabled />
+              <Input size="large" placeholder={auth?.email} disabled />
             </Form.Item>
           </Col>
           <Col xs={24} lg={12}>

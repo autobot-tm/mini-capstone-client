@@ -8,9 +8,11 @@ import { RightOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 
 const HeaderSection = ({ onLogin, handleConfirmTutor }) => {
-  const user = useSelector(state => state.auth.user);
-  const token = user?.token;
+  const auth = useSelector(state => state.auth.user);
+  const user = useSelector(state => state.user.user);
+  const token = auth?.token;
   const role = user?.role;
+  const roleRequestStatus = user?.requestStatus;
   return (
     <div className="header-section">
       <Row className="container" justify="center">
@@ -20,12 +22,11 @@ const HeaderSection = ({ onLogin, handleConfirmTutor }) => {
               A good <b style={{ color: '#1da1f2' }}>#education</b> is always a base of{' '}
             </Headline>
             <Headline classNames="bg-text" strong>
-              ENDLESS OPPORTUNITIES
+              SUCCESS
             </Headline>
             <br />
-            <Paragraph style={{ width: '60%' }}>
-              Consectur adipiscing elitsedo eiusmod tempor incididuntem utaborate dolore magna aliqua ad minim
-              veniamque.
+            <Paragraph classNames="dc-text">
+              Consectur adipiscing elitsedo eiusmod tempor incididuntem utaborate
             </Paragraph>
             <br />
             {!token && (
@@ -38,8 +39,8 @@ const HeaderSection = ({ onLogin, handleConfirmTutor }) => {
                 </BaseButton>
               </>
             )}
-            {token && role !== 'TUTOR' && (
-              <BaseButton onClick={handleConfirmTutor} type="dashed" className="header-section-first-col-inner-btn">
+            {token && role !== 'TUTOR' && (!roleRequestStatus || roleRequestStatus === 'REJECTED') && (
+              <BaseButton onClick={handleConfirmTutor} className="header-section-first-col-inner-btn">
                 Become a Tutor
               </BaseButton>
             )}

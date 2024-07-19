@@ -6,7 +6,7 @@
   .container {
     max-width: 1400px;
     margin: 0 auto;
-    :where(.css-dev-only-do-not-override-h3sjpf).ant-menu-light.ant-menu-root.ant-menu-vertical {
+    .ant-menu-light.ant-menu-root.ant-menu-vertical {
       border-inline-end: none;
     }
   }
@@ -20,6 +20,36 @@
     .user-avatar {
       height: 160px;
       width: 160px;
+    }
+  }
+}
+
+div#wallet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: 40px;
+  padding: 0 10px;
+  box-shadow:
+    rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      margin: 0 6px;
+    }
+
+    img.plus-icon {
+      height: 20px;
+      width: auto;
+      cursor: pointer;
     }
   }
 }

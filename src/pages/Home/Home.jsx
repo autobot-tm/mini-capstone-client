@@ -15,7 +15,7 @@ const Home = () => {
     navigate(routeNames.Login);
   };
   const onAboutUs = () => {
-    navigate(routeNames.AboutUs);
+    navigate(routeNames.ContactUs);
   };
   const onHowItWork = () => {
     navigate(routeNames.HowItWork);

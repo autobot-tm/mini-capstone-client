@@ -7,9 +7,23 @@ import { RightOutlined } from '@ant-design/icons';
 import BaseButton from '../../../../components/Buttons/BaseButtons/BaseButton';
 import ZIGZAG from '../../../../assets/images/zigzagLine.svg';
 import TutorCard from './components/TutorCard/TutorCard';
-import tutors from '../../../../mock/tutor.data.json';
+import { useEffect, useState } from 'react';
+import { getAllTutor } from '../../../../services/apis/subject.service';
 
 const InstructorSection = ({ onFindTutor }) => {
+  const [tutors, setTutors] = useState([]);
+  const fetchTutor = async () => {
+    try {
+      const response = await getAllTutor();
+      setTutors(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchTutor();
+  }, []);
+  if (!tutors) return '';
   return (
     <div className="instructor-section">
       <div className="container">
@@ -30,22 +44,21 @@ const InstructorSection = ({ onFindTutor }) => {
           </Col>
         </Row>
         <Row justify="center" className="instructor-section-second-row" gutter={[24, 24]}>
-          {tutors?.slice(0, 4).map(tutor => {
-            return (
-              <Col xs={24} sm={12} xl={6} key={tutor.id}>
-                <TutorCard
-                  url="https://www.youtube.com/watch?v=JeOggtJH5n8"
-                  avatar="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
-                  id={tutor.id}
-                  firstName={tutor['first-name']}
-                  lastName={tutor['last-name']}
-                  rating={tutor.rating}
-                  mobile={tutor.mobile}
-                  literacy={tutor.literacy}
-                />
-              </Col>
-            );
-          })}
+          {tutors?.monthlyPackage === 'ACTIVATED' &&
+            tutors?.slice(0, 4).map(item => {
+              return (
+                <Col xs={24} sm={12} xl={6} key={item?.id}>
+                  <TutorCard
+                    url={item?.tutorVideos?.[0]?.url}
+                    avatar="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
+                    id={item?.id}
+                    fullname={item?.fullname}
+                    // rating={item.tutor.rating}
+                    educationLevel={item?.educationLevel?.educationLevel}
+                  />
+                </Col>
+              );
+            })}
           <BaseButton onClick={onFindTutor} style={{ width: 'auto', marginTop: 20 }} type="text">
             Explore all tutors <RightOutlined style={{ fontSize: 14 }} />
           </BaseButton>
