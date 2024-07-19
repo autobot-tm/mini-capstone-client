@@ -23,6 +23,7 @@ const InstructorSection = ({ onFindTutor }) => {
   useEffect(() => {
     fetchTutor();
   }, []);
+  if (!tutors) return '';
   return (
     <div className="instructor-section">
       <div className="container">
@@ -43,20 +44,21 @@ const InstructorSection = ({ onFindTutor }) => {
           </Col>
         </Row>
         <Row justify="center" className="instructor-section-second-row" gutter={[24, 24]}>
-          {tutors?.slice(0, 4).map(item => {
-            return (
-              <Col xs={24} sm={12} xl={6} key={item.id}>
-                <TutorCard
-                  url={item.tutorVideos?.[0].url}
-                  avatar="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
-                  id={item.id}
-                  fullname={item.fullname}
-                  // rating={item.tutor.rating}
-                  educationLevel={item.educationLevel.educationLevel}
-                />
-              </Col>
-            );
-          })}
+          {tutors?.monthlyPackage === 'ACTIVATED' &&
+            tutors?.slice(0, 4).map(item => {
+              return (
+                <Col xs={24} sm={12} xl={6} key={item?.id}>
+                  <TutorCard
+                    url={item?.tutorVideos?.[0]?.url}
+                    avatar="https://api.dicebear.com/7.x/miniavs/svg?seed=8"
+                    id={item?.id}
+                    fullname={item?.fullname}
+                    // rating={item.tutor.rating}
+                    educationLevel={item?.educationLevel?.educationLevel}
+                  />
+                </Col>
+              );
+            })}
           <BaseButton onClick={onFindTutor} style={{ width: 'auto', marginTop: 20 }} type="text">
             Explore all tutors <RightOutlined style={{ fontSize: 14 }} />
           </BaseButton>
